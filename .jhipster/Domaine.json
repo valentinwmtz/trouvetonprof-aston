@@ -1,0 +1,46 @@
+{
+    "name": "Domaine",
+    "fields": [
+        {
+            "fieldName": "titre",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 60
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 8000
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "matiere",
+            "otherEntityName": "matiere",
+            "otherEntityRelationshipName": "domaine"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "annonce",
+            "otherEntityName": "annonce",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "domaine"
+        }
+    ],
+    "changelogDate": "20190203132706",
+    "entityTableName": "domaine",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
