@@ -1,0 +1,67 @@
+
+entity Profil {
+    dateNaissance Instant required 
+    pays String 
+    adresse String maxlength(200)
+    telephone String maxlength(20)
+    sexe Sexe required
+}
+
+enum Sexe {
+    HOMME, FEMME
+}
+
+
+
+entity Annonce {
+	titre String required maxlength(60)
+    description String required maxlength(8000)
+    status Satut required    
+    image ImageBlob required
+    adminValide Boolean
+    prixHoraire Double required
+}
+
+entity Disponibilite {
+    date Instant required
+    duree Double required
+}
+
+enum Satut {
+    PROFESSEUR, ELEVE
+}
+
+entity Domaine {
+	titre String required maxlength(60)
+    description String maxlength(8000)
+    image ImageBlob
+}
+
+entity Matiere {
+	titre String required maxlength(60)
+    description String maxlength(8000)
+    image ImageBlob
+}
+
+entity Message {
+	utilisateur1 String maxlength(100)
+    utilisateur2 String maxlength(100)
+    texte String required maxlength(3000)
+    date Instant required
+}
+
+relationship OneToOne {
+    Profil to User
+    Annonce to Domaine
+}
+
+
+relationship OneToMany {
+	Profil{userMessage} to Message
+  	Profil{userAnnonce} to Annonce
+ 	Annonce{annonceDisponibilite} to Disponibilite
+ 	Domaine to Matiere
+}
+
+service * with serviceClass
+
