@@ -16,7 +16,7 @@ import { IMatiere } from 'app/shared/model/matiere.model';
 export class MatiereResolve implements Resolve<IMatiere> {
     constructor(private service: MatiereService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IMatiere> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Matiere> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
             return this.service.find(id).pipe(
@@ -30,7 +30,7 @@ export class MatiereResolve implements Resolve<IMatiere> {
 
 export const matiereRoute: Routes = [
     {
-        path: '',
+        path: 'matiere',
         component: MatiereComponent,
         data: {
             authorities: ['ROLE_USER'],
@@ -39,7 +39,7 @@ export const matiereRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: ':id/view',
+        path: 'matiere/:id/view',
         component: MatiereDetailComponent,
         resolve: {
             matiere: MatiereResolve
@@ -51,7 +51,7 @@ export const matiereRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'new',
+        path: 'matiere/new',
         component: MatiereUpdateComponent,
         resolve: {
             matiere: MatiereResolve
@@ -63,7 +63,7 @@ export const matiereRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: ':id/edit',
+        path: 'matiere/:id/edit',
         component: MatiereUpdateComponent,
         resolve: {
             matiere: MatiereResolve
@@ -78,7 +78,7 @@ export const matiereRoute: Routes = [
 
 export const matierePopupRoute: Routes = [
     {
-        path: ':id/delete',
+        path: 'matiere/:id/delete',
         component: MatiereDeletePopupComponent,
         resolve: {
             matiere: MatiereResolve

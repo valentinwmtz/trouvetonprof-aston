@@ -28,7 +28,6 @@ describe('Matiere e2e test', () => {
     it('should load Matieres', async () => {
         await navBarPage.goToEntity('matiere');
         matiereComponentsPage = new MatiereComponentsPage();
-        await browser.wait(ec.visibilityOf(matiereComponentsPage.title), 5000);
         expect(await matiereComponentsPage.getTitle()).to.eq('trouvetonprofApp.matiere.home.title');
     });
 

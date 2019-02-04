@@ -47,11 +47,11 @@ export class MatiereDeletePopupComponent implements OnInit, OnDestroy {
                 this.ngbModalRef.componentInstance.matiere = matiere;
                 this.ngbModalRef.result.then(
                     result => {
-                        this.router.navigate(['/matiere', { outlets: { popup: null } }]);
+                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
                         this.ngbModalRef = null;
                     },
                     reason => {
-                        this.router.navigate(['/matiere', { outlets: { popup: null } }]);
+                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
                         this.ngbModalRef = null;
                     }
                 );

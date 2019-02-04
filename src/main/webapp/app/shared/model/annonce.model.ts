@@ -1,6 +1,6 @@
-import { IProfil } from 'app/shared/model/profil.model';
-import { IDomaine } from 'app/shared/model/domaine.model';
-import { IDisponibilite } from 'app/shared/model/disponibilite.model';
+import { IProfil } from 'app/shared/model//profil.model';
+import { IDomaine } from 'app/shared/model//domaine.model';
+import { IDisponibilite } from 'app/shared/model//disponibilite.model';
 
 export const enum Satut {
     PROFESSEUR = 'PROFESSEUR',

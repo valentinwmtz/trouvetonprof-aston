@@ -28,7 +28,6 @@ describe('Annonce e2e test', () => {
     it('should load Annonces', async () => {
         await navBarPage.goToEntity('annonce');
         annonceComponentsPage = new AnnonceComponentsPage();
-        await browser.wait(ec.visibilityOf(annonceComponentsPage.title), 5000);
         expect(await annonceComponentsPage.getTitle()).to.eq('trouvetonprofApp.annonce.home.title');
     });
 
