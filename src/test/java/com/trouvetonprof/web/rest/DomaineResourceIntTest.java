@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
@@ -46,6 +47,11 @@ public class DomaineResourceIntTest {
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final byte[] DEFAULT_IMAGE = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_IMAGE = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_IMAGE_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_IMAGE_CONTENT_TYPE = "image/png";
 
     @Autowired
     private DomaineRepository domaineRepository;
@@ -93,7 +99,9 @@ public class DomaineResourceIntTest {
     public static Domaine createEntity(EntityManager em) {
         Domaine domaine = new Domaine()
             .titre(DEFAULT_TITRE)
-            .description(DEFAULT_DESCRIPTION);
+            .description(DEFAULT_DESCRIPTION)
+            .image(DEFAULT_IMAGE)
+            .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE);
         return domaine;
     }
 
@@ -119,6 +127,8 @@ public class DomaineResourceIntTest {
         Domaine testDomaine = domaineList.get(domaineList.size() - 1);
         assertThat(testDomaine.getTitre()).isEqualTo(DEFAULT_TITRE);
         assertThat(testDomaine.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testDomaine.getImage()).isEqualTo(DEFAULT_IMAGE);
+        assertThat(testDomaine.getImageContentType()).isEqualTo(DEFAULT_IMAGE_CONTENT_TYPE);
     }
 
     @Test
@@ -170,7 +180,9 @@ public class DomaineResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(domaine.getId().intValue())))
             .andExpect(jsonPath("$.[*].titre").value(hasItem(DEFAULT_TITRE.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))));
     }
     
     @Test
@@ -185,7 +197,9 @@ public class DomaineResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(domaine.getId().intValue()))
             .andExpect(jsonPath("$.titre").value(DEFAULT_TITRE.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.imageContentType").value(DEFAULT_IMAGE_CONTENT_TYPE))
+            .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)));
     }
 
     @Test
@@ -210,7 +224,9 @@ public class DomaineResourceIntTest {
         em.detach(updatedDomaine);
         updatedDomaine
             .titre(UPDATED_TITRE)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .image(UPDATED_IMAGE)
+            .imageContentType(UPDATED_IMAGE_CONTENT_TYPE);
 
         restDomaineMockMvc.perform(put("/api/domaines")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -223,6 +239,8 @@ public class DomaineResourceIntTest {
         Domaine testDomaine = domaineList.get(domaineList.size() - 1);
         assertThat(testDomaine.getTitre()).isEqualTo(UPDATED_TITRE);
         assertThat(testDomaine.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testDomaine.getImage()).isEqualTo(UPDATED_IMAGE);
+        assertThat(testDomaine.getImageContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
     }
 
     @Test
@@ -251,7 +269,7 @@ public class DomaineResourceIntTest {
 
         int databaseSizeBeforeDelete = domaineRepository.findAll().size();
 
-        // Get the domaine
+        // Delete the domaine
         restDomaineMockMvc.perform(delete("/api/domaines/{id}", domaine.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());

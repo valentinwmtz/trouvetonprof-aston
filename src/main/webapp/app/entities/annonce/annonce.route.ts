@@ -16,7 +16,7 @@ import { IAnnonce } from 'app/shared/model/annonce.model';
 export class AnnonceResolve implements Resolve<IAnnonce> {
     constructor(private service: AnnonceService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Annonce> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IAnnonce> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
             return this.service.find(id).pipe(
@@ -30,7 +30,7 @@ export class AnnonceResolve implements Resolve<IAnnonce> {
 
 export const annonceRoute: Routes = [
     {
-        path: 'annonce',
+        path: '',
         component: AnnonceComponent,
         data: {
             authorities: ['ROLE_USER'],
@@ -39,7 +39,7 @@ export const annonceRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'annonce/:id/view',
+        path: ':id/view',
         component: AnnonceDetailComponent,
         resolve: {
             annonce: AnnonceResolve
@@ -51,7 +51,7 @@ export const annonceRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'annonce/new',
+        path: 'new',
         component: AnnonceUpdateComponent,
         resolve: {
             annonce: AnnonceResolve
@@ -63,7 +63,7 @@ export const annonceRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'annonce/:id/edit',
+        path: ':id/edit',
         component: AnnonceUpdateComponent,
         resolve: {
             annonce: AnnonceResolve
@@ -78,7 +78,7 @@ export const annonceRoute: Routes = [
 
 export const annoncePopupRoute: Routes = [
     {
-        path: 'annonce/:id/delete',
+        path: ':id/delete',
         component: AnnonceDeletePopupComponent,
         resolve: {
             annonce: AnnonceResolve

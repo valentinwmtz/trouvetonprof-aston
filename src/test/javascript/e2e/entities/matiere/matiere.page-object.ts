@@ -28,6 +28,7 @@ export class MatiereUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     titreInput = element(by.id('field_titre'));
     descriptionInput = element(by.id('field_description'));
+    imageInput = element(by.id('file_image'));
     domaineSelect = element(by.id('field_domaine'));
 
     async getPageTitle() {
@@ -48,6 +49,14 @@ export class MatiereUpdatePage {
 
     async getDescriptionInput() {
         return this.descriptionInput.getAttribute('value');
+    }
+
+    async setImageInput(image) {
+        await this.imageInput.sendKeys(image);
+    }
+
+    async getImageInput() {
+        return this.imageInput.getAttribute('value');
     }
 
     async domaineSelectLastOption() {

@@ -289,7 +289,7 @@ public class MessageResourceIntTest {
 
         int databaseSizeBeforeDelete = messageRepository.findAll().size();
 
-        // Get the message
+        // Delete the message
         restMessageMockMvc.perform(delete("/api/messages/{id}", message.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());

@@ -24,6 +24,7 @@ describe('Profil e2e test', () => {
     it('should load Profils', async () => {
         await navBarPage.goToEntity('profil');
         profilComponentsPage = new ProfilComponentsPage();
+        await browser.wait(ec.visibilityOf(profilComponentsPage.title), 5000);
         expect(await profilComponentsPage.getTitle()).to.eq('trouvetonprofApp.profil.home.title');
     });
 

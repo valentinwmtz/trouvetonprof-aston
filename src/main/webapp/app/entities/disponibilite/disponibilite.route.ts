@@ -16,7 +16,7 @@ import { IDisponibilite } from 'app/shared/model/disponibilite.model';
 export class DisponibiliteResolve implements Resolve<IDisponibilite> {
     constructor(private service: DisponibiliteService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Disponibilite> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IDisponibilite> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
             return this.service.find(id).pipe(
@@ -30,7 +30,7 @@ export class DisponibiliteResolve implements Resolve<IDisponibilite> {
 
 export const disponibiliteRoute: Routes = [
     {
-        path: 'disponibilite',
+        path: '',
         component: DisponibiliteComponent,
         data: {
             authorities: ['ROLE_USER'],
@@ -39,7 +39,7 @@ export const disponibiliteRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'disponibilite/:id/view',
+        path: ':id/view',
         component: DisponibiliteDetailComponent,
         resolve: {
             disponibilite: DisponibiliteResolve
@@ -51,7 +51,7 @@ export const disponibiliteRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'disponibilite/new',
+        path: 'new',
         component: DisponibiliteUpdateComponent,
         resolve: {
             disponibilite: DisponibiliteResolve
@@ -63,7 +63,7 @@ export const disponibiliteRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'disponibilite/:id/edit',
+        path: ':id/edit',
         component: DisponibiliteUpdateComponent,
         resolve: {
             disponibilite: DisponibiliteResolve
@@ -78,7 +78,7 @@ export const disponibiliteRoute: Routes = [
 
 export const disponibilitePopupRoute: Routes = [
     {
-        path: 'disponibilite/:id/delete',
+        path: ':id/delete',
         component: DisponibiliteDeletePopupComponent,
         resolve: {
             disponibilite: DisponibiliteResolve

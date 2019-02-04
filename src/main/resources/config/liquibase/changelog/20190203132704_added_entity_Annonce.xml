@@ -7,7 +7,7 @@
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <property name="now" value="now()" dbms="h2"/>
-
+    
     <property name="now" value="now()" dbms="mysql"/>
     <property name="autoIncrement" value="true"/>
 
@@ -31,6 +31,21 @@
             </column>
 
             <column name="status" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="image" type="longblob">
+                <constraints nullable="false" />
+            </column>
+            <column name="image_content_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="admin_valide" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="prix_horaire" type="double">
                 <constraints nullable="false" />
             </column>
 

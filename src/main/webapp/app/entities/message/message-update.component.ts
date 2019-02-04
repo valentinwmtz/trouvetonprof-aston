@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
-
 import { IMessage } from 'app/shared/model/message.model';
 import { MessageService } from './message.service';
 import { IProfil } from 'app/shared/model/profil.model';
@@ -35,12 +35,13 @@ export class MessageUpdateComponent implements OnInit {
             this.message = message;
             this.date = this.message.date != null ? this.message.date.format(DATE_TIME_FORMAT) : null;
         });
-        this.profilService.query().subscribe(
-            (res: HttpResponse<IProfil[]>) => {
-                this.profils = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.profilService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IProfil[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IProfil[]>) => response.body)
+            )
+            .subscribe((res: IProfil[]) => (this.profils = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {

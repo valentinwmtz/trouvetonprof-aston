@@ -67,7 +67,6 @@ public class MatiereService {
      * @param id the id of the entity
      */
     public void delete(Long id) {
-        log.debug("Request to delete Matiere : {}", id);
-        matiereRepository.deleteById(id);
+        log.debug("Request to delete Matiere : {}", id);        matiereRepository.deleteById(id);
     }
 }

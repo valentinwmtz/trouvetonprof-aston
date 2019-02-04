@@ -1,6 +1,4 @@
 package com.trouvetonprof.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.trouvetonprof.domain.Domaine;
 import com.trouvetonprof.service.DomaineService;
 import com.trouvetonprof.web.rest.errors.BadRequestAlertException;
@@ -44,7 +42,6 @@ public class DomaineResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/domaines")
-    @Timed
     public ResponseEntity<Domaine> createDomaine(@Valid @RequestBody Domaine domaine) throws URISyntaxException {
         log.debug("REST request to save Domaine : {}", domaine);
         if (domaine.getId() != null) {
@@ -66,7 +63,6 @@ public class DomaineResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/domaines")
-    @Timed
     public ResponseEntity<Domaine> updateDomaine(@Valid @RequestBody Domaine domaine) throws URISyntaxException {
         log.debug("REST request to update Domaine : {}", domaine);
         if (domaine.getId() == null) {
@@ -85,7 +81,6 @@ public class DomaineResource {
      * @return the ResponseEntity with status 200 (OK) and the list of domaines in body
      */
     @GetMapping("/domaines")
-    @Timed
     public List<Domaine> getAllDomaines(@RequestParam(required = false) String filter) {
         if ("annonce-is-null".equals(filter)) {
             log.debug("REST request to get all Domaines where annonce is null");
@@ -102,7 +97,6 @@ public class DomaineResource {
      * @return the ResponseEntity with status 200 (OK) and with body the domaine, or with status 404 (Not Found)
      */
     @GetMapping("/domaines/{id}")
-    @Timed
     public ResponseEntity<Domaine> getDomaine(@PathVariable Long id) {
         log.debug("REST request to get Domaine : {}", id);
         Optional<Domaine> domaine = domaineService.findOne(id);
@@ -116,7 +110,6 @@ public class DomaineResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/domaines/{id}")
-    @Timed
     public ResponseEntity<Void> deleteDomaine(@PathVariable Long id) {
         log.debug("REST request to delete Domaine : {}", id);
         domaineService.delete(id);
