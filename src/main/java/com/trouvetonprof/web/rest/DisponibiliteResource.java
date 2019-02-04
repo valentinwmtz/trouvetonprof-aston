@@ -1,6 +1,4 @@
 package com.trouvetonprof.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.trouvetonprof.domain.Disponibilite;
 import com.trouvetonprof.service.DisponibiliteService;
 import com.trouvetonprof.web.rest.errors.BadRequestAlertException;
@@ -43,7 +41,6 @@ public class DisponibiliteResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/disponibilites")
-    @Timed
     public ResponseEntity<Disponibilite> createDisponibilite(@Valid @RequestBody Disponibilite disponibilite) throws URISyntaxException {
         log.debug("REST request to save Disponibilite : {}", disponibilite);
         if (disponibilite.getId() != null) {
@@ -65,7 +62,6 @@ public class DisponibiliteResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/disponibilites")
-    @Timed
     public ResponseEntity<Disponibilite> updateDisponibilite(@Valid @RequestBody Disponibilite disponibilite) throws URISyntaxException {
         log.debug("REST request to update Disponibilite : {}", disponibilite);
         if (disponibilite.getId() == null) {
@@ -83,7 +79,6 @@ public class DisponibiliteResource {
      * @return the ResponseEntity with status 200 (OK) and the list of disponibilites in body
      */
     @GetMapping("/disponibilites")
-    @Timed
     public List<Disponibilite> getAllDisponibilites() {
         log.debug("REST request to get all Disponibilites");
         return disponibiliteService.findAll();
@@ -96,7 +91,6 @@ public class DisponibiliteResource {
      * @return the ResponseEntity with status 200 (OK) and with body the disponibilite, or with status 404 (Not Found)
      */
     @GetMapping("/disponibilites/{id}")
-    @Timed
     public ResponseEntity<Disponibilite> getDisponibilite(@PathVariable Long id) {
         log.debug("REST request to get Disponibilite : {}", id);
         Optional<Disponibilite> disponibilite = disponibiliteService.findOne(id);
@@ -110,7 +104,6 @@ public class DisponibiliteResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/disponibilites/{id}")
-    @Timed
     public ResponseEntity<Void> deleteDisponibilite(@PathVariable Long id) {
         log.debug("REST request to delete Disponibilite : {}", id);
         disponibiliteService.delete(id);

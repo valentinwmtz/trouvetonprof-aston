@@ -3,6 +3,7 @@ import { browser, ExpectedConditions as ec, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import { DomaineComponentsPage, DomaineDeleteDialog, DomaineUpdatePage } from './domaine.page-object';
+import * as path from 'path';
 
 const expect = chai.expect;
 
@@ -12,6 +13,9 @@ describe('Domaine e2e test', () => {
     let domaineUpdatePage: DomaineUpdatePage;
     let domaineComponentsPage: DomaineComponentsPage;
     let domaineDeleteDialog: DomaineDeleteDialog;
+    const fileNameToUpload = 'logo-jhipster.png';
+    const fileToUpload = '../../../../../main/webapp/content/images/' + fileNameToUpload;
+    const absolutePath = path.resolve(__dirname, fileToUpload);
 
     before(async () => {
         await browser.get('/');
@@ -24,6 +28,7 @@ describe('Domaine e2e test', () => {
     it('should load Domaines', async () => {
         await navBarPage.goToEntity('domaine');
         domaineComponentsPage = new DomaineComponentsPage();
+        await browser.wait(ec.visibilityOf(domaineComponentsPage.title), 5000);
         expect(await domaineComponentsPage.getTitle()).to.eq('trouvetonprofApp.domaine.home.title');
     });
 
@@ -38,9 +43,14 @@ describe('Domaine e2e test', () => {
         const nbButtonsBeforeCreate = await domaineComponentsPage.countDeleteButtons();
 
         await domaineComponentsPage.clickOnCreateButton();
-        await promise.all([domaineUpdatePage.setTitreInput('titre'), domaineUpdatePage.setDescriptionInput('description')]);
+        await promise.all([
+            domaineUpdatePage.setTitreInput('titre'),
+            domaineUpdatePage.setDescriptionInput('description'),
+            domaineUpdatePage.setImageInput(absolutePath)
+        ]);
         expect(await domaineUpdatePage.getTitreInput()).to.eq('titre');
         expect(await domaineUpdatePage.getDescriptionInput()).to.eq('description');
+        expect(await domaineUpdatePage.getImageInput()).to.endsWith(fileNameToUpload);
         await domaineUpdatePage.save();
         expect(await domaineUpdatePage.getSaveButton().isPresent()).to.be.false;
 

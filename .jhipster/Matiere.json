@@ -17,6 +17,11 @@
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 8000
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
         }
     ],
     "relationships": [
@@ -24,7 +29,8 @@
             "relationshipType": "many-to-one",
             "relationshipName": "domaine",
             "otherEntityName": "domaine",
-            "otherEntityField": "id"
+            "otherEntityField": "id",
+            "otherEntityRelationshipName": "matiere"
         }
     ],
     "changelogDate": "20190203132707",

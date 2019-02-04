@@ -1,5 +1,6 @@
 package com.trouvetonprof.domain;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
@@ -24,7 +25,7 @@ import com.trouvetonprof.domain.enumeration.Satut;
 public class Annonce implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,11 +45,27 @@ public class Annonce implements Serializable {
     @Column(name = "status", nullable = false)
     private Satut status;
 
+    
+    @Lob
+    @Column(name = "image", nullable = false)
+    private byte[] image;
+
+    @Column(name = "image_content_type", nullable = false)
+    private String imageContentType;
+
+    @Column(name = "admin_valide")
+    private Boolean adminValide;
+
+    @NotNull
+    @Column(name = "prix_horaire", nullable = false)
+    private Double prixHoraire;
+
     @ManyToOne
     @JsonIgnoreProperties("userAnnonces")
     private Profil profil;
 
-    @OneToOne    @JoinColumn(unique = true)
+    @OneToOne
+    @JoinColumn(unique = true)
     private Domaine domaine;
 
     @OneToMany(mappedBy = "annonce")
@@ -100,6 +117,58 @@ public class Annonce implements Serializable {
 
     public void setStatus(Satut status) {
         this.status = status;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public Annonce image(byte[] image) {
+        this.image = image;
+        return this;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getImageContentType() {
+        return imageContentType;
+    }
+
+    public Annonce imageContentType(String imageContentType) {
+        this.imageContentType = imageContentType;
+        return this;
+    }
+
+    public void setImageContentType(String imageContentType) {
+        this.imageContentType = imageContentType;
+    }
+
+    public Boolean isAdminValide() {
+        return adminValide;
+    }
+
+    public Annonce adminValide(Boolean adminValide) {
+        this.adminValide = adminValide;
+        return this;
+    }
+
+    public void setAdminValide(Boolean adminValide) {
+        this.adminValide = adminValide;
+    }
+
+    public Double getPrixHoraire() {
+        return prixHoraire;
+    }
+
+    public Annonce prixHoraire(Double prixHoraire) {
+        this.prixHoraire = prixHoraire;
+        return this;
+    }
+
+    public void setPrixHoraire(Double prixHoraire) {
+        this.prixHoraire = prixHoraire;
     }
 
     public Profil getProfil() {
@@ -181,6 +250,10 @@ public class Annonce implements Serializable {
             ", titre='" + getTitre() + "'" +
             ", description='" + getDescription() + "'" +
             ", status='" + getStatus() + "'" +
+            ", image='" + getImage() + "'" +
+            ", imageContentType='" + getImageContentType() + "'" +
+            ", adminValide='" + isAdminValide() + "'" +
+            ", prixHoraire=" + getPrixHoraire() +
             "}";
     }
 }

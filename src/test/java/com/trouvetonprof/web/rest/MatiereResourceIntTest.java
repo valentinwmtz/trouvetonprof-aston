@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
@@ -46,6 +47,11 @@ public class MatiereResourceIntTest {
 
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final byte[] DEFAULT_IMAGE = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_IMAGE = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_IMAGE_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_IMAGE_CONTENT_TYPE = "image/png";
 
     @Autowired
     private MatiereRepository matiereRepository;
@@ -93,7 +99,9 @@ public class MatiereResourceIntTest {
     public static Matiere createEntity(EntityManager em) {
         Matiere matiere = new Matiere()
             .titre(DEFAULT_TITRE)
-            .description(DEFAULT_DESCRIPTION);
+            .description(DEFAULT_DESCRIPTION)
+            .image(DEFAULT_IMAGE)
+            .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE);
         return matiere;
     }
 
@@ -119,6 +127,8 @@ public class MatiereResourceIntTest {
         Matiere testMatiere = matiereList.get(matiereList.size() - 1);
         assertThat(testMatiere.getTitre()).isEqualTo(DEFAULT_TITRE);
         assertThat(testMatiere.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testMatiere.getImage()).isEqualTo(DEFAULT_IMAGE);
+        assertThat(testMatiere.getImageContentType()).isEqualTo(DEFAULT_IMAGE_CONTENT_TYPE);
     }
 
     @Test
@@ -170,7 +180,9 @@ public class MatiereResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(matiere.getId().intValue())))
             .andExpect(jsonPath("$.[*].titre").value(hasItem(DEFAULT_TITRE.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))));
     }
     
     @Test
@@ -185,7 +197,9 @@ public class MatiereResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(matiere.getId().intValue()))
             .andExpect(jsonPath("$.titre").value(DEFAULT_TITRE.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.imageContentType").value(DEFAULT_IMAGE_CONTENT_TYPE))
+            .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)));
     }
 
     @Test
@@ -210,7 +224,9 @@ public class MatiereResourceIntTest {
         em.detach(updatedMatiere);
         updatedMatiere
             .titre(UPDATED_TITRE)
-            .description(UPDATED_DESCRIPTION);
+            .description(UPDATED_DESCRIPTION)
+            .image(UPDATED_IMAGE)
+            .imageContentType(UPDATED_IMAGE_CONTENT_TYPE);
 
         restMatiereMockMvc.perform(put("/api/matieres")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -223,6 +239,8 @@ public class MatiereResourceIntTest {
         Matiere testMatiere = matiereList.get(matiereList.size() - 1);
         assertThat(testMatiere.getTitre()).isEqualTo(UPDATED_TITRE);
         assertThat(testMatiere.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testMatiere.getImage()).isEqualTo(UPDATED_IMAGE);
+        assertThat(testMatiere.getImageContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
     }
 
     @Test
@@ -251,7 +269,7 @@ public class MatiereResourceIntTest {
 
         int databaseSizeBeforeDelete = matiereRepository.findAll().size();
 
-        // Get the matiere
+        // Delete the matiere
         restMatiereMockMvc.perform(delete("/api/matieres/{id}", matiere.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());

@@ -13,6 +13,15 @@
                 <dd>
                     <span>{{matiere.description}}</span>
                 </dd>
+                <dt><span jhiTranslate="trouvetonprofApp.matiere.image">Image</span></dt>
+                <dd>
+                    <div *ngIf="matiere.image">
+                        <a (click)="openFile(matiere.imageContentType, matiere.image)">
+                            <img [src]="'data:' + matiere.imageContentType + ';base64,' + matiere.image" style="max-width: 100%;" alt="matiere image"/>
+                        </a>
+                        {{matiere.imageContentType}}, {{byteSize(matiere.image)}}
+                    </div>
+                </dd>
                 <dt><span jhiTranslate="trouvetonprofApp.matiere.domaine">Domaine</span></dt>
                 <dd>
                     <div *ngIf="matiere.domaine">

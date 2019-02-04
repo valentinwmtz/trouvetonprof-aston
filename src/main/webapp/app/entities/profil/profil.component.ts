@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { IProfil } from 'app/shared/model/profil.model';
@@ -24,12 +25,18 @@ export class ProfilComponent implements OnInit, OnDestroy {
     ) {}
 
     loadAll() {
-        this.profilService.query().subscribe(
-            (res: HttpResponse<IProfil[]>) => {
-                this.profils = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.profilService
+            .query()
+            .pipe(
+                filter((res: HttpResponse<IProfil[]>) => res.ok),
+                map((res: HttpResponse<IProfil[]>) => res.body)
+            )
+            .subscribe(
+                (res: IProfil[]) => {
+                    this.profils = res;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 
     ngOnInit() {

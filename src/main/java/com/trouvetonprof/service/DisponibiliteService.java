@@ -67,7 +67,6 @@ public class DisponibiliteService {
      * @param id the id of the entity
      */
     public void delete(Long id) {
-        log.debug("Request to delete Disponibilite : {}", id);
-        disponibiliteRepository.deleteById(id);
+        log.debug("Request to delete Disponibilite : {}", id);        disponibiliteRepository.deleteById(id);
     }
 }

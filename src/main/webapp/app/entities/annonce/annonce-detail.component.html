@@ -17,6 +17,23 @@
                 <dd>
                     <span jhiTranslate="{{'trouvetonprofApp.Satut.' + annonce.status}}">{{annonce.status}}</span>
                 </dd>
+                <dt><span jhiTranslate="trouvetonprofApp.annonce.image">Image</span></dt>
+                <dd>
+                    <div *ngIf="annonce.image">
+                        <a (click)="openFile(annonce.imageContentType, annonce.image)">
+                            <img [src]="'data:' + annonce.imageContentType + ';base64,' + annonce.image" style="max-width: 100%;" alt="annonce image"/>
+                        </a>
+                        {{annonce.imageContentType}}, {{byteSize(annonce.image)}}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="trouvetonprofApp.annonce.adminValide">Admin Valide</span></dt>
+                <dd>
+                    <span>{{annonce.adminValide}}</span>
+                </dd>
+                <dt><span jhiTranslate="trouvetonprofApp.annonce.prixHoraire">Prix Horaire</span></dt>
+                <dd>
+                    <span>{{annonce.prixHoraire}}</span>
+                </dd>
                 <dt><span jhiTranslate="trouvetonprofApp.annonce.profil">Profil</span></dt>
                 <dd>
                     <div *ngIf="annonce.profil">

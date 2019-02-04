@@ -1,5 +1,6 @@
 package com.trouvetonprof.domain;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -24,7 +25,7 @@ import com.trouvetonprof.domain.enumeration.Sexe;
 public class Profil implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -49,7 +50,8 @@ public class Profil implements Serializable {
     @Column(name = "sexe", nullable = false)
     private Sexe sexe;
 
-    @OneToOne    @JoinColumn(unique = true)
+    @OneToOne
+    @JoinColumn(unique = true)
     private User user;
 
     @OneToMany(mappedBy = "profil")

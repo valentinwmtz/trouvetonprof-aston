@@ -17,6 +17,7 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="trouvetonprofApp.matiere.titre">Titre</span></th>
             <th><span jhiTranslate="trouvetonprofApp.matiere.description">Description</span></th>
+            <th><span jhiTranslate="trouvetonprofApp.matiere.image">Image</span></th>
             <th><span jhiTranslate="trouvetonprofApp.matiere.domaine">Domaine</span></th>
             <th></th>
             </tr>
@@ -26,6 +27,12 @@
                 <td><a [routerLink]="['/matiere', matiere.id, 'view' ]">{{matiere.id}}</a></td>
                 <td>{{matiere.titre}}</td>
                 <td>{{matiere.description}}</td>
+                <td>
+                    <a *ngIf="matiere.image" (click)="openFile(matiere.imageContentType, matiere.image)">
+                        <img [src]="'data:' + matiere.imageContentType + ';base64,' + matiere.image" style="max-height: 30px;" alt="matiere image"/>
+                    </a>
+                    <span *ngIf="matiere.image">{{matiere.imageContentType}}, {{byteSize(matiere.image)}}</span>
+                </td>
                 <td>
                     <div *ngIf="matiere.domaine">
                         <a [routerLink]="['../domaine', matiere.domaine?.id, 'view' ]" >{{matiere.domaine?.id}}</a>
@@ -46,7 +53,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'matiere/'+ matiere.id + '/delete'} }]"
+                                [routerLink]="['/', 'matiere', { outlets: { popup: matiere.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

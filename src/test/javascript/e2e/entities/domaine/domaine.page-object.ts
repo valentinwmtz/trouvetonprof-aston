@@ -28,6 +28,7 @@ export class DomaineUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     titreInput = element(by.id('field_titre'));
     descriptionInput = element(by.id('field_description'));
+    imageInput = element(by.id('file_image'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -47,6 +48,14 @@ export class DomaineUpdatePage {
 
     async getDescriptionInput() {
         return this.descriptionInput.getAttribute('value');
+    }
+
+    async setImageInput(image) {
+        await this.imageInput.sendKeys(image);
+    }
+
+    async getImageInput() {
+        return this.imageInput.getAttribute('value');
     }
 
     async save() {

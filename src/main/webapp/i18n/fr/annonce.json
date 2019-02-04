@@ -18,6 +18,9 @@
             "titre": "Titre",
             "description": "Description",
             "status": "Status",
+            "image": "Image",
+            "adminValide": "Admin Valide",
+            "prixHoraire": "Prix Horaire",
             "profil": "Profil",
             "domaine": "Domaine",
             "annonceDisponibilite": "Annonce Disponibilite"
