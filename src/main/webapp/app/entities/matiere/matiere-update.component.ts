@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { JhiAlertService } from 'ng-jhipster';
-
+import { filter, map } from 'rxjs/operators';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IMatiere } from 'app/shared/model/matiere.model';
 import { MatiereService } from './matiere.service';
 import { IDomaine } from 'app/shared/model/domaine.model';
@@ -20,9 +20,11 @@ export class MatiereUpdateComponent implements OnInit {
     domaines: IDomaine[];
 
     constructor(
+        protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
         protected matiereService: MatiereService,
         protected domaineService: DomaineService,
+        protected elementRef: ElementRef,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -31,12 +33,29 @@ export class MatiereUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ matiere }) => {
             this.matiere = matiere;
         });
-        this.domaineService.query().subscribe(
-            (res: HttpResponse<IDomaine[]>) => {
-                this.domaines = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.domaineService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IDomaine[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IDomaine[]>) => response.body)
+            )
+            .subscribe((res: IDomaine[]) => (this.domaines = res), (res: HttpErrorResponse) => this.onError(res.message));
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.dataUtils.setFileData(event, entity, field, isImage);
+    }
+
+    clearInputImage(field: string, fieldContentType: string, idInput: string) {
+        this.dataUtils.clearInputImage(this.matiere, this.elementRef, field, fieldContentType, idInput);
     }
 
     previousState() {

@@ -17,6 +17,7 @@
             },
             "titre": "Titre",
             "description": "Description",
+            "image": "Image",
             "matiere": "Matiere",
             "annonce": "Annonce"
         }

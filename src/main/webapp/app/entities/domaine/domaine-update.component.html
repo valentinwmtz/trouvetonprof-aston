@@ -19,7 +19,7 @@
                         This field is required.
                         </small>
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.titre?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 60 }">
+                        [hidden]="!editForm.controls.titre?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 60 }">
                         This field cannot be longer than 60 characters.
                         </small>
                     </div>
@@ -30,10 +30,27 @@
                         [(ngModel)]="domaine.description" maxlength="8000"/>
                     <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 8000 }">
+                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 8000 }">
                         This field cannot be longer than 8000 characters.
                         </small>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trouvetonprofApp.domaine.image" for="field_image">Image</label>
+                    <div>
+                        <img [src]="'data:' + domaine.imageContentType + ';base64,' + domaine.image" style="max-height: 100px;" *ngIf="domaine.image" alt="domaine image"/>
+                        <div *ngIf="domaine.image" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{domaine.imageContentType}}, {{byteSize(domaine.image)}}</span>
+                            <button type="button" (click)="clearInputImage('image', 'imageContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_image" (change)="setFileData($event, domaine, 'image', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="image" id="field_image"
+                        [(ngModel)]="domaine.image" />
+                    <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                        [(ngModel)]="domaine.imageContentType" />
                 </div>
 
             </div>

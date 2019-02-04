@@ -17,6 +17,11 @@
                 "maxlength"
             ],
             "fieldValidateRulesMaxlength": 8000
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
         }
     ],
     "relationships": [

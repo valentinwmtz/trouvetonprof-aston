@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { IMessage } from 'app/shared/model/message.model';
@@ -24,12 +25,18 @@ export class MessageComponent implements OnInit, OnDestroy {
     ) {}
 
     loadAll() {
-        this.messageService.query().subscribe(
-            (res: HttpResponse<IMessage[]>) => {
-                this.messages = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.messageService
+            .query()
+            .pipe(
+                filter((res: HttpResponse<IMessage[]>) => res.ok),
+                map((res: HttpResponse<IMessage[]>) => res.body)
+            )
+            .subscribe(
+                (res: IMessage[]) => {
+                    this.messages = res;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 
     ngOnInit() {

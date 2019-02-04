@@ -1,6 +1,4 @@
 package com.trouvetonprof.web.rest;
-
-import com.codahale.metrics.annotation.Timed;
 import com.trouvetonprof.domain.Annonce;
 import com.trouvetonprof.service.AnnonceService;
 import com.trouvetonprof.web.rest.errors.BadRequestAlertException;
@@ -43,7 +41,6 @@ public class AnnonceResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/annonces")
-    @Timed
     public ResponseEntity<Annonce> createAnnonce(@Valid @RequestBody Annonce annonce) throws URISyntaxException {
         log.debug("REST request to save Annonce : {}", annonce);
         if (annonce.getId() != null) {
@@ -65,7 +62,6 @@ public class AnnonceResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/annonces")
-    @Timed
     public ResponseEntity<Annonce> updateAnnonce(@Valid @RequestBody Annonce annonce) throws URISyntaxException {
         log.debug("REST request to update Annonce : {}", annonce);
         if (annonce.getId() == null) {
@@ -83,7 +79,6 @@ public class AnnonceResource {
      * @return the ResponseEntity with status 200 (OK) and the list of annonces in body
      */
     @GetMapping("/annonces")
-    @Timed
     public List<Annonce> getAllAnnonces() {
         log.debug("REST request to get all Annonces");
         return annonceService.findAll();
@@ -96,7 +91,6 @@ public class AnnonceResource {
      * @return the ResponseEntity with status 200 (OK) and with body the annonce, or with status 404 (Not Found)
      */
     @GetMapping("/annonces/{id}")
-    @Timed
     public ResponseEntity<Annonce> getAnnonce(@PathVariable Long id) {
         log.debug("REST request to get Annonce : {}", id);
         Optional<Annonce> annonce = annonceService.findOne(id);
@@ -110,7 +104,6 @@ public class AnnonceResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/annonces/{id}")
-    @Timed
     public ResponseEntity<Void> deleteAnnonce(@PathVariable Long id) {
         log.debug("REST request to delete Annonce : {}", id);
         annonceService.delete(id);

@@ -299,7 +299,7 @@ public class ProfilResourceIntTest {
 
         int databaseSizeBeforeDelete = profilRepository.findAll().size();
 
-        // Get the profil
+        // Delete the profil
         restProfilMockMvc.perform(delete("/api/profils/{id}", profil.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());

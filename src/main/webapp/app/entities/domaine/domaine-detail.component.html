@@ -13,6 +13,15 @@
                 <dd>
                     <span>{{domaine.description}}</span>
                 </dd>
+                <dt><span jhiTranslate="trouvetonprofApp.domaine.image">Image</span></dt>
+                <dd>
+                    <div *ngIf="domaine.image">
+                        <a (click)="openFile(domaine.imageContentType, domaine.image)">
+                            <img [src]="'data:' + domaine.imageContentType + ';base64,' + domaine.image" style="max-width: 100%;" alt="domaine image"/>
+                        </a>
+                        {{domaine.imageContentType}}, {{byteSize(domaine.image)}}
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

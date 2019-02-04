@@ -19,7 +19,7 @@
                         This field is required.
                         </small>
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.titre?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 60 }">
+                        [hidden]="!editForm.controls.titre?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 60 }">
                         This field cannot be longer than 60 characters.
                         </small>
                     </div>
@@ -34,7 +34,7 @@
                         This field is required.
                         </small>
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 8000 }">
+                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 8000 }">
                         This field cannot be longer than 8000 characters.
                         </small>
                     </div>
@@ -51,6 +51,34 @@
                         This field is required.
                         </small>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trouvetonprofApp.annonce.image" for="field_image">Image</label>
+                    <div>
+                        <img [src]="'data:' + annonce.imageContentType + ';base64,' + annonce.image" style="max-height: 100px;" *ngIf="annonce.image" alt="annonce image"/>
+                        <div *ngIf="annonce.image" class="form-text text-danger clearfix">
+                            <span class="pull-left">{{annonce.imageContentType}}, {{byteSize(annonce.image)}}</span>
+                            <button type="button" (click)="clearInputImage('image', 'imageContentType', 'fileImage')" class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_image" (change)="setFileData($event, annonce, 'image', true)" accept="image/*" jhiTranslate="entity.action.addimage"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="image" id="field_image"
+                        [(ngModel)]="annonce.image" required/>
+                    <input type="hidden" class="form-control" name="imageContentType" id="field_imageContentType"
+                        [(ngModel)]="annonce.imageContentType" />
+                    <div [hidden]="!(editForm.controls.image?.dirty && editForm.controls.image?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.image?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trouvetonprofApp.annonce.adminValide" for="field_adminValide">Admin Valide</label>
+                    <input type="checkbox" class="form-control" name="adminValide" id="field_adminValide"
+                        [(ngModel)]="annonce.adminValide" />
                 </div>
 
                 <div class="form-group">

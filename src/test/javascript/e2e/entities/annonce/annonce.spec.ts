@@ -3,6 +3,7 @@ import { browser, ExpectedConditions as ec, promise } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
 import { AnnonceComponentsPage, AnnonceDeleteDialog, AnnonceUpdatePage } from './annonce.page-object';
+import * as path from 'path';
 
 const expect = chai.expect;
 
@@ -12,6 +13,9 @@ describe('Annonce e2e test', () => {
     let annonceUpdatePage: AnnonceUpdatePage;
     let annonceComponentsPage: AnnonceComponentsPage;
     let annonceDeleteDialog: AnnonceDeleteDialog;
+    const fileNameToUpload = 'logo-jhipster.png';
+    const fileToUpload = '../../../../../main/webapp/content/images/' + fileNameToUpload;
+    const absolutePath = path.resolve(__dirname, fileToUpload);
 
     before(async () => {
         await browser.get('/');
@@ -24,6 +28,7 @@ describe('Annonce e2e test', () => {
     it('should load Annonces', async () => {
         await navBarPage.goToEntity('annonce');
         annonceComponentsPage = new AnnonceComponentsPage();
+        await browser.wait(ec.visibilityOf(annonceComponentsPage.title), 5000);
         expect(await annonceComponentsPage.getTitle()).to.eq('trouvetonprofApp.annonce.home.title');
     });
 
@@ -42,11 +47,21 @@ describe('Annonce e2e test', () => {
             annonceUpdatePage.setTitreInput('titre'),
             annonceUpdatePage.setDescriptionInput('description'),
             annonceUpdatePage.statusSelectLastOption(),
+            annonceUpdatePage.setImageInput(absolutePath),
             annonceUpdatePage.profilSelectLastOption(),
             annonceUpdatePage.domaineSelectLastOption()
         ]);
         expect(await annonceUpdatePage.getTitreInput()).to.eq('titre');
         expect(await annonceUpdatePage.getDescriptionInput()).to.eq('description');
+        expect(await annonceUpdatePage.getImageInput()).to.endsWith(fileNameToUpload);
+        const selectedAdminValide = annonceUpdatePage.getAdminValideInput();
+        if (await selectedAdminValide.isSelected()) {
+            await annonceUpdatePage.getAdminValideInput().click();
+            expect(await annonceUpdatePage.getAdminValideInput().isSelected()).to.be.false;
+        } else {
+            await annonceUpdatePage.getAdminValideInput().click();
+            expect(await annonceUpdatePage.getAdminValideInput().isSelected()).to.be.true;
+        }
         await annonceUpdatePage.save();
         expect(await annonceUpdatePage.getSaveButton().isPresent()).to.be.false;
 

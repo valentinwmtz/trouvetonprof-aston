@@ -26,6 +26,18 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "adminValide",
+            "fieldType": "Boolean"
         }
     ],
     "relationships": [

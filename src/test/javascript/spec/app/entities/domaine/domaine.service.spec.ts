@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(DomaineService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Domaine(0, 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new Domaine(0, 'AAAAAAA', 'AAAAAAA', 'image/png', 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -56,7 +56,8 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         titre: 'BBBBBB',
-                        description: 'BBBBBB'
+                        description: 'BBBBBB',
+                        image: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -74,7 +75,8 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         titre: 'BBBBBB',
-                        description: 'BBBBBB'
+                        description: 'BBBBBB',
+                        image: 'BBBBBB'
                     },
                     elemDefault
                 );

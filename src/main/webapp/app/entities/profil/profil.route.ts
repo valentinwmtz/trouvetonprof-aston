@@ -16,7 +16,7 @@ import { IProfil } from 'app/shared/model/profil.model';
 export class ProfilResolve implements Resolve<IProfil> {
     constructor(private service: ProfilService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Profil> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IProfil> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
             return this.service.find(id).pipe(
@@ -30,7 +30,7 @@ export class ProfilResolve implements Resolve<IProfil> {
 
 export const profilRoute: Routes = [
     {
-        path: 'profil',
+        path: '',
         component: ProfilComponent,
         data: {
             authorities: ['ROLE_USER'],
@@ -39,7 +39,7 @@ export const profilRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'profil/:id/view',
+        path: ':id/view',
         component: ProfilDetailComponent,
         resolve: {
             profil: ProfilResolve
@@ -51,7 +51,7 @@ export const profilRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'profil/new',
+        path: 'new',
         component: ProfilUpdateComponent,
         resolve: {
             profil: ProfilResolve
@@ -63,7 +63,7 @@ export const profilRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'profil/:id/edit',
+        path: ':id/edit',
         component: ProfilUpdateComponent,
         resolve: {
             profil: ProfilResolve
@@ -78,7 +78,7 @@ export const profilRoute: Routes = [
 
 export const profilPopupRoute: Routes = [
     {
-        path: 'profil/:id/delete',
+        path: ':id/delete',
         component: ProfilDeletePopupComponent,
         resolve: {
             profil: ProfilResolve

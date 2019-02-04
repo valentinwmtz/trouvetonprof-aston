@@ -18,6 +18,8 @@
             "titre": "Titre",
             "description": "Description",
             "status": "Status",
+            "image": "Image",
+            "adminValide": "Admin Valide",
             "profil": "Profil",
             "domaine": "Domaine",
             "annonceDisponibilite": "Annonce Disponibilite"

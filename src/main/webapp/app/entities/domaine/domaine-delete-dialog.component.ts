@@ -47,11 +47,11 @@ export class DomaineDeletePopupComponent implements OnInit, OnDestroy {
                 this.ngbModalRef.componentInstance.domaine = domaine;
                 this.ngbModalRef.result.then(
                     result => {
-                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
+                        this.router.navigate(['/domaine', { outlets: { popup: null } }]);
                         this.ngbModalRef = null;
                     },
                     reason => {
-                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
+                        this.router.navigate(['/domaine', { outlets: { popup: null } }]);
                         this.ngbModalRef = null;
                     }
                 );

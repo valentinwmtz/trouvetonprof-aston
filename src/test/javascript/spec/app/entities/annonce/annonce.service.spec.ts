@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(AnnonceService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new Annonce(0, 'AAAAAAA', 'AAAAAAA', Satut.PROFESSEUR);
+            elemDefault = new Annonce(0, 'AAAAAAA', 'AAAAAAA', Satut.PROFESSEUR, 'image/png', 'AAAAAAA', false);
         });
 
         describe('Service methods', async () => {
@@ -57,7 +57,9 @@ describe('Service Tests', () => {
                     {
                         titre: 'BBBBBB',
                         description: 'BBBBBB',
-                        status: 'BBBBBB'
+                        status: 'BBBBBB',
+                        image: 'BBBBBB',
+                        adminValide: true
                     },
                     elemDefault
                 );
@@ -76,7 +78,9 @@ describe('Service Tests', () => {
                     {
                         titre: 'BBBBBB',
                         description: 'BBBBBB',
-                        status: 'BBBBBB'
+                        status: 'BBBBBB',
+                        image: 'BBBBBB',
+                        adminValide: true
                     },
                     elemDefault
                 );

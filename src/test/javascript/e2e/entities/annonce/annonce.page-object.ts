@@ -29,6 +29,8 @@ export class AnnonceUpdatePage {
     titreInput = element(by.id('field_titre'));
     descriptionInput = element(by.id('field_description'));
     statusSelect = element(by.id('field_status'));
+    imageInput = element(by.id('file_image'));
+    adminValideInput = element(by.id('field_adminValide'));
     profilSelect = element(by.id('field_profil'));
     domaineSelect = element(by.id('field_domaine'));
 
@@ -65,6 +67,18 @@ export class AnnonceUpdatePage {
             .all(by.tagName('option'))
             .last()
             .click();
+    }
+
+    async setImageInput(image) {
+        await this.imageInput.sendKeys(image);
+    }
+
+    async getImageInput() {
+        return this.imageInput.getAttribute('value');
+    }
+
+    getAdminValideInput() {
+        return this.adminValideInput;
     }
 
     async profilSelectLastOption() {

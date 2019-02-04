@@ -18,6 +18,8 @@
             <th><span jhiTranslate="trouvetonprofApp.annonce.titre">Titre</span></th>
             <th><span jhiTranslate="trouvetonprofApp.annonce.description">Description</span></th>
             <th><span jhiTranslate="trouvetonprofApp.annonce.status">Status</span></th>
+            <th><span jhiTranslate="trouvetonprofApp.annonce.image">Image</span></th>
+            <th><span jhiTranslate="trouvetonprofApp.annonce.adminValide">Admin Valide</span></th>
             <th><span jhiTranslate="trouvetonprofApp.annonce.profil">Profil</span></th>
             <th><span jhiTranslate="trouvetonprofApp.annonce.domaine">Domaine</span></th>
             <th></th>
@@ -29,6 +31,13 @@
                 <td>{{annonce.titre}}</td>
                 <td>{{annonce.description}}</td>
                 <td jhiTranslate="{{'trouvetonprofApp.Satut.' + annonce.status}}">{{annonce.status}}</td>
+                <td>
+                    <a *ngIf="annonce.image" (click)="openFile(annonce.imageContentType, annonce.image)">
+                        <img [src]="'data:' + annonce.imageContentType + ';base64,' + annonce.image" style="max-height: 30px;" alt="annonce image"/>
+                    </a>
+                    <span *ngIf="annonce.image">{{annonce.imageContentType}}, {{byteSize(annonce.image)}}</span>
+                </td>
+                <td>{{annonce.adminValide}}</td>
                 <td>
                     <div *ngIf="annonce.profil">
                         <a [routerLink]="['../profil', annonce.profil?.id, 'view' ]" >{{annonce.profil?.id}}</a>
@@ -54,7 +63,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'annonce/'+ annonce.id + '/delete'} }]"
+                                [routerLink]="['/', 'annonce', { outlets: { popup: annonce.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

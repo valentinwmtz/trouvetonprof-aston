@@ -67,7 +67,6 @@ public class MessageService {
      * @param id the id of the entity
      */
     public void delete(Long id) {
-        log.debug("Request to delete Message : {}", id);
-        messageRepository.deleteById(id);
+        log.debug("Request to delete Message : {}", id);        messageRepository.deleteById(id);
     }
 }

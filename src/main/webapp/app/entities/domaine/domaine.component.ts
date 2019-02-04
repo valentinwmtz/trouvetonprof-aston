@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import { filter, map } from 'rxjs/operators';
+import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IDomaine } from 'app/shared/model/domaine.model';
 import { AccountService } from 'app/core';
@@ -19,17 +20,24 @@ export class DomaineComponent implements OnInit, OnDestroy {
     constructor(
         protected domaineService: DomaineService,
         protected jhiAlertService: JhiAlertService,
+        protected dataUtils: JhiDataUtils,
         protected eventManager: JhiEventManager,
         protected accountService: AccountService
     ) {}
 
     loadAll() {
-        this.domaineService.query().subscribe(
-            (res: HttpResponse<IDomaine[]>) => {
-                this.domaines = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.domaineService
+            .query()
+            .pipe(
+                filter((res: HttpResponse<IDomaine[]>) => res.ok),
+                map((res: HttpResponse<IDomaine[]>) => res.body)
+            )
+            .subscribe(
+                (res: IDomaine[]) => {
+                    this.domaines = res;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 
     ngOnInit() {
@@ -46,6 +54,14 @@ export class DomaineComponent implements OnInit, OnDestroy {
 
     trackId(index: number, item: IDomaine) {
         return item.id;
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
     }
 
     registerChangeInDomaines() {

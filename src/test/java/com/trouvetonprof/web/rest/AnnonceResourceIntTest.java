@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
@@ -50,6 +51,14 @@ public class AnnonceResourceIntTest {
 
     private static final Satut DEFAULT_STATUS = Satut.PROFESSEUR;
     private static final Satut UPDATED_STATUS = Satut.ELEVE;
+
+    private static final byte[] DEFAULT_IMAGE = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_IMAGE = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_IMAGE_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_IMAGE_CONTENT_TYPE = "image/png";
+
+    private static final Boolean DEFAULT_ADMIN_VALIDE = false;
+    private static final Boolean UPDATED_ADMIN_VALIDE = true;
 
     @Autowired
     private AnnonceRepository annonceRepository;
@@ -98,7 +107,10 @@ public class AnnonceResourceIntTest {
         Annonce annonce = new Annonce()
             .titre(DEFAULT_TITRE)
             .description(DEFAULT_DESCRIPTION)
-            .status(DEFAULT_STATUS);
+            .status(DEFAULT_STATUS)
+            .image(DEFAULT_IMAGE)
+            .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE)
+            .adminValide(DEFAULT_ADMIN_VALIDE);
         return annonce;
     }
 
@@ -125,6 +137,9 @@ public class AnnonceResourceIntTest {
         assertThat(testAnnonce.getTitre()).isEqualTo(DEFAULT_TITRE);
         assertThat(testAnnonce.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testAnnonce.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testAnnonce.getImage()).isEqualTo(DEFAULT_IMAGE);
+        assertThat(testAnnonce.getImageContentType()).isEqualTo(DEFAULT_IMAGE_CONTENT_TYPE);
+        assertThat(testAnnonce.isAdminValide()).isEqualTo(DEFAULT_ADMIN_VALIDE);
     }
 
     @Test
@@ -213,7 +228,10 @@ public class AnnonceResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(annonce.getId().intValue())))
             .andExpect(jsonPath("$.[*].titre").value(hasItem(DEFAULT_TITRE.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))))
+            .andExpect(jsonPath("$.[*].adminValide").value(hasItem(DEFAULT_ADMIN_VALIDE.booleanValue())));
     }
     
     @Test
@@ -229,7 +247,10 @@ public class AnnonceResourceIntTest {
             .andExpect(jsonPath("$.id").value(annonce.getId().intValue()))
             .andExpect(jsonPath("$.titre").value(DEFAULT_TITRE.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
+            .andExpect(jsonPath("$.imageContentType").value(DEFAULT_IMAGE_CONTENT_TYPE))
+            .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)))
+            .andExpect(jsonPath("$.adminValide").value(DEFAULT_ADMIN_VALIDE.booleanValue()));
     }
 
     @Test
@@ -255,7 +276,10 @@ public class AnnonceResourceIntTest {
         updatedAnnonce
             .titre(UPDATED_TITRE)
             .description(UPDATED_DESCRIPTION)
-            .status(UPDATED_STATUS);
+            .status(UPDATED_STATUS)
+            .image(UPDATED_IMAGE)
+            .imageContentType(UPDATED_IMAGE_CONTENT_TYPE)
+            .adminValide(UPDATED_ADMIN_VALIDE);
 
         restAnnonceMockMvc.perform(put("/api/annonces")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -269,6 +293,9 @@ public class AnnonceResourceIntTest {
         assertThat(testAnnonce.getTitre()).isEqualTo(UPDATED_TITRE);
         assertThat(testAnnonce.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testAnnonce.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testAnnonce.getImage()).isEqualTo(UPDATED_IMAGE);
+        assertThat(testAnnonce.getImageContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
+        assertThat(testAnnonce.isAdminValide()).isEqualTo(UPDATED_ADMIN_VALIDE);
     }
 
     @Test
@@ -297,7 +324,7 @@ public class AnnonceResourceIntTest {
 
         int databaseSizeBeforeDelete = annonceRepository.findAll().size();
 
-        // Get the annonce
+        // Delete the annonce
         restAnnonceMockMvc.perform(delete("/api/annonces/{id}", annonce.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());

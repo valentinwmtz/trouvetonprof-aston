@@ -1,5 +1,6 @@
 package com.trouvetonprof.domain;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -19,7 +20,7 @@ import java.util.Objects;
 public class Matiere implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,6 +33,13 @@ public class Matiere implements Serializable {
     @Size(max = 8000)
     @Column(name = "description", length = 8000)
     private String description;
+
+    @Lob
+    @Column(name = "image")
+    private byte[] image;
+
+    @Column(name = "image_content_type")
+    private String imageContentType;
 
     @ManyToOne
     @JsonIgnoreProperties("matieres")
@@ -70,6 +78,32 @@ public class Matiere implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public Matiere image(byte[] image) {
+        this.image = image;
+        return this;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getImageContentType() {
+        return imageContentType;
+    }
+
+    public Matiere imageContentType(String imageContentType) {
+        this.imageContentType = imageContentType;
+        return this;
+    }
+
+    public void setImageContentType(String imageContentType) {
+        this.imageContentType = imageContentType;
     }
 
     public Domaine getDomaine() {
@@ -112,6 +146,8 @@ public class Matiere implements Serializable {
             "id=" + getId() +
             ", titre='" + getTitre() + "'" +
             ", description='" + getDescription() + "'" +
+            ", image='" + getImage() + "'" +
+            ", imageContentType='" + getImageContentType() + "'" +
             "}";
     }
 }

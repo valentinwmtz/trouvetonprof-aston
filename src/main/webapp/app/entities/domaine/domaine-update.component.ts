@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { JhiAlertService } from 'ng-jhipster';
-
+import { filter, map } from 'rxjs/operators';
+import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IDomaine } from 'app/shared/model/domaine.model';
 import { DomaineService } from './domaine.service';
 import { IAnnonce } from 'app/shared/model/annonce.model';
@@ -20,9 +20,11 @@ export class DomaineUpdateComponent implements OnInit {
     annonces: IAnnonce[];
 
     constructor(
+        protected dataUtils: JhiDataUtils,
         protected jhiAlertService: JhiAlertService,
         protected domaineService: DomaineService,
         protected annonceService: AnnonceService,
+        protected elementRef: ElementRef,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -31,12 +33,29 @@ export class DomaineUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ domaine }) => {
             this.domaine = domaine;
         });
-        this.annonceService.query().subscribe(
-            (res: HttpResponse<IAnnonce[]>) => {
-                this.annonces = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.annonceService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IAnnonce[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IAnnonce[]>) => response.body)
+            )
+            .subscribe((res: IAnnonce[]) => (this.annonces = res), (res: HttpErrorResponse) => this.onError(res.message));
+    }
+
+    byteSize(field) {
+        return this.dataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.dataUtils.openFile(contentType, field);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.dataUtils.setFileData(event, entity, field, isImage);
+    }
+
+    clearInputImage(field: string, fieldContentType: string, idInput: string) {
+        this.dataUtils.clearInputImage(this.domaine, this.elementRef, field, fieldContentType, idInput);
     }
 
     previousState() {
