@@ -1,7 +1,7 @@
 import { Moment } from 'moment';
 import { IUser } from 'app/core/user/user.model';
-import { IMessage } from 'app/shared/model/message.model';
-import { IAnnonce } from 'app/shared/model/annonce.model';
+import { IMessage } from 'app/shared/model//message.model';
+import { IAnnonce } from 'app/shared/model//annonce.model';
 
 export const enum Sexe {
     HOMME = 'HOMME',

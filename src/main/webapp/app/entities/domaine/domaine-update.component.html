@@ -19,7 +19,7 @@
                         This field is required.
                         </small>
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.titre?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 60 }">
+                        [hidden]="!editForm.controls.titre?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 60 }">
                         This field cannot be longer than 60 characters.
                         </small>
                     </div>
@@ -30,7 +30,7 @@
                         [(ngModel)]="domaine.description" maxlength="8000"/>
                     <div [hidden]="!(editForm.controls.description?.dirty && editForm.controls.description?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 8000 }">
+                        [hidden]="!editForm.controls.description?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 8000 }">
                         This field cannot be longer than 8000 characters.
                         </small>
                     </div>

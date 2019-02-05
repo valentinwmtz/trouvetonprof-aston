@@ -1,4 +1,6 @@
 package com.trouvetonprof.web.rest;
+
+import com.codahale.metrics.annotation.Timed;
 import com.trouvetonprof.domain.Cours;
 import com.trouvetonprof.service.CoursService;
 import com.trouvetonprof.web.rest.errors.BadRequestAlertException;
@@ -41,6 +43,7 @@ public class CoursResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/cours")
+    @Timed
     public ResponseEntity<Cours> createCours(@Valid @RequestBody Cours cours) throws URISyntaxException {
         log.debug("REST request to save Cours : {}", cours);
         if (cours.getId() != null) {
@@ -62,6 +65,7 @@ public class CoursResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/cours")
+    @Timed
     public ResponseEntity<Cours> updateCours(@Valid @RequestBody Cours cours) throws URISyntaxException {
         log.debug("REST request to update Cours : {}", cours);
         if (cours.getId() == null) {
@@ -79,6 +83,7 @@ public class CoursResource {
      * @return the ResponseEntity with status 200 (OK) and the list of cours in body
      */
     @GetMapping("/cours")
+    @Timed
     public List<Cours> getAllCours() {
         log.debug("REST request to get all Cours");
         return coursService.findAll();
@@ -91,6 +96,7 @@ public class CoursResource {
      * @return the ResponseEntity with status 200 (OK) and with body the cours, or with status 404 (Not Found)
      */
     @GetMapping("/cours/{id}")
+    @Timed
     public ResponseEntity<Cours> getCours(@PathVariable Long id) {
         log.debug("REST request to get Cours : {}", id);
         Optional<Cours> cours = coursService.findOne(id);
@@ -104,6 +110,7 @@ public class CoursResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/cours/{id}")
+    @Timed
     public ResponseEntity<Void> deleteCours(@PathVariable Long id) {
         log.debug("REST request to delete Cours : {}", id);
         coursService.delete(id);

@@ -24,7 +24,6 @@ describe('Message e2e test', () => {
     it('should load Messages', async () => {
         await navBarPage.goToEntity('message');
         messageComponentsPage = new MessageComponentsPage();
-        await browser.wait(ec.visibilityOf(messageComponentsPage.title), 5000);
         expect(await messageComponentsPage.getTitle()).to.eq('trouvetonprofApp.message.home.title');
     });
 

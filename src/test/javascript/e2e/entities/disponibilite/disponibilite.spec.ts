@@ -24,7 +24,6 @@ describe('Disponibilite e2e test', () => {
     it('should load Disponibilites', async () => {
         await navBarPage.goToEntity('disponibilite');
         disponibiliteComponentsPage = new DisponibiliteComponentsPage();
-        await browser.wait(ec.visibilityOf(disponibiliteComponentsPage.title), 5000);
         expect(await disponibiliteComponentsPage.getTitle()).to.eq('trouvetonprofApp.disponibilite.home.title');
     });
 

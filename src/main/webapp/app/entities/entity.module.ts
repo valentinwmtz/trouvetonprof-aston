@@ -6,6 +6,7 @@ import { TrouvetonprofDisponibiliteModule } from './disponibilite/disponibilite.
 import { TrouvetonprofDomaineModule } from './domaine/domaine.module';
 import { TrouvetonprofMatiereModule } from './matiere/matiere.module';
 import { TrouvetonprofMessageModule } from './message/message.module';
+import { TrouvetonprofCoursModule } from './cours/cours.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -17,6 +18,7 @@ import { TrouvetonprofMessageModule } from './message/message.module';
         TrouvetonprofDomaineModule,
         TrouvetonprofMatiereModule,
         TrouvetonprofMessageModule,
+        TrouvetonprofCoursModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

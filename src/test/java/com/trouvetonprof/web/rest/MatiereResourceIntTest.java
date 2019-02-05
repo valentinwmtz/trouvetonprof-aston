@@ -269,7 +269,7 @@ public class MatiereResourceIntTest {
 
         int databaseSizeBeforeDelete = matiereRepository.findAll().size();
 
-        // Delete the matiere
+        // Get the matiere
         restMatiereMockMvc.perform(delete("/api/matieres/{id}", matiere.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());

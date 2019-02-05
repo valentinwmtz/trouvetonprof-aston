@@ -1,6 +1,5 @@
 package com.trouvetonprof.domain;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
@@ -25,7 +24,7 @@ import com.trouvetonprof.domain.enumeration.Satut;
 public class Annonce implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -64,8 +63,7 @@ public class Annonce implements Serializable {
     @JsonIgnoreProperties("userAnnonces")
     private Profil profil;
 
-    @OneToOne
-    @JoinColumn(unique = true)
+    @OneToOne    @JoinColumn(unique = true)
     private Domaine domaine;
 
     @OneToMany(mappedBy = "annonce")

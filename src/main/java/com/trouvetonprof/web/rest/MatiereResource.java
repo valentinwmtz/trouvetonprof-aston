@@ -1,4 +1,6 @@
 package com.trouvetonprof.web.rest;
+
+import com.codahale.metrics.annotation.Timed;
 import com.trouvetonprof.domain.Matiere;
 import com.trouvetonprof.service.MatiereService;
 import com.trouvetonprof.web.rest.errors.BadRequestAlertException;
@@ -41,6 +43,7 @@ public class MatiereResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/matieres")
+    @Timed
     public ResponseEntity<Matiere> createMatiere(@Valid @RequestBody Matiere matiere) throws URISyntaxException {
         log.debug("REST request to save Matiere : {}", matiere);
         if (matiere.getId() != null) {
@@ -62,6 +65,7 @@ public class MatiereResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/matieres")
+    @Timed
     public ResponseEntity<Matiere> updateMatiere(@Valid @RequestBody Matiere matiere) throws URISyntaxException {
         log.debug("REST request to update Matiere : {}", matiere);
         if (matiere.getId() == null) {
@@ -79,6 +83,7 @@ public class MatiereResource {
      * @return the ResponseEntity with status 200 (OK) and the list of matieres in body
      */
     @GetMapping("/matieres")
+    @Timed
     public List<Matiere> getAllMatieres() {
         log.debug("REST request to get all Matieres");
         return matiereService.findAll();
@@ -91,6 +96,7 @@ public class MatiereResource {
      * @return the ResponseEntity with status 200 (OK) and with body the matiere, or with status 404 (Not Found)
      */
     @GetMapping("/matieres/{id}")
+    @Timed
     public ResponseEntity<Matiere> getMatiere(@PathVariable Long id) {
         log.debug("REST request to get Matiere : {}", id);
         Optional<Matiere> matiere = matiereService.findOne(id);
@@ -104,6 +110,7 @@ public class MatiereResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/matieres/{id}")
+    @Timed
     public ResponseEntity<Void> deleteMatiere(@PathVariable Long id) {
         log.debug("REST request to delete Matiere : {}", id);
         matiereService.delete(id);

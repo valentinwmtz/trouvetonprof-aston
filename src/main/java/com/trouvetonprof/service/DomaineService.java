@@ -83,6 +83,7 @@ public class DomaineService {
      * @param id the id of the entity
      */
     public void delete(Long id) {
-        log.debug("Request to delete Domaine : {}", id);        domaineRepository.deleteById(id);
+        log.debug("Request to delete Domaine : {}", id);
+        domaineRepository.deleteById(id);
     }
 }

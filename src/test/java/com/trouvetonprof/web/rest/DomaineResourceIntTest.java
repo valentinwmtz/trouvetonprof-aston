@@ -269,7 +269,7 @@ public class DomaineResourceIntTest {
 
         int databaseSizeBeforeDelete = domaineRepository.findAll().size();
 
-        // Delete the domaine
+        // Get the domaine
         restDomaineMockMvc.perform(delete("/api/domaines/{id}", domaine.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());
