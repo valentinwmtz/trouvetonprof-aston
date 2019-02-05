@@ -14,6 +14,7 @@
                 "domaine": "Domaine",
                 "matiere": "Matiere",
                 "message": "Message",
+                "cours": "Cours",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
