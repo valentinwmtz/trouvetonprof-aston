@@ -1,4 +1,6 @@
 package com.trouvetonprof.web.rest;
+
+import com.codahale.metrics.annotation.Timed;
 import com.trouvetonprof.domain.Message;
 import com.trouvetonprof.service.MessageService;
 import com.trouvetonprof.web.rest.errors.BadRequestAlertException;
@@ -41,6 +43,7 @@ public class MessageResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/messages")
+    @Timed
     public ResponseEntity<Message> createMessage(@Valid @RequestBody Message message) throws URISyntaxException {
         log.debug("REST request to save Message : {}", message);
         if (message.getId() != null) {
@@ -62,6 +65,7 @@ public class MessageResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/messages")
+    @Timed
     public ResponseEntity<Message> updateMessage(@Valid @RequestBody Message message) throws URISyntaxException {
         log.debug("REST request to update Message : {}", message);
         if (message.getId() == null) {
@@ -79,6 +83,7 @@ public class MessageResource {
      * @return the ResponseEntity with status 200 (OK) and the list of messages in body
      */
     @GetMapping("/messages")
+    @Timed
     public List<Message> getAllMessages() {
         log.debug("REST request to get all Messages");
         return messageService.findAll();
@@ -91,6 +96,7 @@ public class MessageResource {
      * @return the ResponseEntity with status 200 (OK) and with body the message, or with status 404 (Not Found)
      */
     @GetMapping("/messages/{id}")
+    @Timed
     public ResponseEntity<Message> getMessage(@PathVariable Long id) {
         log.debug("REST request to get Message : {}", id);
         Optional<Message> message = messageService.findOne(id);
@@ -104,6 +110,7 @@ public class MessageResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/messages/{id}")
+    @Timed
     public ResponseEntity<Void> deleteMessage(@PathVariable Long id) {
         log.debug("REST request to delete Message : {}", id);
         messageService.delete(id);

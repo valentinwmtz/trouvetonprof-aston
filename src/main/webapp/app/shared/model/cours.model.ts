@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
-import { IAnnonce } from 'app/shared/model/annonce.model';
+import { IAnnonce } from 'app/shared/model//annonce.model';
 
 export interface ICours {
     id?: number;

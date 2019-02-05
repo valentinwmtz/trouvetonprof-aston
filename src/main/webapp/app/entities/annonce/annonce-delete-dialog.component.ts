@@ -47,11 +47,11 @@ export class AnnonceDeletePopupComponent implements OnInit, OnDestroy {
                 this.ngbModalRef.componentInstance.annonce = annonce;
                 this.ngbModalRef.result.then(
                     result => {
-                        this.router.navigate(['/annonce', { outlets: { popup: null } }]);
+                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
                         this.ngbModalRef = null;
                     },
                     reason => {
-                        this.router.navigate(['/annonce', { outlets: { popup: null } }]);
+                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
                         this.ngbModalRef = null;
                     }
                 );

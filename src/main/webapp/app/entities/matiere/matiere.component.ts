@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IMatiere } from 'app/shared/model/matiere.model';
@@ -26,18 +25,12 @@ export class MatiereComponent implements OnInit, OnDestroy {
     ) {}
 
     loadAll() {
-        this.matiereService
-            .query()
-            .pipe(
-                filter((res: HttpResponse<IMatiere[]>) => res.ok),
-                map((res: HttpResponse<IMatiere[]>) => res.body)
-            )
-            .subscribe(
-                (res: IMatiere[]) => {
-                    this.matieres = res;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+        this.matiereService.query().subscribe(
+            (res: HttpResponse<IMatiere[]>) => {
+                this.matieres = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     ngOnInit() {

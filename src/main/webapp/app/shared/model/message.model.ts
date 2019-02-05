@@ -1,5 +1,5 @@
 import { Moment } from 'moment';
-import { IProfil } from 'app/shared/model/profil.model';
+import { IProfil } from 'app/shared/model//profil.model';
 
 export interface IMessage {
     id?: number;

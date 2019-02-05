@@ -1,4 +1,4 @@
-import { IDomaine } from 'app/shared/model/domaine.model';
+import { IDomaine } from 'app/shared/model//domaine.model';
 
 export interface IMatiere {
     id?: number;

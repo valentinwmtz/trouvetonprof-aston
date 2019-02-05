@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { ICours } from 'app/shared/model/cours.model';
@@ -25,18 +24,12 @@ export class CoursComponent implements OnInit, OnDestroy {
     ) {}
 
     loadAll() {
-        this.coursService
-            .query()
-            .pipe(
-                filter((res: HttpResponse<ICours[]>) => res.ok),
-                map((res: HttpResponse<ICours[]>) => res.body)
-            )
-            .subscribe(
-                (res: ICours[]) => {
-                    this.cours = res;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+        this.coursService.query().subscribe(
+            (res: HttpResponse<ICours[]>) => {
+                this.cours = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     ngOnInit() {

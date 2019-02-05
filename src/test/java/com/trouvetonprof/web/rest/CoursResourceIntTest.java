@@ -298,7 +298,7 @@ public class CoursResourceIntTest {
 
         int databaseSizeBeforeDelete = coursRepository.findAll().size();
 
-        // Delete the cours
+        // Get the cours
         restCoursMockMvc.perform(delete("/api/cours/{id}", cours.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());

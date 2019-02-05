@@ -16,7 +16,7 @@ import { IMessage } from 'app/shared/model/message.model';
 export class MessageResolve implements Resolve<IMessage> {
     constructor(private service: MessageService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IMessage> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Message> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
             return this.service.find(id).pipe(
@@ -30,7 +30,7 @@ export class MessageResolve implements Resolve<IMessage> {
 
 export const messageRoute: Routes = [
     {
-        path: '',
+        path: 'message',
         component: MessageComponent,
         data: {
             authorities: ['ROLE_USER'],
@@ -39,7 +39,7 @@ export const messageRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: ':id/view',
+        path: 'message/:id/view',
         component: MessageDetailComponent,
         resolve: {
             message: MessageResolve
@@ -51,7 +51,7 @@ export const messageRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'new',
+        path: 'message/new',
         component: MessageUpdateComponent,
         resolve: {
             message: MessageResolve
@@ -63,7 +63,7 @@ export const messageRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: ':id/edit',
+        path: 'message/:id/edit',
         component: MessageUpdateComponent,
         resolve: {
             message: MessageResolve
@@ -78,7 +78,7 @@ export const messageRoute: Routes = [
 
 export const messagePopupRoute: Routes = [
     {
-        path: ':id/delete',
+        path: 'message/:id/delete',
         component: MessageDeletePopupComponent,
         resolve: {
             message: MessageResolve

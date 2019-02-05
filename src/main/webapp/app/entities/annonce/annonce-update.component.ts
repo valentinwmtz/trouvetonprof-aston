@@ -2,8 +2,8 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+
 import { IAnnonce } from 'app/shared/model/annonce.model';
 import { AnnonceService } from './annonce.service';
 import { IProfil } from 'app/shared/model/profil.model';
@@ -38,38 +38,27 @@ export class AnnonceUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ annonce }) => {
             this.annonce = annonce;
         });
-        this.profilService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IProfil[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IProfil[]>) => response.body)
-            )
-            .subscribe((res: IProfil[]) => (this.profils = res), (res: HttpErrorResponse) => this.onError(res.message));
-        this.domaineService
-            .query({ filter: 'annonce-is-null' })
-            .pipe(
-                filter((mayBeOk: HttpResponse<IDomaine[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IDomaine[]>) => response.body)
-            )
-            .subscribe(
-                (res: IDomaine[]) => {
-                    if (!this.annonce.domaine || !this.annonce.domaine.id) {
-                        this.domaines = res;
-                    } else {
-                        this.domaineService
-                            .find(this.annonce.domaine.id)
-                            .pipe(
-                                filter((subResMayBeOk: HttpResponse<IDomaine>) => subResMayBeOk.ok),
-                                map((subResponse: HttpResponse<IDomaine>) => subResponse.body)
-                            )
-                            .subscribe(
-                                (subRes: IDomaine) => (this.domaines = [subRes].concat(res)),
-                                (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                            );
-                    }
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+        this.profilService.query().subscribe(
+            (res: HttpResponse<IProfil[]>) => {
+                this.profils = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.domaineService.query({ filter: 'annonce-is-null' }).subscribe(
+            (res: HttpResponse<IDomaine[]>) => {
+                if (!this.annonce.domaine || !this.annonce.domaine.id) {
+                    this.domaines = res.body;
+                } else {
+                    this.domaineService.find(this.annonce.domaine.id).subscribe(
+                        (subRes: HttpResponse<IDomaine>) => {
+                            this.domaines = [subRes.body].concat(res.body);
+                        },
+                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
+                    );
+                }
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     byteSize(field) {

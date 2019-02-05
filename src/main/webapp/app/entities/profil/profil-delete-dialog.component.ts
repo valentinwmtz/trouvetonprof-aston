@@ -47,11 +47,11 @@ export class ProfilDeletePopupComponent implements OnInit, OnDestroy {
                 this.ngbModalRef.componentInstance.profil = profil;
                 this.ngbModalRef.result.then(
                     result => {
-                        this.router.navigate(['/profil', { outlets: { popup: null } }]);
+                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
                         this.ngbModalRef = null;
                     },
                     reason => {
-                        this.router.navigate(['/profil', { outlets: { popup: null } }]);
+                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
                         this.ngbModalRef = null;
                     }
                 );

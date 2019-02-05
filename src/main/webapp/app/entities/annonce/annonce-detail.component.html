@@ -1,52 +1,61 @@
 <div class="row justify-content-center">
-    <div class="col-8">
+    <div class="col-10">
         <div *ngIf="annonce">
-            <h2><span jhiTranslate="trouvetonprofApp.annonce.detail.title">Annonce</span> {{annonce.id}}</h2>
-            <hr>
+            <div class="container" style="padding-left: 0;">
+                <div class="row">
+                    <div class="col-4">
+                        <dd>
+                            <div *ngIf="annonce.image">
+                                <a (click)="openFile(annonce.imageContentType, annonce.image)">
+                                    <img [src]="'data:' + annonce.imageContentType + ';base64,' + annonce.image"
+                                         style="width: 200px;" alt="annonce image"/>
+                                </a>
+                            </div>
+                        </dd>
+                    </div>
+                    <div class="col-8">
+                        <h1 class="mat-h1" style="margin-bottom: 0;"> {{annonce.titre}}</h1>
+                        <hr>
+                        <dl class="row-md jh-entity-details">
+                            <dt><span jhiTranslate="trouvetonprofApp.annonce.status">Status</span></dt>
+                            <dd>
+                                <span
+                                    jhiTranslate="{{'trouvetonprofApp.Satut.' + annonce.status}}">{{annonce.status}}</span>
+                            </dd>
+                            <dt><span jhiTranslate="trouvetonprofApp.annonce.prixHoraire">Prix Horaire</span></dt>
+                            <dd>
+                                <span>{{annonce.prixHoraire}}</span>
+                            </dd>
+                            <dt><span jhiTranslate="trouvetonprofApp.annonce.profil">Profil</span></dt>
+                            <dd>
+                                <div *ngIf="annonce.profil">
+                                    <a [routerLink]="['/profil', annonce.profil?.id, 'view']">{{annonce.profil?.id}}</a>
+                                </div>
+                            </dd>
+                            <dt><span jhiTranslate="trouvetonprofApp.annonce.domaine">Domaine</span></dt>
+                            <dd>
+                                <div *ngIf="annonce.domaine">
+                                    <a [routerLink]="['/domaine', annonce.domaine?.id, 'view']">{{annonce.domaine?.id}}</a>
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
             <jhi-alert-error></jhi-alert-error>
-            <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="trouvetonprofApp.annonce.titre">Titre</span></dt>
-                <dd>
-                    <span>{{annonce.titre}}</span>
-                </dd>
-                <dt><span jhiTranslate="trouvetonprofApp.annonce.description">Description</span></dt>
-                <dd>
-                    <span>{{annonce.description}}</span>
-                </dd>
-                <dt><span jhiTranslate="trouvetonprofApp.annonce.status">Status</span></dt>
-                <dd>
-                    <span jhiTranslate="{{'trouvetonprofApp.Satut.' + annonce.status}}">{{annonce.status}}</span>
-                </dd>
-                <dt><span jhiTranslate="trouvetonprofApp.annonce.image">Image</span></dt>
-                <dd>
-                    <div *ngIf="annonce.image">
-                        <a (click)="openFile(annonce.imageContentType, annonce.image)">
-                            <img [src]="'data:' + annonce.imageContentType + ';base64,' + annonce.image" style="max-width: 100%;" alt="annonce image"/>
-                        </a>
-                        {{annonce.imageContentType}}, {{byteSize(annonce.image)}}
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="trouvetonprofApp.annonce.adminValide">Admin Valide</span></dt>
-                <dd>
-                    <span>{{annonce.adminValide}}</span>
-                </dd>
-                <dt><span jhiTranslate="trouvetonprofApp.annonce.prixHoraire">Prix Horaire</span></dt>
-                <dd>
-                    <span>{{annonce.prixHoraire}}</span>
-                </dd>
-                <dt><span jhiTranslate="trouvetonprofApp.annonce.profil">Profil</span></dt>
-                <dd>
-                    <div *ngIf="annonce.profil">
-                        <a [routerLink]="['/profil', annonce.profil?.id, 'view']">{{annonce.profil?.id}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="trouvetonprofApp.annonce.domaine">Domaine</span></dt>
-                <dd>
-                    <div *ngIf="annonce.domaine">
-                        <a [routerLink]="['/domaine', annonce.domaine?.id, 'view']">{{annonce.domaine?.id}}</a>
-                    </div>
-                </dd>
-            </dl>
+
+            <div class="container" style="padding-left: 0;">
+                <div class="col-12" style="padding-left: 0;">
+                    <dl class="row-md jh-entity-details">
+                        <dt><span jhiTranslate="trouvetonprofApp.annonce.description">Description</span></dt>
+                        <dd>
+                            <span>{{annonce.description}}</span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
 
             <button type="submit"
                     (click)="previousState()"

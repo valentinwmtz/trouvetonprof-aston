@@ -16,7 +16,7 @@ import { IDomaine } from 'app/shared/model/domaine.model';
 export class DomaineResolve implements Resolve<IDomaine> {
     constructor(private service: DomaineService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IDomaine> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Domaine> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
             return this.service.find(id).pipe(
@@ -30,7 +30,7 @@ export class DomaineResolve implements Resolve<IDomaine> {
 
 export const domaineRoute: Routes = [
     {
-        path: '',
+        path: 'domaine',
         component: DomaineComponent,
         data: {
             authorities: ['ROLE_USER'],
@@ -39,7 +39,7 @@ export const domaineRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: ':id/view',
+        path: 'domaine/:id/view',
         component: DomaineDetailComponent,
         resolve: {
             domaine: DomaineResolve
@@ -51,7 +51,7 @@ export const domaineRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'new',
+        path: 'domaine/new',
         component: DomaineUpdateComponent,
         resolve: {
             domaine: DomaineResolve
@@ -63,7 +63,7 @@ export const domaineRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: ':id/edit',
+        path: 'domaine/:id/edit',
         component: DomaineUpdateComponent,
         resolve: {
             domaine: DomaineResolve
@@ -78,7 +78,7 @@ export const domaineRoute: Routes = [
 
 export const domainePopupRoute: Routes = [
     {
-        path: ':id/delete',
+        path: 'domaine/:id/delete',
         component: DomaineDeletePopupComponent,
         resolve: {
             domaine: DomaineResolve

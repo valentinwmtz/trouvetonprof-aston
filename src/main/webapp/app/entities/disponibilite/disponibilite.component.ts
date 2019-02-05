@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 
 import { IDisponibilite } from 'app/shared/model/disponibilite.model';
@@ -25,18 +24,12 @@ export class DisponibiliteComponent implements OnInit, OnDestroy {
     ) {}
 
     loadAll() {
-        this.disponibiliteService
-            .query()
-            .pipe(
-                filter((res: HttpResponse<IDisponibilite[]>) => res.ok),
-                map((res: HttpResponse<IDisponibilite[]>) => res.body)
-            )
-            .subscribe(
-                (res: IDisponibilite[]) => {
-                    this.disponibilites = res;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
+        this.disponibiliteService.query().subscribe(
+            (res: HttpResponse<IDisponibilite[]>) => {
+                this.disponibilites = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     ngOnInit() {

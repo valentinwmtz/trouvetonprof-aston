@@ -1,4 +1,6 @@
 package com.trouvetonprof.web.rest;
+
+import com.codahale.metrics.annotation.Timed;
 import com.trouvetonprof.domain.Profil;
 import com.trouvetonprof.service.ProfilService;
 import com.trouvetonprof.web.rest.errors.BadRequestAlertException;
@@ -41,6 +43,7 @@ public class ProfilResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/profils")
+    @Timed
     public ResponseEntity<Profil> createProfil(@Valid @RequestBody Profil profil) throws URISyntaxException {
         log.debug("REST request to save Profil : {}", profil);
         if (profil.getId() != null) {
@@ -62,6 +65,7 @@ public class ProfilResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/profils")
+    @Timed
     public ResponseEntity<Profil> updateProfil(@Valid @RequestBody Profil profil) throws URISyntaxException {
         log.debug("REST request to update Profil : {}", profil);
         if (profil.getId() == null) {
@@ -79,6 +83,7 @@ public class ProfilResource {
      * @return the ResponseEntity with status 200 (OK) and the list of profils in body
      */
     @GetMapping("/profils")
+    @Timed
     public List<Profil> getAllProfils() {
         log.debug("REST request to get all Profils");
         return profilService.findAll();
@@ -91,6 +96,7 @@ public class ProfilResource {
      * @return the ResponseEntity with status 200 (OK) and with body the profil, or with status 404 (Not Found)
      */
     @GetMapping("/profils/{id}")
+    @Timed
     public ResponseEntity<Profil> getProfil(@PathVariable Long id) {
         log.debug("REST request to get Profil : {}", id);
         Optional<Profil> profil = profilService.findOne(id);
@@ -104,6 +110,7 @@ public class ProfilResource {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/profils/{id}")
+    @Timed
     public ResponseEntity<Void> deleteProfil(@PathVariable Long id) {
         log.debug("REST request to delete Profil : {}", id);
         profilService.delete(id);
