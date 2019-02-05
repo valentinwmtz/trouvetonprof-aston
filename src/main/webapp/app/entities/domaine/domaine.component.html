@@ -1,4 +1,4 @@
-<div>
+<!--<div>
     <h2 id="page-heading">
         <span jhiTranslate="trouvetonprofApp.domaine.home.title">Domaines</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-domaine" [routerLink]="['/domaine/new']">
@@ -12,7 +12,7 @@
     <br/>
     <div class="table-responsive" *ngIf="domaines">
         <table class="table table-striped">
-            <thead>
+                <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="trouvetonprofApp.domaine.titre">Titre</span></th>
@@ -60,4 +60,17 @@
             </tbody>
         </table>
     </div>
+</div>-->
+<div *ngFor="let domaine of domaines">
+    <div class="card" style="width:18rem;">
+        <div class="card-body">
+            <a [routerLink]="['/domaine', domaine.id, 'view' ]">{{domaine.titre}}</a>
+            <img [src]="'data:' + domaine.imageContentType + ';base64,' + domaine.image" style="max-height: 30px;" alt="domaine image"/>
+            <p>
+                {{domaine.description}}
+            </p>
+        </div>
+    </div>
 </div>
+
+
