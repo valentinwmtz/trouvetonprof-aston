@@ -27,6 +27,15 @@ entity Disponibilite {
     duree Double required
 }
 
+entity Cours {
+    date Instant required
+    duree Double required
+    note Integer min(0) max(5)
+    prix Integer
+    commentaire String
+    
+}
+
 enum Satut {
     PROFESSEUR, ELEVE
 }
@@ -60,6 +69,7 @@ relationship OneToMany {
 	Profil{userMessage} to Message
   	Profil{userAnnonce} to Annonce
  	Annonce{annonceDisponibilite} to Disponibilite
+    Annonce{annonceCours} to Cours
  	Domaine to Matiere
 }
 
