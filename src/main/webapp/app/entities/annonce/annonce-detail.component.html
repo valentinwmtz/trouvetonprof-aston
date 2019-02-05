@@ -17,27 +17,38 @@
                         <h1 class="mat-h1" style="margin-bottom: 0;"> {{annonce.titre}}</h1>
                         <hr>
                         <dl class="row-md jh-entity-details">
-                            <dt><span jhiTranslate="trouvetonprofApp.annonce.status">Status</span></dt>
-                            <dd>
+                            <div class="container" style="padding-left: 0;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <dt><span jhiTranslate="trouvetonprofApp.annonce.status">Status</span></dt>
+                                        <dd>
                                 <span
                                     jhiTranslate="{{'trouvetonprofApp.Satut.' + annonce.status}}">{{annonce.status}}</span>
-                            </dd>
-                            <dt><span jhiTranslate="trouvetonprofApp.annonce.prixHoraire">Prix Horaire</span></dt>
-                            <dd>
-                                <span>{{annonce.prixHoraire}}</span>
-                            </dd>
-                            <dt><span jhiTranslate="trouvetonprofApp.annonce.profil">Profil</span></dt>
-                            <dd>
-                                <div *ngIf="annonce.profil">
-                                    <a [routerLink]="['/profil', annonce.profil?.id, 'view']">{{annonce.profil?.id}}</a>
+                                        </dd>
+                                        <dt><span
+                                            jhiTranslate="trouvetonprofApp.annonce.prixHoraire">Prix Horaire</span></dt>
+                                        <dd>
+                                            <span>{{annonce.prixHoraire}}</span>
+                                        </dd>
+                                    </div>
+                                    <div class="col-6">
+                                        <dt><span jhiTranslate="trouvetonprofApp.annonce.profil">Profil</span></dt>
+                                        <dd>
+                                            <div *ngIf="annonce.profil">
+                                                <a [routerLink]="['/profil', annonce.profil?.id, 'view']">{{annonce.profil?.id}}</a>
+                                            </div>
+                                        </dd>
+                                        <dt><span jhiTranslate="trouvetonprofApp.annonce.domaine">Domaine</span></dt>
+                                        <dd>
+                                            <div *ngIf="annonce.domaine">
+                                                <a [routerLink]="['/domaine', annonce.domaine?.id, 'view']">{{annonce.domaine?.id}}</a>
+                                            </div>
+                                        </dd>
+                                    </div>
                                 </div>
-                            </dd>
-                            <dt><span jhiTranslate="trouvetonprofApp.annonce.domaine">Domaine</span></dt>
-                            <dd>
-                                <div *ngIf="annonce.domaine">
-                                    <a [routerLink]="['/domaine', annonce.domaine?.id, 'view']">{{annonce.domaine?.id}}</a>
-                                </div>
-                            </dd>
+                            </div>
+
+
                         </dl>
                     </div>
                 </div>
@@ -45,10 +56,10 @@
 
             <jhi-alert-error></jhi-alert-error>
 
-            <div class="container" style="padding-left: 0;">
+            <div class="container" style="padding-left: 0;margin-top: 2em;">
                 <div class="col-12" style="padding-left: 0;">
                     <dl class="row-md jh-entity-details">
-                        <dt><span jhiTranslate="trouvetonprofApp.annonce.description">Description</span></dt>
+                        <dt style="text-align: center"><span jhiTranslate="trouvetonprofApp.annonce.description">Description</span></dt>
                         <dd>
                             <span>{{annonce.description}}</span>
                         </dd>
