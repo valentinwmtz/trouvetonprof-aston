@@ -11,11 +11,13 @@
     <include file="config/liquibase/changelog/20190203132706_added_entity_Domaine.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190203132707_added_entity_Matiere.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190203132708_added_entity_Message.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190205091641_added_entity_Cours.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20190203132703_added_entity_constraints_Profil.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190203132704_added_entity_constraints_Annonce.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190203132705_added_entity_constraints_Disponibilite.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190203132707_added_entity_constraints_Matiere.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190203132708_added_entity_constraints_Message.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190205091641_added_entity_constraints_Cours.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

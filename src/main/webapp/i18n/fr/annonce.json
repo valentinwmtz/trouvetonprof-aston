@@ -23,7 +23,8 @@
             "prixHoraire": "Prix Horaire",
             "profil": "Profil",
             "domaine": "Domaine",
-            "annonceDisponibilite": "Annonce Disponibilite"
+            "annonceDisponibilite": "Annonce Disponibilite",
+            "annonceCours": "Annonce Cours"
         }
     }
 }

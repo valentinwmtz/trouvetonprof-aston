@@ -1,6 +1,7 @@
 import { IProfil } from 'app/shared/model/profil.model';
 import { IDomaine } from 'app/shared/model/domaine.model';
 import { IDisponibilite } from 'app/shared/model/disponibilite.model';
+import { ICours } from 'app/shared/model/cours.model';
 
 export const enum Satut {
     PROFESSEUR = 'PROFESSEUR',
@@ -19,6 +20,7 @@ export interface IAnnonce {
     profil?: IProfil;
     domaine?: IDomaine;
     annonceDisponibilites?: IDisponibilite[];
+    annonceCours?: ICours[];
 }
 
 export class Annonce implements IAnnonce {
@@ -33,7 +35,8 @@ export class Annonce implements IAnnonce {
         public prixHoraire?: number,
         public profil?: IProfil,
         public domaine?: IDomaine,
-        public annonceDisponibilites?: IDisponibilite[]
+        public annonceDisponibilites?: IDisponibilite[],
+        public annonceCours?: ICours[]
     ) {
         this.adminValide = this.adminValide || false;
     }

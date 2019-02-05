@@ -71,6 +71,9 @@ public class Annonce implements Serializable {
     @OneToMany(mappedBy = "annonce")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Disponibilite> annonceDisponibilites = new HashSet<>();
+    @OneToMany(mappedBy = "annonce")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Cours> annonceCours = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -220,6 +223,31 @@ public class Annonce implements Serializable {
 
     public void setAnnonceDisponibilites(Set<Disponibilite> disponibilites) {
         this.annonceDisponibilites = disponibilites;
+    }
+
+    public Set<Cours> getAnnonceCours() {
+        return annonceCours;
+    }
+
+    public Annonce annonceCours(Set<Cours> cours) {
+        this.annonceCours = cours;
+        return this;
+    }
+
+    public Annonce addAnnonceCours(Cours cours) {
+        this.annonceCours.add(cours);
+        cours.setAnnonce(this);
+        return this;
+    }
+
+    public Annonce removeAnnonceCours(Cours cours) {
+        this.annonceCours.remove(cours);
+        cours.setAnnonce(null);
+        return this;
+    }
+
+    public void setAnnonceCours(Set<Cours> cours) {
+        this.annonceCours = cours;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
