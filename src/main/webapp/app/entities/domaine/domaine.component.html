@@ -61,16 +61,82 @@
         </table>
     </div>
 </div>-->
-<div *ngFor="let domaine of domaines">
-    <div class="card" style="width:18rem;">
-        <div class="card-body">
-            <a [routerLink]="['/domaine', domaine.id, 'view' ]">{{domaine.titre}}</a>
-            <img [src]="'data:' + domaine.imageContentType + ';base64,' + domaine.image" style="max-height: 30px;" alt="domaine image"/>
-            <p>
-                {{domaine.description}}
-            </p>
+<div><!-- '' Condition ADMIN ''-->
+    <h2 id="page-heading">
+    <span jhiTranslate="trouvetonprofApp.domaine.home.title">Domaines</span>
+    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-domaine" [routerLink]="['/domaine/new']">
+        <fa-icon [icon]="'plus'"></fa-icon>
+        <span  jhiTranslate="trouvetonprofApp.domaine.home.createLabel">
+            Create new Domaine
+            </span>
+    </button>
+    </h2>
+</div>
+<div class="container">
+    <div class="row">
+        <div id="total" *ngFor="let domaine of domaines">
+            <mat-card class="carteDomaine">
+                <mat-card-header>
+                    <mat-card-title>{{domaine.titre}}</mat-card-title>
+                </mat-card-header>
+                <div class="image-domaine">
+                    <img mat-card-image [src]="'data:' + domaine.imageContentType + ';base64,' + domaine.image" style="max-width: 250px; max-height: 100px;" alt="domaine image"/>
+                </div>
+                <mat-card-content>
+                    <p>
+                        {{domaine.description}}
+                    </p>
+                    <div class="carousel">
+                        <ngb-carousel *ngIf="images">
+                            <ng-template ngbSlide>
+                                <img [src]="images[0]" alt="Random first slide">
+                                <div class="carousel-caption">
+                                    <h3>First slide label</h3>
+                                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                </div>
+                            </ng-template>
+                            <ng-template ngbSlide>
+                                <img [src]="images[1]" alt="Random second slide">
+                                <div class="carousel-caption">
+                                    <h3>Second slide label</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                </div>
+                            </ng-template>
+                            <ng-template ngbSlide>
+                                <img [src]="images[2]" alt="Random third slide">
+                                <div class="carousel-caption">
+                                    <h3>Third slide label</h3>
+                                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                </div>
+                            </ng-template>
+                        </ngb-carousel>
+                    </div>
+                </mat-card-content>
+                <mat-card-footer>
+                    <div class="bouton-admin"><!-- '' Condition ADMIN ''-->
+                        <button type="submit"
+                                [routerLink]="['/domaine', domaine.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/domaine', domaine.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'domaine/'+ domaine.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </mat-card-footer>
+            </mat-card>
         </div>
     </div>
 </div>
-
-

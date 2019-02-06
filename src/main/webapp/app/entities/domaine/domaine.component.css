@@ -1,0 +1,32 @@
+#total {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.carteDomaine {
+    max-width: 300px;
+    max-height: 750px;
+    margin: 2em;
+}
+
+mat-card-content {
+    height: 65%;
+}
+
+.bouton-admin {
+    margin: 30px;
+}
+
+.image-domaine {
+    background-size: cover;
+    margin: 20px;
+}
+
+.carousel {
+    max-width: 300px;
+}
+
+.carousel img {
+    max-height: 200px;
+}

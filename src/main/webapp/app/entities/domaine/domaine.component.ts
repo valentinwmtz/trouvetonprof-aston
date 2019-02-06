@@ -9,9 +9,11 @@ import { DomaineService } from './domaine.service';
 
 @Component({
     selector: 'jhi-domaine',
-    templateUrl: './domaine.component.html'
+    templateUrl: './domaine.component.html',
+    styleUrls: ['./domaine.component.css']
 })
 export class DomaineComponent implements OnInit, OnDestroy {
+    images = [1, 2, 3].map(() => `https://picsum.photos/900/500?random&t=${Math.random()}`);
     domaines: IDomaine[];
     currentAccount: any;
     eventSubscriber: Subscription;
