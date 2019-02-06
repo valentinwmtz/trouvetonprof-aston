@@ -9,13 +9,15 @@ import { MatiereService } from './matiere.service';
 
 @Component({
     selector: 'jhi-matiere',
-    templateUrl: './matiere.component.html'
+    templateUrl: './matiere.component.html',
+    styleUrls: ['./matiere.component.css']
 })
 export class MatiereComponent implements OnInit, OnDestroy {
     matieres: IMatiere[];
     currentAccount: any;
     eventSubscriber: Subscription;
 
+    images = [1, 2, 3].map(() => `https://picsum.photos/900/500?random&t=${Math.random()}`);
     constructor(
         protected matiereService: MatiereService,
         protected jhiAlertService: JhiAlertService,
