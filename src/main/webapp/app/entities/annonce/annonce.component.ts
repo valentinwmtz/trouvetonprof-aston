@@ -27,6 +27,7 @@ export class AnnonceComponent implements OnInit, OnDestroy {
     loadAll() {
         this.annonceService.query().subscribe(
             (res: HttpResponse<IAnnonce[]>) => {
+                console.log('koukou');
                 this.annonces = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)

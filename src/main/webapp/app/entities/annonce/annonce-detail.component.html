@@ -57,14 +57,21 @@
             <jhi-alert-error></jhi-alert-error>
 
             <div class="container" style="padding-left: 0;margin-top: 2em;">
-                <div class="col-12" style="padding-left: 0;">
+                <div class="col-12 main-details">
                     <dl class="row-md jh-entity-details">
-                        <dt style="text-align: center"><span jhiTranslate="trouvetonprofApp.annonce.description">Description</span></dt>
+                        <dt><span jhiTranslate="trouvetonprofApp.annonce.description">Description</span></dt>
                         <dd>
                             <span>{{annonce.description}}</span>
                         </dd>
+                        <dt><span> Disponibilités </span></dt>
+                        <dd>
+                            <jhi-calendrier [annonce]="annonce"></jhi-calendrier>
+                        </dd>
                     </dl>
                 </div>
+
+
+
             </div>
 
 

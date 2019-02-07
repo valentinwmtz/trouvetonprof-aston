@@ -11,6 +11,8 @@ import {
     annonceRoute,
     annoncePopupRoute
 } from './';
+import { CalendrierComponent } from './calendrier/calendrier.component';
+import { CalendrierHeaderComponent } from './calendrier/calendrier-header/calendrier-header.component';
 
 const ENTITY_STATES = [...annonceRoute, ...annoncePopupRoute];
 
@@ -21,7 +23,9 @@ const ENTITY_STATES = [...annonceRoute, ...annoncePopupRoute];
         AnnonceDetailComponent,
         AnnonceUpdateComponent,
         AnnonceDeleteDialogComponent,
-        AnnonceDeletePopupComponent
+        AnnonceDeletePopupComponent,
+        CalendrierComponent,
+        CalendrierHeaderComponent
     ],
     entryComponents: [AnnonceComponent, AnnonceUpdateComponent, AnnonceDeleteDialogComponent, AnnonceDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
