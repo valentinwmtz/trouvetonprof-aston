@@ -116,4 +116,18 @@ public class DisponibiliteResource {
         disponibiliteService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    /**
+     * GET  /disponibilites/:id : get the "id" disponibilite.
+     *
+     * @param id the id of the annonce to retrieve disponibilite
+     * @return the ResponseEntity with status 200 (OK) and with body the disponibilite, or with status 404 (Not Found)
+     */
+    @GetMapping("/disponibilites/annonce/{annonceId}/")
+    @Timed
+    public List<Disponibilite> getDisponibiliteByAnnonceId(@PathVariable(value="annonceId") Long id) {
+        log.debug("REST request to get Disponibilite by annonce Id : {}", id);
+        return disponibiliteService.findByAnnonceId(id);
+
+    }
 }
