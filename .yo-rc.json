@@ -1,0 +1,36 @@
+{
+    "generator-jhipster": {
+        "promptValues": {
+            "packageName": "com.trouvetonprof",
+            "nativeLanguage": "fr"
+        },
+        "jhipsterVersion": "5.7.2",
+        "applicationType": "monolith",
+        "baseName": "trouvetonprof",
+        "packageName": "com.trouvetonprof",
+        "packageFolder": "com/trouvetonprof",
+        "serverPort": "8080",
+        "authenticationType": "jwt",
+        "cacheProvider": "hazelcast",
+        "enableHibernateCache": true,
+        "websocket": "spring-websocket",
+        "databaseType": "sql",
+        "devDatabaseType": "h2Disk",
+        "prodDatabaseType": "mariadb",
+        "searchEngine": false,
+        "messageBroker": false,
+        "serviceDiscoveryType": false,
+        "buildTool": "maven",
+        "enableSwaggerCodegen": false,
+        "jwtSecretKey": "NTBkMDc4ODYzNDU3MTcyZGYwYTgxNjE1ZWNiMmViMGMxMWU2MjY2Y2NlOGRiZWU0NTA0ZDA0NzAxNTAwOGEwODViYTcyZjNlMTkxMGM0NDNiMjhkZTYxY2I1NjBmNTU4YmEyMWM3MzBkYjk5YTA5MjA0OTcwMDI5MTEyOGUzMjI=",
+        "clientFramework": "angularX",
+        "useSass": true,
+        "clientPackageManager": "npm",
+        "testFrameworks": ["protractor"],
+        "jhiPrefix": "jhi",
+        "otherModules": [],
+        "enableTranslation": true,
+        "nativeLanguage": "fr",
+        "languages": ["fr"]
+    }
+}

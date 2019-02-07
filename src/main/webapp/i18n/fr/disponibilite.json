@@ -1,0 +1,23 @@
+{
+    "trouvetonprofApp": {
+        "disponibilite": {
+            "home": {
+                "title": "Disponibilites",
+                "createLabel": "Créer un nouveau Disponibilite",
+                "createOrEditLabel": "Créer ou éditer un Disponibilite"
+            },
+            "created": "Un nouveau Disponibilite a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Disponibilite avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Disponibilite avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Disponibilite {{ id }} ?"
+            },
+            "detail": {
+                "title": "Disponibilite"
+            },
+            "date": "Date",
+            "duree": "Duree",
+            "annonce": "Annonce"
+        }
+    }
+}

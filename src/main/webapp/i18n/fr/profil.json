@@ -1,0 +1,28 @@
+{
+    "trouvetonprofApp": {
+        "profil": {
+            "home": {
+                "title": "Profils",
+                "createLabel": "Créer un nouveau Profil",
+                "createOrEditLabel": "Créer ou éditer un Profil"
+            },
+            "created": "Un nouveau Profil a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Profil avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Profil avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Profil {{ id }} ?"
+            },
+            "detail": {
+                "title": "Profil"
+            },
+            "dateNaissance": "Date Naissance",
+            "pays": "Pays",
+            "adresse": "Adresse",
+            "telephone": "Telephone",
+            "sexe": "Sexe",
+            "user": "User",
+            "userMessage": "User Message",
+            "userAnnonce": "User Annonce"
+        }
+    }
+}

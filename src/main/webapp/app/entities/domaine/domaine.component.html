@@ -1,0 +1,63 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="trouvetonprofApp.domaine.home.title">Domaines</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-domaine" [routerLink]="['/domaine/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="trouvetonprofApp.domaine.home.createLabel">
+            Create new Domaine
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="domaines">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="trouvetonprofApp.domaine.titre">Titre</span></th>
+            <th><span jhiTranslate="trouvetonprofApp.domaine.description">Description</span></th>
+            <th><span jhiTranslate="trouvetonprofApp.domaine.image">Image</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let domaine of domaines ;trackBy: trackId">
+                <td><a [routerLink]="['/domaine', domaine.id, 'view' ]">{{domaine.id}}</a></td>
+                <td>{{domaine.titre}}</td>
+                <td>{{domaine.description}}</td>
+                <td>
+                    <a *ngIf="domaine.image" (click)="openFile(domaine.imageContentType, domaine.image)">
+                        <img [src]="'data:' + domaine.imageContentType + ';base64,' + domaine.image" style="max-height: 30px;" alt="domaine image"/>
+                    </a>
+                    <span *ngIf="domaine.image">{{domaine.imageContentType}}, {{byteSize(domaine.image)}}</span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/domaine', domaine.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/domaine', domaine.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'domaine/'+ domaine.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

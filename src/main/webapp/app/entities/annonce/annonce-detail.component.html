@@ -1,0 +1,91 @@
+<div class="row justify-content-center">
+    <div class="col-10">
+        <div *ngIf="annonce">
+            <div class="container" style="padding-left: 0;">
+                <div class="row">
+                    <div class="col-4">
+                        <dd>
+                            <div *ngIf="annonce.image">
+                                <a (click)="openFile(annonce.imageContentType, annonce.image)">
+                                    <img [src]="'data:' + annonce.imageContentType + ';base64,' + annonce.image"
+                                         style="width: 200px;" alt="annonce image"/>
+                                </a>
+                            </div>
+                        </dd>
+                    </div>
+                    <div class="col-8">
+                        <h1 class="mat-h1" style="margin-bottom: 0;"> {{annonce.titre}}</h1>
+                        <hr>
+                        <dl class="row-md jh-entity-details">
+                            <div class="container" style="padding-left: 0;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <dt><span jhiTranslate="trouvetonprofApp.annonce.status">Status</span></dt>
+                                        <dd>
+                                <span
+                                    jhiTranslate="{{'trouvetonprofApp.Satut.' + annonce.status}}">{{annonce.status}}</span>
+                                        </dd>
+                                        <dt><span
+                                            jhiTranslate="trouvetonprofApp.annonce.prixHoraire">Prix Horaire</span></dt>
+                                        <dd>
+                                            <span>{{annonce.prixHoraire}}</span>
+                                        </dd>
+                                    </div>
+                                    <div class="col-6">
+                                        <dt><span jhiTranslate="trouvetonprofApp.annonce.profil">Profil</span></dt>
+                                        <dd>
+                                            <div *ngIf="annonce.profil">
+                                                <a [routerLink]="['/profil', annonce.profil?.id, 'view']">{{annonce.profil?.id}}</a>
+                                            </div>
+                                        </dd>
+                                        <dt><span jhiTranslate="trouvetonprofApp.annonce.domaine">Domaine</span></dt>
+                                        <dd>
+                                            <div *ngIf="annonce.domaine">
+                                                <a [routerLink]="['/domaine', annonce.domaine?.id, 'view']">{{annonce.domaine?.id}}</a>
+                                            </div>
+                                        </dd>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <div class="container" style="padding-left: 0;margin-top: 2em;">
+                <div class="col-12 main-details">
+                    <dl class="row-md jh-entity-details">
+                        <dt><span jhiTranslate="trouvetonprofApp.annonce.description">Description</span></dt>
+                        <dd>
+                            <span>{{annonce.description}}</span>
+                        </dd>
+                        <dt><span> Disponibilités </span></dt>
+                        <dd>
+                            <jhi-calendrier [annonce]="annonce"></jhi-calendrier>
+                        </dd>
+                    </dl>
+                </div>
+
+
+
+            </div>
+
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/annonce', annonce.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

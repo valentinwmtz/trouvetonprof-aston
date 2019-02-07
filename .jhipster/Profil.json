@@ -1,0 +1,71 @@
+{
+    "name": "Profil",
+    "fields": [
+        {
+            "fieldName": "dateNaissance",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "pays",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "adresse",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 200
+        },
+        {
+            "fieldName": "telephone",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 20
+        },
+        {
+            "fieldName": "sexe",
+            "fieldType": "Sexe",
+            "fieldValues": "HOMME,FEMME",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "profil"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "userMessage",
+            "otherEntityName": "message",
+            "otherEntityRelationshipName": "profil"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "userAnnonce",
+            "otherEntityName": "annonce",
+            "otherEntityRelationshipName": "profil"
+        }
+    ],
+    "changelogDate": "20190203132703",
+    "entityTableName": "profil",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

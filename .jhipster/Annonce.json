@@ -1,0 +1,87 @@
+{
+    "name": "Annonce",
+    "fields": [
+        {
+            "fieldName": "titre",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 60
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 8000
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "Satut",
+            "fieldValues": "PROFESSEUR,ELEVE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "adminValide",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "prixHoraire",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "profil",
+            "otherEntityName": "profil",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "domaine",
+            "otherEntityName": "domaine",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "annonce"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "annonceDisponibilite",
+            "otherEntityName": "disponibilite",
+            "otherEntityRelationshipName": "annonce"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "annonceCours",
+            "otherEntityName": "cours",
+            "otherEntityRelationshipName": "annonce"
+        }
+    ],
+    "changelogDate": "20190203132704",
+    "entityTableName": "annonce",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
