@@ -1,5 +1,4 @@
 /* after changing this file run 'npm run webpack:build' */
-
 /***************************
 put Sass variables here:
 eg $input-color: red;
@@ -8,6 +7,87 @@ eg $input-color: red;
 @import 'bootstrap-variables';
 // Import Bootstrap source files from node_modules
 @import '~bootstrap/scss/bootstrap';
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@angular/material/theming';
 /* jhipster-needle-scss-add-vendor JHipster will add new css style */
-@import "../../../../../node_modules/angular-calendar/css/angular-calendar.css";
+@import '~angular-calendar/css/angular-calendar.css';
+@import '~angular-mgl-timeline/theme';
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$candy-app-primary: mat-palette($mat-blue);
+$candy-app-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$candy-app-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($candy-app-theme);
+@include mgl-timeline-theme($candy-app-theme);
+
+mgl-timeline:not(.mobile) {
+    padding: 50px 20px;
+}
+
+mgl-timeline.mobile {
+    padding-right: 20px;
+}
+
+@font-face {
+    font-family: amazon-italic;
+    src: url(/content/font/BookerlyLCD_It.ttf) format('opentype');
+}
+
+@font-face {
+    font-family: amazon-regular;
+    src: url(/content/font/AmazonEmber_Rg.ttf) format('opentype');
+}
+
+@font-face {
+    font-family: amazon-bold;
+    src: url(/content/font/AmazonEmber_Bd.ttf) format('opentype');
+}
+
+@font-face {
+    font-family: amazon-lite;
+    src: url(/content/font/AmazonEmber_Lt.ttf) format('opentype');
+}
+
+* {
+    font-family: 'amazon-regular', 'Times New Roman', monospace;
+}
+
+dt span {
+    font-family: 'amazon-bold', 'Times New Roman', monospace;
+    font-weight: 500;
+}
+
+dd span {
+    font-family: 'amazon-italic', 'Times New Roman', monospace;
+}
+
+.amazon-italic {
+    font-family: 'amazon-italic', 'Times New Roman', monospace;
+}
+
+.amazon-bold {
+    font-family: 'amazon-bold', 'Times New Roman', monospace;
+}
+
+.amazon-regular {
+    font-family: 'amazon-italic', 'Times New Roman', monospace;
+}
+
+.amazon-lite {
+    font-family: 'amazon-lite', 'Times New Roman', monospace;
+}
