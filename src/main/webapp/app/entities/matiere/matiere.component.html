@@ -67,6 +67,7 @@
         </table>
     </div>
 </div>-->
+
 <h2 id="page-heading">
     <span jhiTranslate="trouvetonprofApp.matiere.home.title">Matieres</span>
     <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-matiere" [routerLink]="['/matiere/new']">
@@ -78,7 +79,10 @@
 </h2>
 <jhi-alert></jhi-alert>
 <br/>
-
+<!--<div *ngFor="let annonce of annonces">
+    <h1>{{ annonce.titre }}</h1>
+    <p> {{  annonce.description }}</p>
+</div>-->
 <div class="container">
 
     <div class="row">
@@ -94,31 +98,33 @@
                     <img id="illustration" mat-card-image [src]="'data:' + matiere.imageContentType + ';base64,' + matiere.image" alt="matiere-image"/>
 
                     <p>{{ matiere.description }}</p>
-                    <div class="info-carousel">
+
+                    <div class="info-carousel" *ngFor="let annonce of annonces">
                     <ngb-carousel *ngIf="images">
                         <ng-template ngbSlide>
                             <img [src]="images[0]" alt="Random first slide">
                             <div class="carousel-caption">
-                                <h3>First slide label</h3>
-                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                                <h3> {{ annonce.titre }} </h3>
+                                <p> {{ annonce.description }} </p>
                             </div>
                         </ng-template>
                         <ng-template ngbSlide>
                             <img [src]="images[1]" alt="Random second slide">
                             <div class="carousel-caption">
-                                <h3>Second slide label</h3>
+                                <h3>{{ annonce.titre }}</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                             </div>
                         </ng-template>
                         <ng-template ngbSlide>
                             <img [src]="images[2]" alt="Random third slide">
                             <div class="carousel-caption">
-                                <h3>Third slide label</h3>
+                                <h3>{{ annonce.titre }}</h3>
                                 <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
                             </div>
                         </ng-template>
                     </ngb-carousel>
                     </div>
+
                 </mat-card-content>
                 <mat-card-footer id="footer">
                     <div class="btn-group flex-btn-group-container">
