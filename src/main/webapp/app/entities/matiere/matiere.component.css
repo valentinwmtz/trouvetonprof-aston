@@ -22,8 +22,8 @@ h1 {
 }
 #illustration {
     background-size: cover;
-    height: 150px;
-    width: 300px;
+    max-height: 150px;
+    max-width: 300px;
 }
 
 #header {
@@ -57,12 +57,4 @@ h1 {
 
 .carousel-caption {
     color: #0a0a0a;
-}
-
-@font-face {
-    font-family: Demonized;
-    src: local('C:\projetformationcap\trouvetonprof-aston\src\main\webapp\app\entities\matiere\assets');
-}
-#page-heading {
-    font-family: 'Demonized', 'arial', sans-serif;
 }

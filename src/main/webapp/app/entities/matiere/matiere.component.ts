@@ -12,7 +12,7 @@ import { IAnnonce } from 'app/shared/model/annonce.model';
 @Component({
     selector: 'jhi-matiere',
     templateUrl: './matiere.component.html',
-    styleUrls: ['./assets/matiere.component.css']
+    styleUrls: ['./matiere.component.css']
 })
 export class MatiereComponent implements OnInit, OnDestroy {
     matieres: IMatiere[];
