@@ -6,14 +6,17 @@ import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IMatiere } from 'app/shared/model/matiere.model';
 import { AccountService } from 'app/core';
 import { MatiereService } from './matiere.service';
+import { AnnonceService } from 'app/entities/annonce';
+import { IAnnonce } from 'app/shared/model/annonce.model';
 
 @Component({
     selector: 'jhi-matiere',
     templateUrl: './matiere.component.html',
-    styleUrls: ['./matiere.component.css']
+    styleUrls: ['./assets/matiere.component.css']
 })
 export class MatiereComponent implements OnInit, OnDestroy {
     matieres: IMatiere[];
+    annonces: IAnnonce[];
     currentAccount: any;
     eventSubscriber: Subscription;
 
@@ -23,7 +26,8 @@ export class MatiereComponent implements OnInit, OnDestroy {
         protected jhiAlertService: JhiAlertService,
         protected dataUtils: JhiDataUtils,
         protected eventManager: JhiEventManager,
-        protected accountService: AccountService
+        protected accountService: AccountService,
+        protected annonceService: AnnonceService
     ) {}
 
     loadAll() {
@@ -41,6 +45,12 @@ export class MatiereComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInMatieres();
+        this.annonceService.query().subscribe(
+            (res: HttpResponse<IAnnonce[]>) => {
+                this.annonces = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     ngOnDestroy() {
