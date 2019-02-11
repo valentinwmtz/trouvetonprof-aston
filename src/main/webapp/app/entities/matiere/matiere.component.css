@@ -1,0 +1,60 @@
+.container {
+    background-image: url('https://media.giphy.com/media/xT8qAXDs9Ju3wG7i6s/giphy.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-width: 90%;
+    min-height: 90%;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+h1 {
+    font-weight: bold;
+}
+
+#card {
+    margin: 2em;
+    display: flex;
+
+    max-width: 350px;
+    min-width: 350px;
+    max-height: 600px;
+    min-height: 600px;
+}
+#illustration {
+    background-size: cover;
+    max-height: 150px;
+    max-width: 300px;
+}
+
+#header {
+    height: 10%;
+}
+#content {
+    height: 70%;
+}
+
+#footer {
+    height: 20%;
+}
+.domaine {
+    background-image: url('https://st2.depositphotos.com/1384048/12364/v/950/depositphotos_123648776-stock-illustration-avatar-of-man-surrounded-by.jpg');
+    background-size: cover;
+}
+
+.flex-btn-group-container {
+    justify-content: center;
+    align-items: stretch;
+}
+
+.info-carousel {
+    max-width: 300px;
+}
+.info-carousel,
+.info-carousel img {
+    max-width: 300px;
+    max-height: 170px;
+}
+
+.carousel-caption {
+    color: #0a0a0a;
+}

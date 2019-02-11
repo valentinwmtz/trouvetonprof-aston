@@ -1,0 +1,37 @@
+diff a/src/main/webapp/app/entities/matiere/matiere.component.css b/src/main/webapp/app/entities/matiere/matiere.component.css	(rejected hunks)
+@@ -1,2 +1,2 @@
+-.container{
+-    background-image: url("https://media.giphy.com/media/xT8qAXDs9Ju3wG7i6s/giphy.gif");
++.container {
++    background-image: url('https://media.giphy.com/media/xT8qAXDs9Ju3wG7i6s/giphy.gif');
+@@ -16 +15 @@ h1 {
+-#card{
++#card {
+@@ -27 +25 @@ h1 {
+-#illustration{
++#illustration {
+@@ -33 +31 @@ h1 {
+-#header{
++#header {
+@@ -40 +38 @@ h1 {
+-#footer{
++#footer {
+@@ -45,2 +42,2 @@ h1 {
+-.domaine{
+-    background-image: url("https://st2.depositphotos.com/1384048/12364/v/950/depositphotos_123648776-stock-illustration-avatar-of-man-surrounded-by.jpg");
++.domaine {
++    background-image: url('https://st2.depositphotos.com/1384048/12364/v/950/depositphotos_123648776-stock-illustration-avatar-of-man-surrounded-by.jpg');
+@@ -50,3 +47,3 @@ h1 {
+-.flex-btn-group-container{
+-   justify-content: center;
+-   align-items: stretch;
++.flex-btn-group-container {
++    justify-content: center;
++    align-items: stretch;
+@@ -55 +52 @@ h1 {
+-.info-carousel{
++.info-carousel {
+@@ -59 +56,2 @@ h1 {
+-.info-carousel, .info-carousel img{
++.info-carousel,
++.info-carousel img {
