@@ -17,27 +17,39 @@
                         <h1 class="mat-h1" style="margin-bottom: 0;"> {{annonce.titre}}</h1>
                         <hr>
                         <dl class="row-md jh-entity-details">
-                            <dt><span jhiTranslate="trouvetonprofApp.annonce.status">Status</span></dt>
-                            <dd>
+                            <div class="container" style="padding-left: 0;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <dt><span jhiTranslate="trouvetonprofApp.annonce.status">Status</span></dt>
+                                        <dd>
                                 <span
-                                    jhiTranslate="{{'trouvetonprofApp.Satut.' + annonce.status}}">{{annonce.status}}</span>
-                            </dd>
-                            <dt><span jhiTranslate="trouvetonprofApp.annonce.prixHoraire">Prix Horaire</span></dt>
-                            <dd>
-                                <span>{{annonce.prixHoraire}}</span>
-                            </dd>
-                            <dt><span jhiTranslate="trouvetonprofApp.annonce.profil">Profil</span></dt>
-                            <dd>
-                                <div *ngIf="annonce.profil">
-                                    <a [routerLink]="['/profil', annonce.profil?.id, 'view']">{{annonce.profil?.id}}</a>
+                                        jhiTranslate="{{'trouvetonprofApp.Satut.' + annonce.status}}">{{annonce.status}}</span>
+                                        </dd>
+                                        <dt><span
+                                                jhiTranslate="trouvetonprofApp.annonce.prixHoraire">Prix Horaire</span>
+                                        </dt>
+                                        <dd>
+                                            <span>{{annonce.prixHoraire}} €</span>
+                                        </dd>
+                                    </div>
+                                    <div class="col-6">
+                                        <dt><span jhiTranslate="trouvetonprofApp.annonce.profil">Profil</span></dt>
+                                        <dd>
+                                            <div *ngIf="annonce.profil">
+                                                <a [routerLink]="['/profil', annonce.profil?.id, 'view']">{{annonce.profil?.id}}</a>
+                                            </div>
+                                        </dd>
+                                        <dt><span jhiTranslate="trouvetonprofApp.annonce.domaine">Domaine</span></dt>
+                                        <dd>
+                                            <div *ngIf="annonce.domaine">
+                                                <a [routerLink]="['/domaine', annonce.domaine?.id, 'view']">{{annonce.domaine?.id}}</a>
+                                            </div>
+                                        </dd>
+                                    </div>
                                 </div>
-                            </dd>
-                            <dt><span jhiTranslate="trouvetonprofApp.annonce.domaine">Domaine</span></dt>
-                            <dd>
-                                <div *ngIf="annonce.domaine">
-                                    <a [routerLink]="['/domaine', annonce.domaine?.id, 'view']">{{annonce.domaine?.id}}</a>
-                                </div>
-                            </dd>
+                            </div>
+
+
                         </dl>
                     </div>
                 </div>
@@ -45,15 +57,71 @@
 
             <jhi-alert-error></jhi-alert-error>
 
-            <div class="container" style="padding-left: 0;">
-                <div class="col-12" style="padding-left: 0;">
+            <div class="container" style="padding-left: 0;margin-top: 3em;">
+                <div class="col-12 main-details">
                     <dl class="row-md jh-entity-details">
                         <dt><span jhiTranslate="trouvetonprofApp.annonce.description">Description</span></dt>
                         <dd>
                             <span>{{annonce.description}}</span>
                         </dd>
+                        <dt><span> Disponibilités </span></dt>
+                        <dd>
+                            <!--     <jhi-calendrier [annonce]="annonce"></jhi-calendrier>-->
+                            <mgl-timeline focusOnOpen="true" [toggle]="toggle" [alternate]="alternate" [side]="side">
+                                <div *ngIf="isDisponibilitesloaded">
+                                    <mgl-timeline-entry *ngFor="let dispo of disponibilites; let i = index;"
+                                                        (expand)="onExpandEntry($event, i)">
+                                        <mgl-timeline-entry-header (click)="onHeaderClick($event)"
+                                                                   style="cursor: pointer;">
+                                            <div class="amazon-italic">{{dispo.header}}</div>
+                                        </mgl-timeline-entry-header>
+                                        <mgl-timeline-entry-content>
+                                            <mat-nav-list style="padding-top: 0">
+                                                <mat-list-item *ngFor="let content of dispo.content">
+                                                    <div matLine class="amazon-italic"
+                                                         style="text-align: center;color: #3d7e40;">{{content}}</div>
+                                                </mat-list-item>
+                                            </mat-nav-list>
+                                            <div style="width: 100%;">
+                                                <button style="width: 100%;" mat-raised-button color="primary">
+                                                    Reserver
+                                                </button>
+                                            </div>
+                                        </mgl-timeline-entry-content>
+                                        <mgl-timeline-entry-dot [class]="color ? 'primary' : 'accent'"
+                                                                [size]="size"
+                                                                (click)="onDotClick($event)"></mgl-timeline-entry-dot>
+                                    </mgl-timeline-entry>
+                                    <mgl-timeline-entry (expand)="onExpandEntry($event, i)">
+                                        <mgl-timeline-entry-header (click)="onHeaderClick($event)">
+                                            Demander une disponibilité
+                                        </mgl-timeline-entry-header>
+                                        <mgl-timeline-entry-content>
+                                        </mgl-timeline-entry-content>
+                                        <mgl-timeline-entry-dot [class]="color ? 'primary' : 'accent'"
+                                                                [size]="size"
+                                                                (click)="onDotClick($event)"></mgl-timeline-entry-dot>
+                                    </mgl-timeline-entry>
+                                </div>
+                                <div *ngIf="!isDisponibilitesloaded">
+                                    <mgl-timeline-entry
+                                            (expand)="onExpandEntry($event, i)">
+                                        <mgl-timeline-entry-header (click)="onHeaderClick($event)">
+                                            <div> Chargement en cours ...</div>
+                                        </mgl-timeline-entry-header>
+                                        <mgl-timeline-entry-content>
+                                        </mgl-timeline-entry-content>
+                                        <mgl-timeline-entry-dot [class]="color ? 'primary' : 'accent'"
+                                                                [size]="size"
+                                                                (click)="onDotClick($event)"></mgl-timeline-entry-dot>
+                                    </mgl-timeline-entry>
+                                </div>
+                            </mgl-timeline>
+                        </dd>
                     </dl>
                 </div>
+
+
             </div>
 
 

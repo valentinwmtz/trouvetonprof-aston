@@ -44,7 +44,7 @@ public class Annonce implements Serializable {
     @Column(name = "status", nullable = false)
     private Satut status;
 
-    
+
     @Lob
     @Column(name = "image", nullable = false)
     private byte[] image;
@@ -63,15 +63,18 @@ public class Annonce implements Serializable {
     @JsonIgnoreProperties("userAnnonces")
     private Profil profil;
 
-    @OneToOne    @JoinColumn(unique = true)
+    @OneToOne
+    @JoinColumn(unique = true)
     private Domaine domaine;
 
     @OneToMany(mappedBy = "annonce")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Disponibilite> annonceDisponibilites = new HashSet<>();
+
     @OneToMany(mappedBy = "annonce")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Cours> annonceCours = new HashSet<>();
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -272,14 +275,14 @@ public class Annonce implements Serializable {
     @Override
     public String toString() {
         return "Annonce{" +
-            "id=" + getId() +
-            ", titre='" + getTitre() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", image='" + getImage() + "'" +
-            ", imageContentType='" + getImageContentType() + "'" +
-            ", adminValide='" + isAdminValide() + "'" +
-            ", prixHoraire=" + getPrixHoraire() +
-            "}";
+                "id=" + getId() +
+                ", titre='" + getTitre() + "'" +
+                ", description='" + getDescription() + "'" +
+                ", status='" + getStatus() + "'" +
+                ", image='" + getImage() + "'" +
+                ", imageContentType='" + getImageContentType() + "'" +
+                ", adminValide='" + isAdminValide() + "'" +
+                ", prixHoraire=" + getPrixHoraire() +
+                "}";
     }
 }
