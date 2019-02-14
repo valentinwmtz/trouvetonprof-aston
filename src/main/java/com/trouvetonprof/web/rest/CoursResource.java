@@ -51,8 +51,8 @@ public class CoursResource {
         }
         Cours result = coursService.save(cours);
         return ResponseEntity.created(new URI("/api/cours/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
@@ -73,8 +73,8 @@ public class CoursResource {
         }
         Cours result = coursService.save(cours);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, cours.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, cours.getId().toString()))
+                .body(result);
     }
 
     /**
@@ -115,5 +115,32 @@ public class CoursResource {
         log.debug("REST request to delete Cours : {}", id);
         coursService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET  /cours/moyenne/notes/:id : get the moyenne of notes by annonce "id".
+     *
+     * @param id the id of the annonce to retrieve disponibilite
+     * @return the ResponseEntity with status 200 (OK) and with body the disponibilite, or with status 404 (Not Found)
+     */
+    @GetMapping("/cours/moyenne/notes/{annonceId}")
+    @Timed
+    public double getDisponibiliteByAnnonceId(@PathVariable(value = "annonceId") Long id) {
+        log.debug("REST request to get moyenne of notes by annonce Id : {}", id);
+        return coursService.findNoteMoyenneByAnnonceId(id);
+    }
+
+
+    /**
+     * GET /cours/commentaires/:id : get the commentaires by annonce "id".
+     *
+     * @param id the id of the annonce to retrieve commentaires
+     * @return the ResponseEntity with status 200 (OK) and with body the disponibilite, or with status 404 (Not Found)
+     */
+    @GetMapping("/cours/commentaires/{annonceId}")
+    @Timed
+    public List<String> getCommentairesByAnnonceId(@PathVariable(value = "annonceId") Long id) {
+        log.debug("REST request to get commenaitres by annonce Id : {}", id);
+        return coursService.findCommentairesByAnnonceId(id);
     }
 }

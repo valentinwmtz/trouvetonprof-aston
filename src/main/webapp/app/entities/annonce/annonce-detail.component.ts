@@ -7,6 +7,7 @@ import { DisponibiliteService } from 'app/entities/disponibilite';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { IDisponibilite } from 'app/shared/model/disponibilite.model';
 import * as moment from 'moment';
+import { CoursService } from 'app/entities/cours';
 
 @Component({
     selector: 'jhi-annonce-detail',
@@ -25,24 +26,27 @@ export class AnnonceDetailComponent implements OnInit {
     expandEnabled = true;
     side = 'right';
     isDisponibilitesloaded = false;
+    moyenneNotes: number;
+    commentaires: String[];
 
     constructor(
         protected dataUtils: JhiDataUtils,
         protected activatedRoute: ActivatedRoute,
         protected jhiAlertService: JhiAlertService,
         private disponibiliteService: DisponibiliteService,
-        private changeDetectorRef: ChangeDetectorRef
+        private changeDetectorRef: ChangeDetectorRef,
+        private coursService: CoursService
     ) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ annonce }) => {
             this.annonce = annonce;
+            console.error(annonce);
         });
 
         this.disponibiliteService.findByAnnonceId(this.annonce.id).subscribe(
             (res: HttpResponse<IDisponibilite[]>) => {
                 const dispoStructured = this.stuctureDispoForTimeLine(res.body);
-                console.error(dispoStructured);
                 dispoStructured.forEach(dispo => {
                     this.disponibilites.push({
                         header: this.capitalizeAllFirstCharOfWord(dispo.header),
@@ -51,6 +55,21 @@ export class AnnonceDetailComponent implements OnInit {
                 });
                 this.isDisponibilitesloaded = true;
                 this.changeDetectorRef.detectChanges();
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+
+        this.coursService.findNotesMoyenneByAnnonceId(this.annonce.id).subscribe(
+            (res: HttpResponse<number>) => {
+                this.moyenneNotes = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+
+        this.coursService.findCommentairesByAnnonceId(this.annonce.id).subscribe(
+            (res: HttpResponse<String[]>) => {
+                this.commentaires = res.body;
+                console.error(this.commentaires);
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

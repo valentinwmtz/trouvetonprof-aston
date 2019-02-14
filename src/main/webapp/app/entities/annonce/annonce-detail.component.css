@@ -6,3 +6,21 @@
     text-align: center;
     margin: 2em;
 }
+
+.star {
+    position: relative;
+    display: inline-block;
+    font-size: 3rem;
+    color: #dadada;
+}
+
+.full {
+    color: #ffe81d;
+}
+
+.half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: #ffe81d;
+}

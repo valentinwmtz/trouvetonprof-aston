@@ -118,12 +118,12 @@ public class DisponibiliteResource {
     }
 
     /**
-     * GET  /disponibilites/:id : get the "id" disponibilite.
+     * GET  /disponibilites/annonce/:id : get the disponibilite by annonce "id".
      *
      * @param id the id of the annonce to retrieve disponibilite
      * @return the ResponseEntity with status 200 (OK) and with body the disponibilite, or with status 404 (Not Found)
      */
-    @GetMapping("/disponibilites/annonce/{annonceId}/")
+    @GetMapping("/disponibilites/annonce/{annonceId}")
     @Timed
     public List<Disponibilite> getDisponibiliteByAnnonceId(@PathVariable(value="annonceId") Long id) {
         log.debug("REST request to get Disponibilite by annonce Id : {}", id);

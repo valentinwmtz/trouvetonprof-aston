@@ -33,13 +33,25 @@
                                         </dd>
                                     </div>
                                     <div class="col-6">
-                                        <dt><span jhiTranslate="trouvetonprofApp.annonce.profil">Profil</span></dt>
-                                        <dd>
-                                            <div *ngIf="annonce.profil">
-                                                <a [routerLink]="['/profil', annonce.profil?.id, 'view']">{{annonce.profil?.id}}</a>
+                                        <!--                                     <dt><span jhiTranslate="trouvetonprofApp.annonce.profil">Profil</span></dt>
+                                                                             <dd>
+                                                                                 <div *ngIf="annonce.profil">
+                                                                                     <a [routerLink]="['/profil', annonce.profil?.id, 'view']">{{annonce.profil?.id}}</a>
+                                                                                 </div>
+                                                                             </dd>-->
+                                        <dt><span>Note</span></dt>
+                                        <dd style="margin-top: -1.7em;">
+                                            <div *ngIf="moyenneNotes">
+                                                <ng-template #t let-fill="fill">
+                                                      <span class="star" [class.full]="fill === 100">
+                                                        <span class="half" [style.width.%]="fill">&#8902;</span>&#8902;
+                                                      </span>
+                                                </ng-template>
+                                                <ngb-rating [(rate)]="moyenneNotes" [starTemplate]="t" [readonly]="true"
+                                                            max="5"></ngb-rating>
                                             </div>
                                         </dd>
-                                        <dt><span jhiTranslate="trouvetonprofApp.annonce.domaine">Domaine</span></dt>
+                                        <dt style="margin-top: -1.4em;"><span jhiTranslate="trouvetonprofApp.annonce.domaine">Domaine</span></dt>
                                         <dd>
                                             <div *ngIf="annonce.domaine">
                                                 <a [routerLink]="['/domaine', annonce.domaine?.id, 'view']">{{annonce.domaine?.id}}</a>
