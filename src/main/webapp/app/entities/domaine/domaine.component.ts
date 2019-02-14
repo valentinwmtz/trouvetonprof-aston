@@ -6,6 +6,8 @@ import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IDomaine } from 'app/shared/model/domaine.model';
 import { AccountService } from 'app/core';
 import { DomaineService } from './domaine.service';
+import { MatiereService } from 'app/entities/matiere';
+import { IMatiere } from 'app/shared/model/matiere.model';
 
 @Component({
     selector: 'jhi-domaine',
@@ -15,6 +17,7 @@ import { DomaineService } from './domaine.service';
 export class DomaineComponent implements OnInit, OnDestroy {
     images = [1, 2, 3].map(() => `https://picsum.photos/900/500?random&t=${Math.random()}`);
     domaines: IDomaine[];
+    matieres: IMatiere[];
     currentAccount: any;
     eventSubscriber: Subscription;
 
@@ -23,6 +26,7 @@ export class DomaineComponent implements OnInit, OnDestroy {
         protected jhiAlertService: JhiAlertService,
         protected dataUtils: JhiDataUtils,
         protected eventManager: JhiEventManager,
+        protected matiereService: MatiereService,
         protected accountService: AccountService
     ) {}
 
@@ -41,6 +45,12 @@ export class DomaineComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInDomaines();
+        this.matiereService.query().subscribe(
+            (res: HttpResponse<IMatiere[]>) => {
+                this.matieres = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     ngOnDestroy() {
