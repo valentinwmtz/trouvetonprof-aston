@@ -38,14 +38,6 @@ export class CoursService {
             .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
     }
 
-    findNotesMoyenneByAnnonceId(id: number): Observable<any> {
-        return this.http.get<number>(`${this.resourceUrl}/moyenne/notes/${id}`, { observe: 'response' });
-    }
-
-    findCommentairesByAnnonceId(id: number): Observable<any> {
-        return this.http.get<String[]>(`${this.resourceUrl}/commentaires/${id}`, { observe: 'response' });
-    }
-
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http

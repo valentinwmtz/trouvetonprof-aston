@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
-
 import { IProfil } from 'app/shared/model/profil.model';
 import { ProfilService } from './profil.service';
 import { IUser, UserService } from 'app/core';
+import { ICours } from 'app/shared/model/cours.model';
+import { CoursService } from 'app/entities/cours';
 
 @Component({
     selector: 'jhi-profil-update',
@@ -19,12 +21,15 @@ export class ProfilUpdateComponent implements OnInit {
     isSaving: boolean;
 
     users: IUser[];
+
+    cours: ICours[];
     dateNaissance: string;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected profilService: ProfilService,
         protected userService: UserService,
+        protected coursService: CoursService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -34,12 +39,20 @@ export class ProfilUpdateComponent implements OnInit {
             this.profil = profil;
             this.dateNaissance = this.profil.dateNaissance != null ? this.profil.dateNaissance.format(DATE_TIME_FORMAT) : null;
         });
-        this.userService.query().subscribe(
-            (res: HttpResponse<IUser[]>) => {
-                this.users = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.userService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IUser[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IUser[]>) => response.body)
+            )
+            .subscribe((res: IUser[]) => (this.users = res), (res: HttpErrorResponse) => this.onError(res.message));
+        this.coursService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<ICours[]>) => mayBeOk.ok),
+                map((response: HttpResponse<ICours[]>) => response.body)
+            )
+            .subscribe((res: ICours[]) => (this.cours = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -74,6 +87,10 @@ export class ProfilUpdateComponent implements OnInit {
     }
 
     trackUserById(index: number, item: IUser) {
+        return item.id;
+    }
+
+    trackCoursById(index: number, item: ICours) {
         return item.id;
     }
 }

@@ -32,6 +32,7 @@ export class ProfilUpdatePage {
     telephoneInput = element(by.id('field_telephone'));
     sexeSelect = element(by.id('field_sexe'));
     userSelect = element(by.id('field_user'));
+    coursSelect = element(by.id('field_cours'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -101,6 +102,25 @@ export class ProfilUpdatePage {
 
     async getUserSelectedOption() {
         return this.userSelect.element(by.css('option:checked')).getText();
+    }
+
+    async coursSelectLastOption() {
+        await this.coursSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async coursSelectOption(option) {
+        await this.coursSelect.sendKeys(option);
+    }
+
+    getCoursSelect(): ElementFinder {
+        return this.coursSelect;
+    }
+
+    async getCoursSelectedOption() {
+        return this.coursSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

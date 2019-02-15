@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Cours.
@@ -68,35 +67,6 @@ public class CoursService {
      * @param id the id of the entity
      */
     public void delete(Long id) {
-        log.debug("Request to delete Cours : {}", id);
-        coursRepository.deleteById(id);
+        log.debug("Request to delete Cours : {}", id);        coursRepository.deleteById(id);
     }
-
-    /**
-     * Get moyenne of notes by annoce id.
-     *
-     * @param id the id of the entity
-     * @return moyenne of notes
-     */
-    @Transactional(readOnly = true)
-    public double findNoteMoyenneByAnnonceId(Long id) {
-        log.debug("Request to get moyenne of notes by annonce id : {}", id);
-        return coursRepository.findByAnnonceId(id).stream()
-                .mapToDouble(Cours::getNote)
-                .average()
-                .orElse(-1);
-    }
-
-    /**
-     * Get moyenne of notes by annoce id.
-     *
-     * @param id the id of the entity
-     * @return moyenne of notes
-     */
-    @Transactional(readOnly = true)
-    public List<String> findCommentairesByAnnonceId(Long id) {
-        log.debug("Request to get commentaires by annonce id : {}", id);
-        return coursRepository.findCommentaireByAnnonceId(id).stream().map(Cours::getCommentaire).collect(Collectors.toList());
-    }
-
 }

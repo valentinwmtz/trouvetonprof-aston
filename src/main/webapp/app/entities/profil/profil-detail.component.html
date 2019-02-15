@@ -29,6 +29,12 @@
                 <dd>
                     {{profil.user?.id}}
                 </dd>
+                <dt><span jhiTranslate="trouvetonprofApp.profil.cours">Cours</span></dt>
+                <dd>
+                    <div *ngIf="profil.cours">
+                        <a [routerLink]="['/cours', profil.cours?.id, 'view']">{{profil.cours?.id}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

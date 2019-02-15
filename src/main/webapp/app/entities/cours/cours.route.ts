@@ -16,7 +16,7 @@ import { ICours } from 'app/shared/model/cours.model';
 export class CoursResolve implements Resolve<ICours> {
     constructor(private service: CoursService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Cours> {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ICours> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
             return this.service.find(id).pipe(
@@ -30,7 +30,7 @@ export class CoursResolve implements Resolve<ICours> {
 
 export const coursRoute: Routes = [
     {
-        path: 'cours',
+        path: '',
         component: CoursComponent,
         data: {
             authorities: ['ROLE_USER'],
@@ -39,7 +39,7 @@ export const coursRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'cours/:id/view',
+        path: ':id/view',
         component: CoursDetailComponent,
         resolve: {
             cours: CoursResolve
@@ -51,7 +51,7 @@ export const coursRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'cours/new',
+        path: 'new',
         component: CoursUpdateComponent,
         resolve: {
             cours: CoursResolve
@@ -63,7 +63,7 @@ export const coursRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'cours/:id/edit',
+        path: ':id/edit',
         component: CoursUpdateComponent,
         resolve: {
             cours: CoursResolve
@@ -78,7 +78,7 @@ export const coursRoute: Routes = [
 
 export const coursPopupRoute: Routes = [
     {
-        path: 'cours/:id/delete',
+        path: ':id/delete',
         component: CoursDeletePopupComponent,
         resolve: {
             cours: CoursResolve

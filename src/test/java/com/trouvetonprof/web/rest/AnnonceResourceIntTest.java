@@ -351,7 +351,7 @@ public class AnnonceResourceIntTest {
 
         int databaseSizeBeforeDelete = annonceRepository.findAll().size();
 
-        // Get the annonce
+        // Delete the annonce
         restAnnonceMockMvc.perform(delete("/api/annonces/{id}", annonce.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());

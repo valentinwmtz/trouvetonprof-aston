@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="trouvetonprofApp.profil.dateNaissance" for="field_dateNaissance">Date Naissance</label>
                     <div class="d-flex">
-                        <input id="field_dateNaissance" type="datetime-local" class="form-control" name="dateNaissance" [(ngModel)]="dateNaissance"
+                        <input id="field_dateNaissance" type="datetime-local" class="form-control" name="dateNaissance" [(ngModel)]="dateNaissance" placeholder="YYYY-MM-DD HH:mm"
                         required/>
                     </div>
                     <div [hidden]="!(editForm.controls.dateNaissance?.dirty && editForm.controls.dateNaissance?.invalid)">
@@ -37,7 +37,7 @@
                         [(ngModel)]="profil.adresse" maxlength="200"/>
                     <div [hidden]="!(editForm.controls.adresse?.dirty && editForm.controls.adresse?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.adresse?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 200 }">
+                        [hidden]="!editForm.controls.adresse?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 200 }">
                         This field cannot be longer than 200 characters.
                         </small>
                     </div>
@@ -48,7 +48,7 @@
                         [(ngModel)]="profil.telephone" maxlength="20"/>
                     <div [hidden]="!(editForm.controls.telephone?.dirty && editForm.controls.telephone?.invalid)">
                         <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.telephone?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 20 }">
+                        [hidden]="!editForm.controls.telephone?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 20 }">
                         This field cannot be longer than 20 characters.
                         </small>
                     </div>
@@ -72,6 +72,13 @@
                     <select class="form-control" id="field_user" name="user" [(ngModel)]="profil.user" >
                         <option [ngValue]="null"></option>
                         <option [ngValue]="userOption.id === profil.user?.id ? profil.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="trouvetonprofApp.profil.cours" for="field_cours">Cours</label>
+                    <select class="form-control" id="field_cours" name="cours" [(ngModel)]="profil.cours" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="coursOption.id === profil.cours?.id ? profil.cours : coursOption" *ngFor="let coursOption of cours; trackBy: trackCoursById">{{coursOption.id}}</option>
                     </select>
                 </div>
             </div>

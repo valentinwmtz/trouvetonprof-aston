@@ -2,8 +2,8 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
-
 import { IDomaine } from 'app/shared/model/domaine.model';
 import { DomaineService } from './domaine.service';
 import { IAnnonce } from 'app/shared/model/annonce.model';
@@ -33,12 +33,13 @@ export class DomaineUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ domaine }) => {
             this.domaine = domaine;
         });
-        this.annonceService.query().subscribe(
-            (res: HttpResponse<IAnnonce[]>) => {
-                this.annonces = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.annonceService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IAnnonce[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IAnnonce[]>) => response.body)
+            )
+            .subscribe((res: IAnnonce[]) => (this.annonces = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     byteSize(field) {

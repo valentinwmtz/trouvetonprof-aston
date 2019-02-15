@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IDomaine } from 'app/shared/model/domaine.model';
@@ -25,12 +26,18 @@ export class DomaineComponent implements OnInit, OnDestroy {
     ) {}
 
     loadAll() {
-        this.domaineService.query().subscribe(
-            (res: HttpResponse<IDomaine[]>) => {
-                this.domaines = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.domaineService
+            .query()
+            .pipe(
+                filter((res: HttpResponse<IDomaine[]>) => res.ok),
+                map((res: HttpResponse<IDomaine[]>) => res.body)
+            )
+            .subscribe(
+                (res: IDomaine[]) => {
+                    this.domaines = res;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 
     ngOnInit() {

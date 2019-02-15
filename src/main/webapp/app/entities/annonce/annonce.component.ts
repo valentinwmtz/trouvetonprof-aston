@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IAnnonce } from 'app/shared/model/annonce.model';
@@ -25,13 +26,18 @@ export class AnnonceComponent implements OnInit, OnDestroy {
     ) {}
 
     loadAll() {
-        this.annonceService.query().subscribe(
-            (res: HttpResponse<IAnnonce[]>) => {
-                console.log('koukou');
-                this.annonces = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.annonceService
+            .query()
+            .pipe(
+                filter((res: HttpResponse<IAnnonce[]>) => res.ok),
+                map((res: HttpResponse<IAnnonce[]>) => res.body)
+            )
+            .subscribe(
+                (res: IAnnonce[]) => {
+                    this.annonces = res;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 
     ngOnInit() {

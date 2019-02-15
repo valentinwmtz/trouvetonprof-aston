@@ -40,6 +40,12 @@
             "otherEntityName": "annonce",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "coursAnnonce",
+            "otherEntityName": "profil",
+            "otherEntityRelationshipName": "cours"
         }
     ],
     "changelogDate": "20190205091641",

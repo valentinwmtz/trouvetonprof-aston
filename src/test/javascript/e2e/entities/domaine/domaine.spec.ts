@@ -28,6 +28,7 @@ describe('Domaine e2e test', () => {
     it('should load Domaines', async () => {
         await navBarPage.goToEntity('domaine');
         domaineComponentsPage = new DomaineComponentsPage();
+        await browser.wait(ec.visibilityOf(domaineComponentsPage.title), 5000);
         expect(await domaineComponentsPage.getTitle()).to.eq('trouvetonprofApp.domaine.home.title');
     });
 

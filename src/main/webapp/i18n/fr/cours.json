@@ -20,7 +20,8 @@
             "note": "Note",
             "prix": "Prix",
             "commentaire": "Commentaire",
-            "annonce": "Annonce"
+            "annonce": "Annonce",
+            "coursAnnonce": "Cours Annonce"
         }
     }
 }

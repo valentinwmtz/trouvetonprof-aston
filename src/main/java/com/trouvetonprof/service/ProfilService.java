@@ -67,7 +67,6 @@ public class ProfilService {
      * @param id the id of the entity
      */
     public void delete(Long id) {
-        log.debug("Request to delete Profil : {}", id);
-        profilRepository.deleteById(id);
+        log.debug("Request to delete Profil : {}", id);        profilRepository.deleteById(id);
     }
 }

@@ -22,7 +22,8 @@
             "sexe": "Sexe",
             "user": "User",
             "userMessage": "User Message",
-            "userAnnonce": "User Annonce"
+            "userAnnonce": "User Annonce",
+            "cours": "Cours"
         }
     }
 }

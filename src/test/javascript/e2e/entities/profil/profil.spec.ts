@@ -24,6 +24,7 @@ describe('Profil e2e test', () => {
     it('should load Profils', async () => {
         await navBarPage.goToEntity('profil');
         profilComponentsPage = new ProfilComponentsPage();
+        await browser.wait(ec.visibilityOf(profilComponentsPage.title), 5000);
         expect(await profilComponentsPage.getTitle()).to.eq('trouvetonprofApp.profil.home.title');
     });
 
@@ -44,7 +45,8 @@ describe('Profil e2e test', () => {
             profilUpdatePage.setAdresseInput('adresse'),
             profilUpdatePage.setTelephoneInput('telephone'),
             profilUpdatePage.sexeSelectLastOption(),
-            profilUpdatePage.userSelectLastOption()
+            profilUpdatePage.userSelectLastOption(),
+            profilUpdatePage.coursSelectLastOption()
         ]);
         expect(await profilUpdatePage.getDateNaissanceInput()).to.contain('2001-01-01T02:30');
         expect(await profilUpdatePage.getPaysInput()).to.eq('pays');

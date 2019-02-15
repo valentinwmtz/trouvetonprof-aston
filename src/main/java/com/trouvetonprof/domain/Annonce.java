@@ -1,5 +1,6 @@
 package com.trouvetonprof.domain;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
@@ -24,7 +25,7 @@ import com.trouvetonprof.domain.enumeration.Satut;
 public class Annonce implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,7 +45,7 @@ public class Annonce implements Serializable {
     @Column(name = "status", nullable = false)
     private Satut status;
 
-
+    
     @Lob
     @Column(name = "image", nullable = false)
     private byte[] image;
@@ -70,11 +71,9 @@ public class Annonce implements Serializable {
     @OneToMany(mappedBy = "annonce")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Disponibilite> annonceDisponibilites = new HashSet<>();
-
     @OneToMany(mappedBy = "annonce")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Cours> annonceCours = new HashSet<>();
-
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -275,14 +274,14 @@ public class Annonce implements Serializable {
     @Override
     public String toString() {
         return "Annonce{" +
-                "id=" + getId() +
-                ", titre='" + getTitre() + "'" +
-                ", description='" + getDescription() + "'" +
-                ", status='" + getStatus() + "'" +
-                ", image='" + getImage() + "'" +
-                ", imageContentType='" + getImageContentType() + "'" +
-                ", adminValide='" + isAdminValide() + "'" +
-                ", prixHoraire=" + getPrixHoraire() +
-                "}";
+            "id=" + getId() +
+            ", titre='" + getTitre() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", status='" + getStatus() + "'" +
+            ", image='" + getImage() + "'" +
+            ", imageContentType='" + getImageContentType() + "'" +
+            ", adminValide='" + isAdminValide() + "'" +
+            ", prixHoraire=" + getPrixHoraire() +
+            "}";
     }
 }

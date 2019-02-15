@@ -271,7 +271,7 @@ public class DisponibiliteResourceIntTest {
 
         int databaseSizeBeforeDelete = disponibiliteRepository.findAll().size();
 
-        // Get the disponibilite
+        // Delete the disponibilite
         restDisponibiliteMockMvc.perform(delete("/api/disponibilites/{id}", disponibilite.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());

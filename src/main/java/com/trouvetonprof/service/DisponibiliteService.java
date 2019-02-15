@@ -67,20 +67,6 @@ public class DisponibiliteService {
      * @param id the id of the entity
      */
     public void delete(Long id) {
-        log.debug("Request to delete Disponibilite : {}", id);
-        disponibiliteRepository.deleteById(id);
-    }
-
-
-    /**
-     * Get one disponibilite by annoce id.
-     *
-     * @param id the id of the entity
-     * @return the entity
-     */
-    @Transactional(readOnly = true)
-    public List<Disponibilite> findByAnnonceId(Long id) {
-        log.debug("Request to get Disponibilite by annonce id : {}", id);
-        return disponibiliteRepository.findByAnnonceId(id);
+        log.debug("Request to delete Disponibilite : {}", id);        disponibiliteRepository.deleteById(id);
     }
 }

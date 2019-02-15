@@ -57,6 +57,12 @@
             "relationshipName": "userAnnonce",
             "otherEntityName": "annonce",
             "otherEntityRelationshipName": "profil"
+        },
+        {
+            "relationshipName": "cours",
+            "otherEntityName": "cours",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "changelogDate": "20190203132703",

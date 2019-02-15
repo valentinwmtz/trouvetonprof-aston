@@ -24,6 +24,7 @@ describe('Cours e2e test', () => {
     it('should load Cours', async () => {
         await navBarPage.goToEntity('cours');
         coursComponentsPage = new CoursComponentsPage();
+        await browser.wait(ec.visibilityOf(coursComponentsPage.title), 5000);
         expect(await coursComponentsPage.getTitle()).to.eq('trouvetonprofApp.cours.home.title');
     });
 

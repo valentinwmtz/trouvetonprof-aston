@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 import { JhiAlertService } from 'ng-jhipster';
-
 import { ICours } from 'app/shared/model/cours.model';
 import { CoursService } from './cours.service';
 import { IAnnonce } from 'app/shared/model/annonce.model';
@@ -35,12 +35,13 @@ export class CoursUpdateComponent implements OnInit {
             this.cours = cours;
             this.date = this.cours.date != null ? this.cours.date.format(DATE_TIME_FORMAT) : null;
         });
-        this.annonceService.query().subscribe(
-            (res: HttpResponse<IAnnonce[]>) => {
-                this.annonces = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.annonceService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IAnnonce[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IAnnonce[]>) => response.body)
+            )
+            .subscribe((res: IAnnonce[]) => (this.annonces = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {

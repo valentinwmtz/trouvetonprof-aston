@@ -1,42 +1,43 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
 import { IMatiere } from 'app/shared/model/matiere.model';
 import { AccountService } from 'app/core';
 import { MatiereService } from './matiere.service';
-import { AnnonceService } from 'app/entities/annonce';
-import { IAnnonce } from 'app/shared/model/annonce.model';
 
 @Component({
     selector: 'jhi-matiere',
-    templateUrl: './matiere.component.html',
-    styleUrls: ['./matiere.component.css']
+    templateUrl: './matiere.component.html'
 })
 export class MatiereComponent implements OnInit, OnDestroy {
     matieres: IMatiere[];
-    annonces: IAnnonce[];
     currentAccount: any;
     eventSubscriber: Subscription;
 
-    images = [1, 2, 3].map(() => `https://picsum.photos/900/500?random&t=${Math.random()}`);
     constructor(
         protected matiereService: MatiereService,
         protected jhiAlertService: JhiAlertService,
         protected dataUtils: JhiDataUtils,
         protected eventManager: JhiEventManager,
-        protected accountService: AccountService,
-        protected annonceService: AnnonceService
+        protected accountService: AccountService
     ) {}
 
     loadAll() {
-        this.matiereService.query().subscribe(
-            (res: HttpResponse<IMatiere[]>) => {
-                this.matieres = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        this.matiereService
+            .query()
+            .pipe(
+                filter((res: HttpResponse<IMatiere[]>) => res.ok),
+                map((res: HttpResponse<IMatiere[]>) => res.body)
+            )
+            .subscribe(
+                (res: IMatiere[]) => {
+                    this.matieres = res;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 
     ngOnInit() {
@@ -45,12 +46,6 @@ export class MatiereComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.registerChangeInMatieres();
-        this.annonceService.query().subscribe(
-            (res: HttpResponse<IAnnonce[]>) => {
-                this.annonces = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
     }
 
     ngOnDestroy() {

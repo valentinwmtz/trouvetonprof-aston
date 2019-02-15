@@ -1,5 +1,7 @@
 package com.trouvetonprof.domain;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -9,6 +11,8 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -20,7 +24,7 @@ import java.util.Objects;
 public class Cours implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -48,6 +52,9 @@ public class Cours implements Serializable {
     @JsonIgnoreProperties("annonceCours")
     private Annonce annonce;
 
+    @OneToMany(mappedBy = "cours")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Profil> coursAnnonces = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -133,6 +140,31 @@ public class Cours implements Serializable {
 
     public void setAnnonce(Annonce annonce) {
         this.annonce = annonce;
+    }
+
+    public Set<Profil> getCoursAnnonces() {
+        return coursAnnonces;
+    }
+
+    public Cours coursAnnonces(Set<Profil> profils) {
+        this.coursAnnonces = profils;
+        return this;
+    }
+
+    public Cours addCoursAnnonce(Profil profil) {
+        this.coursAnnonces.add(profil);
+        profil.setCours(this);
+        return this;
+    }
+
+    public Cours removeCoursAnnonce(Profil profil) {
+        this.coursAnnonces.remove(profil);
+        profil.setCours(null);
+        return this;
+    }
+
+    public void setCoursAnnonces(Set<Profil> profils) {
+        this.coursAnnonces = profils;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

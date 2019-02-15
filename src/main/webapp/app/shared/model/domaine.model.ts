@@ -1,5 +1,5 @@
-import { IMatiere } from 'app/shared/model//matiere.model';
-import { IAnnonce } from 'app/shared/model//annonce.model';
+import { IMatiere } from 'app/shared/model/matiere.model';
+import { IAnnonce } from 'app/shared/model/annonce.model';
 
 export interface IDomaine {
     id?: number;

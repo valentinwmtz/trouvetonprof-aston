@@ -47,7 +47,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'domaine/'+ domaine.id + '/delete'} }]"
+                                [routerLink]="['/', 'domaine', { outlets: { popup: domaine.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">
@@ -61,4 +61,3 @@
         </table>
     </div>
 </div>
-
