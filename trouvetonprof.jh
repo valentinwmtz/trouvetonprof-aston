@@ -71,6 +71,7 @@ relationship OneToMany {
  	Annonce{annonceDisponibilite} to Disponibilite
     Annonce{annonceCours} to Cours
  	Domaine to Matiere
+       Cours{coursAnnonce} to Profil
 }
 
 service * with serviceClass
