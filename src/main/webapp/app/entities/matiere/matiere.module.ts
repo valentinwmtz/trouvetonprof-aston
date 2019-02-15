@@ -11,6 +11,7 @@ import {
     matiereRoute,
     matierePopupRoute
 } from './';
+import { MatiereCardComponent } from 'app/entities/matiere/matiere-card/matiere-card.component';
 
 const ENTITY_STATES = [...matiereRoute, ...matierePopupRoute];
 
@@ -21,7 +22,8 @@ const ENTITY_STATES = [...matiereRoute, ...matierePopupRoute];
         MatiereDetailComponent,
         MatiereUpdateComponent,
         MatiereDeleteDialogComponent,
-        MatiereDeletePopupComponent
+        MatiereDeletePopupComponent,
+        MatiereCardComponent
     ],
     entryComponents: [MatiereComponent, MatiereUpdateComponent, MatiereDeleteDialogComponent, MatiereDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

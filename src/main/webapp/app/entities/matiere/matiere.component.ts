@@ -19,6 +19,7 @@ export class MatiereComponent implements OnInit, OnDestroy {
     annonces: IAnnonce[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    slides: any = [[]];
 
     images = [1, 2, 3].map(() => `https://picsum.photos/900/500?random&t=${Math.random()}`);
     constructor(
@@ -34,6 +35,7 @@ export class MatiereComponent implements OnInit, OnDestroy {
         this.matiereService.query().subscribe(
             (res: HttpResponse<IMatiere[]>) => {
                 this.matieres = res.body;
+                console.log(this.matieres);
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -41,6 +43,7 @@ export class MatiereComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.loadAll();
+        this.slides = this.chunk(this.matieres, 3);
         this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
@@ -75,5 +78,12 @@ export class MatiereComponent implements OnInit, OnDestroy {
 
     protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+    chunk(arr, chunkSize) {
+        let R = [];
+        for (let i = 0, len = arr.length; i < len; i += chunkSize) {
+            R.push(arr.slice(i, i + chunkSize));
+        }
+        return R;
     }
 }

@@ -22,8 +22,8 @@ h1 {
 }
 #illustration {
     background-size: cover;
-    max-height: 150px;
-    max-width: 300px;
+    max-height: 50%;
+    max-width: 50%;
 }
 
 #header {
