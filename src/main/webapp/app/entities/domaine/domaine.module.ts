@@ -11,6 +11,7 @@ import {
     domaineRoute,
     domainePopupRoute
 } from './';
+import { DomaineCardComponent } from './domaine-card/domaine-card.component';
 
 const ENTITY_STATES = [...domaineRoute, ...domainePopupRoute];
 
@@ -21,7 +22,8 @@ const ENTITY_STATES = [...domaineRoute, ...domainePopupRoute];
         DomaineDetailComponent,
         DomaineUpdateComponent,
         DomaineDeleteDialogComponent,
-        DomaineDeletePopupComponent
+        DomaineDeletePopupComponent,
+        DomaineCardComponent
     ],
     entryComponents: [DomaineComponent, DomaineUpdateComponent, DomaineDeleteDialogComponent, DomaineDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

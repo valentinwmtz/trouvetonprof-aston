@@ -30,3 +30,7 @@ mat-card-content {
 .carousel img {
     max-height: 200px;
 }
+
+.titre {
+    color: black !important;
+}

@@ -61,15 +61,16 @@
         </table>
     </div>
 </div>-->
-<div><!-- '' Condition ADMIN ''-->
+<!--<div>
     <h2 id="page-heading">
-    <span jhiTranslate="trouvetonprofApp.domaine.home.title">Domaines</span>
-    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-domaine" [routerLink]="['/domaine/new']">
-        <fa-icon [icon]="'plus'"></fa-icon>
-        <span  jhiTranslate="trouvetonprofApp.domaine.home.createLabel">
+        <span jhiTranslate="trouvetonprofApp.domaine.home.title">Domaines</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-domaine"
+                [routerLink]="['/domaine/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span jhiTranslate="trouvetonprofApp.domaine.home.createLabel">
             Create new Domaine
             </span>
-    </button>
+        </button>
     </h2>
 </div>
 <div class="container">
@@ -80,7 +81,8 @@
                     <mat-card-title>{{domaine.titre}}</mat-card-title>
                 </mat-card-header>
                 <div class="image-domaine">
-                    <img mat-card-image [src]="'data:' + domaine.imageContentType + ';base64,' + domaine.image" style="max-width: 250px; max-height: 100px;" alt="domaine image"/>
+                    <img mat-card-image [src]="'data:' + domaine.imageContentType + ';base64,' + domaine.image"
+                         style="max-width: 250px; max-height: 100px;" alt="domaine image"/>
                 </div>
                 <mat-card-content>
                     <p>
@@ -88,24 +90,14 @@
                     </p>
                     <div class="carousel">
                         <ngb-carousel *ngIf="images">
-                           <div *ngFor="let matiere of matieres">
+                            <div *ngFor="let matiere of matieres">
+                                <p>
+                                    {{matiere.titre}}
+                                </p>
                                 <ng-template ngbSlide>
-                                    <img [src]="images[0]" alt="Random first slide">
+
                                     <div class="carousel-caption">
-                                       <h3>{{matiere.titre}}</h3>
-                                        <p>{{matiere.description}}</p>
-                                    </div>
-                                </ng-template>
-                                <ng-template ngbSlide>
-                                    <img [src]="images[1]" alt="Random second slide">
-                                    <div class="carousel-caption">
-                                        <h3>{{matiere.titre}}</h3>
-                                        <p>{{matiere.description}}</p>
-                                    </div>
-                                </ng-template>
-                                <ng-template ngbSlide>
-                                    <img [src]="images[2]" alt="Random third slide">
-                                    <div class="carousel-caption">
+
                                         <h3>{{matiere.titre}}</h3>
                                         <p>{{matiere.description}}</p>
                                     </div>
@@ -113,9 +105,19 @@
                             </div>
                         </ngb-carousel>
                     </div>
+                    <ngb-carousel>
+                        <ng-template ngbSlide *ngFor="let matiere of matieres">
+                            <img [src]="images[0]" alt="Random first slide">
+                            <div class="carousel-caption">
+                                <h3>{{matiere.titre}}</h3>
+                                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                            </div>
+                        </ng-template>
+                    </ngb-carousel>
+
                 </mat-card-content>
                 <mat-card-footer>
-                    <div class="bouton-admin"><!-- '' Condition ADMIN ''-->
+                    <div class="bouton-admin">
                         <button type="submit"
                                 [routerLink]="['/domaine', domaine.id, 'view' ]"
                                 class="btn btn-info btn-sm">
@@ -141,4 +143,5 @@
             </mat-card>
         </div>
     </div>
-</div>
+</div>-->
+<jhi-domaine-card *ngFor="let domaine of domaines" [dom]="domaine"></jhi-domaine-card>
