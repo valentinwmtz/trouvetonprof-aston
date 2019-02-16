@@ -3,17 +3,17 @@
         <div *ngIf="annonce">
             <div class="container" style="padding-left: 0;">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-3">
                         <dd>
                             <div *ngIf="annonce.image">
                                 <a (click)="openFile(annonce.imageContentType, annonce.image)">
                                     <img [src]="'data:' + annonce.imageContentType + ';base64,' + annonce.image"
-                                         style="width: 200px;" alt="annonce image"/>
+                                         style="width: 100px;" alt="annonce image"/>
                                 </a>
                             </div>
                         </dd>
                     </div>
-                    <div class="col-8">
+                    <div class="col-9">
                         <h1 class="mat-h1" style="margin-bottom: 0;"> {{annonce.titre}}</h1>
                         <hr>
                         <dl class="row-md jh-entity-details">
