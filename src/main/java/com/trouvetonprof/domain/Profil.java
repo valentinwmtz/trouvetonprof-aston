@@ -1,6 +1,7 @@
 package com.trouvetonprof.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -58,6 +59,10 @@ public class Profil implements Serializable {
     @OneToMany(mappedBy = "profil")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Annonce> userAnnonces = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties(value = "profils", allowSetters = true)
+    private Cours cours;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -193,6 +198,19 @@ public class Profil implements Serializable {
 
     public void setUserAnnonces(Set<Annonce> annonces) {
         this.userAnnonces = annonces;
+    }
+
+    public Cours getCours() {
+        return cours;
+    }
+
+    public Profil cours(Cours cours) {
+        this.cours = cours;
+        return this;
+    }
+
+    public void setCours(Cours cours) {
+        this.cours = cours;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

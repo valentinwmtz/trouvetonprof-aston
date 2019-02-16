@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { IAnnonce } from 'app/shared/model//annonce.model';
+import { IProfil } from 'app/shared/model//profil.model';
 
 export interface ICours {
     id?: number;
@@ -9,6 +10,8 @@ export interface ICours {
     prix?: number;
     commentaire?: string;
     annonce?: IAnnonce;
+    profils?: IProfil[];
+    cours?: IProfil;
 }
 
 export class Cours implements ICours {
@@ -19,6 +22,8 @@ export class Cours implements ICours {
         public note?: number,
         public prix?: number,
         public commentaire?: string,
-        public annonce?: IAnnonce
+        public annonce?: IAnnonce,
+        public profils?: IProfil[],
+        public cours?: IProfil
     ) {}
 }

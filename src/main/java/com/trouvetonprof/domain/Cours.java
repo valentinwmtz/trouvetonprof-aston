@@ -1,5 +1,6 @@
 package com.trouvetonprof.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -9,6 +10,8 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -47,6 +50,13 @@ public class Cours implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties("annonceCours")
     private Annonce annonce;
+
+    @OneToMany(mappedBy = "cours")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Profil> profils = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties("")
+    private Profil cours;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -133,6 +143,44 @@ public class Cours implements Serializable {
 
     public void setAnnonce(Annonce annonce) {
         this.annonce = annonce;
+    }
+
+    public Set<Profil> getProfils() {
+        return profils;
+    }
+
+    public Cours profils(Set<Profil> profils) {
+        this.profils = profils;
+        return this;
+    }
+
+    public Cours addProfil(Profil profil) {
+        this.profils.add(profil);
+        profil.setCours(this);
+        return this;
+    }
+
+    public Cours removeProfil(Profil profil) {
+        this.profils.remove(profil);
+        profil.setCours(null);
+        return this;
+    }
+
+    public void setProfils(Set<Profil> profils) {
+        this.profils = profils;
+    }
+
+    public Profil getCours() {
+        return cours;
+    }
+
+    public Cours cours(Profil profil) {
+        this.cours = profil;
+        return this;
+    }
+
+    public void setCours(Profil profil) {
+        this.cours = profil;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -44,7 +44,8 @@ describe('Cours e2e test', () => {
             coursUpdatePage.setNoteInput('5'),
             coursUpdatePage.setPrixInput('5'),
             coursUpdatePage.setCommentaireInput('commentaire'),
-            coursUpdatePage.annonceSelectLastOption()
+            coursUpdatePage.annonceSelectLastOption(),
+            coursUpdatePage.coursSelectLastOption()
         ]);
         expect(await coursUpdatePage.getDateInput()).to.contain('2001-01-01T02:30');
         expect(await coursUpdatePage.getDureeInput()).to.eq('5');

@@ -44,7 +44,8 @@ describe('Profil e2e test', () => {
             profilUpdatePage.setAdresseInput('adresse'),
             profilUpdatePage.setTelephoneInput('telephone'),
             profilUpdatePage.sexeSelectLastOption(),
-            profilUpdatePage.userSelectLastOption()
+            profilUpdatePage.userSelectLastOption(),
+            profilUpdatePage.coursSelectLastOption()
         ]);
         expect(await profilUpdatePage.getDateNaissanceInput()).to.contain('2001-01-01T02:30');
         expect(await profilUpdatePage.getPaysInput()).to.eq('pays');

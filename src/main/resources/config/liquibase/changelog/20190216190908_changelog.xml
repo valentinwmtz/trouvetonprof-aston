@@ -1,0 +1,19 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Valentin (generated)" id="1550344183908-1">
+        <addColumn tableName="cours">
+            <column name="cours_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550344183908-2">
+        <addColumn tableName="profil">
+            <column name="cours_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550344183908-3">
+        <addForeignKeyConstraint baseColumnNames="cours_id" baseTableName="cours" constraintName="FKa6cla8vk14gtjtcgsdqa1v30b" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="profil"/>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550344183908-4">
+        <addForeignKeyConstraint baseColumnNames="cours_id" baseTableName="profil" constraintName="FKjh6osfpoajrwx6mpinq8tamfj" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cours"/>
+    </changeSet>
+</databaseChangeLog>

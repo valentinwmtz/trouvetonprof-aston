@@ -60,7 +60,7 @@ public class Annonce implements Serializable {
     private Double prixHoraire;
 
     @ManyToOne
-    @JsonIgnoreProperties("userAnnonces")
+    @JsonIgnoreProperties(value = "userAnnonces", allowSetters = true)
     private Profil profil;
 
     @OneToOne

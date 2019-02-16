@@ -1,5 +1,26 @@
 {
-    "name": "Cours",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipName": "annonce",
+            "otherEntityName": "annonce",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "profil",
+            "otherEntityName": "profil",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "cours"
+        },
+        {
+            "relationshipName": "cours",
+            "otherEntityName": "profil",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
     "fields": [
         {
             "fieldName": "date",
@@ -34,21 +55,11 @@
             "fieldType": "String"
         }
     ],
-    "relationships": [
-        {
-            "relationshipName": "annonce",
-            "otherEntityName": "annonce",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        }
-    ],
     "changelogDate": "20190205091641",
-    "entityTableName": "cours",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": false,
     "service": "serviceClass",
+    "entityTableName": "cours",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }

@@ -1,0 +1,55 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Valentin (generated)" id="1550352542102-1">
+        <addColumn tableName="cours">
+            <column name="cours_user_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550352542102-2">
+        <addColumn tableName="annonce">
+            <column name="profil_user_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550352542102-3">
+        <addColumn tableName="message">
+            <column name="profil_user_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550352542102-4">
+        <addForeignKeyConstraint baseColumnNames="profil_user_id" baseTableName="annonce" constraintName="FK1i22pqg371ekgaaw5s10uglsb" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="profil"/>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550352542102-5">
+        <addForeignKeyConstraint baseColumnNames="cours_user_id" baseTableName="cours" constraintName="FK67vjuqwicnea2vd8k6xq5ys9g" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="profil"/>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550352542102-6">
+        <addForeignKeyConstraint baseColumnNames="profil_user_id" baseTableName="message" constraintName="FKg4ie2pbdwoxqtqifi9gp5py4p" deferrable="false" initiallyDeferred="false" referencedColumnNames="user_id" referencedTableName="profil"/>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550352542102-7">
+        <dropForeignKeyConstraint baseTableName="annonce" constraintName="fk_annonce_profil_id"/>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550352542102-8">
+        <dropForeignKeyConstraint baseTableName="cours" constraintName="fk_cours_cours_id"/>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550352542102-9">
+        <dropForeignKeyConstraint baseTableName="message" constraintName="fk_message_profil_id"/>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550352542102-10">
+        <dropColumn columnName="cours_id" tableName="cours"/>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550352542102-11">
+        <dropColumn columnName="id" tableName="profil"/>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550352542102-12">
+        <dropColumn columnName="profil_id" tableName="annonce"/>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550352542102-13">
+        <dropColumn columnName="profil_id" tableName="message"/>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550352542102-14">
+        <addNotNullConstraint columnDataType="bigint" columnName="user_id" tableName="profil"/>
+    </changeSet>
+    <changeSet author="Valentin (generated)" id="1550352542102-15">
+        <dropPrimaryKey tableName="profil"/>
+        <addPrimaryKey columnNames="user_id" constraintName="profilPK" tableName="profil"/>
+    </changeSet>
+</databaseChangeLog>

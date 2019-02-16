@@ -10,6 +10,8 @@ import { ICours } from 'app/shared/model/cours.model';
 import { CoursService } from './cours.service';
 import { IAnnonce } from 'app/shared/model/annonce.model';
 import { AnnonceService } from 'app/entities/annonce';
+import { IProfil } from 'app/shared/model/profil.model';
+import { ProfilService } from 'app/entities/profil';
 
 @Component({
     selector: 'jhi-cours-update',
@@ -20,12 +22,15 @@ export class CoursUpdateComponent implements OnInit {
     isSaving: boolean;
 
     annonces: IAnnonce[];
+
+    profils: IProfil[];
     date: string;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected coursService: CoursService,
         protected annonceService: AnnonceService,
+        protected profilService: ProfilService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -38,6 +43,12 @@ export class CoursUpdateComponent implements OnInit {
         this.annonceService.query().subscribe(
             (res: HttpResponse<IAnnonce[]>) => {
                 this.annonces = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.profilService.query().subscribe(
+            (res: HttpResponse<IProfil[]>) => {
+                this.profils = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -75,6 +86,10 @@ export class CoursUpdateComponent implements OnInit {
     }
 
     trackAnnonceById(index: number, item: IAnnonce) {
+        return item.id;
+    }
+
+    trackProfilById(index: number, item: IProfil) {
         return item.id;
     }
 }

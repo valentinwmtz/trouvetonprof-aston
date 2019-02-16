@@ -9,6 +9,8 @@ import { JhiAlertService } from 'ng-jhipster';
 import { IProfil } from 'app/shared/model/profil.model';
 import { ProfilService } from './profil.service';
 import { IUser, UserService } from 'app/core';
+import { ICours } from 'app/shared/model/cours.model';
+import { CoursService } from 'app/entities/cours';
 
 @Component({
     selector: 'jhi-profil-update',
@@ -19,12 +21,15 @@ export class ProfilUpdateComponent implements OnInit {
     isSaving: boolean;
 
     users: IUser[];
+
+    cours: ICours[];
     dateNaissance: string;
 
     constructor(
         protected jhiAlertService: JhiAlertService,
         protected profilService: ProfilService,
         protected userService: UserService,
+        protected coursService: CoursService,
         protected activatedRoute: ActivatedRoute
     ) {}
 
@@ -37,6 +42,12 @@ export class ProfilUpdateComponent implements OnInit {
         this.userService.query().subscribe(
             (res: HttpResponse<IUser[]>) => {
                 this.users = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.coursService.query().subscribe(
+            (res: HttpResponse<ICours[]>) => {
+                this.cours = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -74,6 +85,10 @@ export class ProfilUpdateComponent implements OnInit {
     }
 
     trackUserById(index: number, item: IUser) {
+        return item.id;
+    }
+
+    trackCoursById(index: number, item: ICours) {
         return item.id;
     }
 }

@@ -21,6 +21,7 @@
             <th><span jhiTranslate="trouvetonprofApp.profil.telephone">Telephone</span></th>
             <th><span jhiTranslate="trouvetonprofApp.profil.sexe">Sexe</span></th>
             <th><span jhiTranslate="trouvetonprofApp.profil.user">User</span></th>
+            <th><span jhiTranslate="trouvetonprofApp.profil.cours">Cours</span></th>
             <th></th>
             </tr>
             </thead>
@@ -34,6 +35,11 @@
                 <td jhiTranslate="{{'trouvetonprofApp.Sexe.' + profil.sexe}}">{{profil.sexe}}</td>
                 <td>
                     {{profil.user?.id}}
+                </td>
+                <td>
+                    <div *ngIf="profil.cours">
+                        <a [routerLink]="['../cours', profil.cours?.id, 'view' ]" >{{profil.cours?.id}}</a>
+                    </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

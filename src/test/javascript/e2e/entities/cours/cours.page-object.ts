@@ -32,6 +32,7 @@ export class CoursUpdatePage {
     prixInput = element(by.id('field_prix'));
     commentaireInput = element(by.id('field_commentaire'));
     annonceSelect = element(by.id('field_annonce'));
+    coursSelect = element(by.id('field_cours'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -94,6 +95,25 @@ export class CoursUpdatePage {
 
     async getAnnonceSelectedOption() {
         return this.annonceSelect.element(by.css('option:checked')).getText();
+    }
+
+    async coursSelectLastOption() {
+        await this.coursSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async coursSelectOption(option) {
+        await this.coursSelect.sendKeys(option);
+    }
+
+    getCoursSelect(): ElementFinder {
+        return this.coursSelect;
+    }
+
+    async getCoursSelectedOption() {
+        return this.coursSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

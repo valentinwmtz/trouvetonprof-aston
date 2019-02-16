@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="annonce"/>
 
+        <addForeignKeyConstraint baseColumnNames="cours_id"
+                                 baseTableName="cours"
+                                 constraintName="fk_cours_cours_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profil"/>
+
     </changeSet>
 </databaseChangeLog>

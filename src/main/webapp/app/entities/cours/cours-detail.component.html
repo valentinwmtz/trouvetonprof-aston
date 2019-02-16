@@ -31,6 +31,12 @@
                         <a [routerLink]="['/annonce', cours.annonce?.id, 'view']">{{cours.annonce?.id}}</a>
                     </div>
                 </dd>
+                <dt><span jhiTranslate="trouvetonprofApp.cours.cours">Cours</span></dt>
+                <dd>
+                    <div *ngIf="cours.cours">
+                        <a [routerLink]="['/profil', cours.cours?.id, 'view']">{{cours.cours?.id}}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"
