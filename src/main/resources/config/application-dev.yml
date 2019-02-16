@@ -40,6 +40,8 @@ spring:
     url: jdbc:mysql://localhost:3306/trouvetonprof?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
     username: root
     password: root
+    #username: jhipster
+    #password: jhipster
     hikari:
       data-source-properties:
         cachePrepStmts: true
@@ -52,10 +54,9 @@ spring:
     show-sql: true
     properties:
       hibernate.id.new_generator_mappings: true
-      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_second_level_cache: false
       hibernate.cache.use_query_cache: false
       hibernate.generate_statistics: true
-      hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory
   liquibase:
     contexts: dev
   mail:
