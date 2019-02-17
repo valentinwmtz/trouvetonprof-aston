@@ -88,15 +88,15 @@ public class CoursService {
     }
 
     /**
-     * Get moyenne of notes by annoce id.
+     * Get cours by annoce id.
      *
      * @param id the id of the entity
-     * @return moyenne of notes
+     * @return Liste of Cours
      */
     @Transactional(readOnly = true)
-    public List<String> findCommentairesByAnnonceId(Long id) {
-        log.debug("Request to get commentaires by annonce id : {}", id);
-        return coursRepository.findCommentaireByAnnonceId(id).stream().map(Cours::getCommentaire).collect(Collectors.toList());
+    public List<Cours> findCoursByAnnonceId(Long id) {
+        log.debug("Request to get cours by annonce id : {}", id);
+        return coursRepository.findByAnnonceId(id);
     }
 
 }

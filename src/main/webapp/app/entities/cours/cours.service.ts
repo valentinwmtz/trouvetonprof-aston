@@ -42,8 +42,11 @@ export class CoursService {
         return this.http.get<number>(`${this.resourceUrl}/moyenne/notes/${id}`, { observe: 'response' });
     }
 
-    findCommentairesByAnnonceId(id: number): Observable<any> {
-        return this.http.get<String[]>(`${this.resourceUrl}/commentaires/${id}`, { observe: 'response' });
+    findCoursByAnnonceId(id: number, req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http
+            .get<ICours[]>(`${this.resourceUrl}/annonce/${id}`, { params: options, observe: 'response' })
+            .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
     }
 
     query(req?: any): Observable<EntityArrayResponseType> {

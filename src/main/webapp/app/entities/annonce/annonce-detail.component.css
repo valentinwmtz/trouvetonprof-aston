@@ -15,12 +15,17 @@
 }
 
 .full {
-    color: #ffe81d;
+    color: #ffb800;
 }
 
 .half {
     position: absolute;
     display: inline-block;
     overflow: hidden;
-    color: #ffe81d;
+    color: #ffb800;
+}
+
+.font-lite {
+    font-size: 13px;
+    line-height: 19px;
 }

@@ -132,15 +132,15 @@ public class CoursResource {
 
 
     /**
-     * GET /cours/commentaires/:id : get the commentaires by annonce "id".
+     * GET /cours/commentaires/:id : get the cours by annonce "id".
      *
-     * @param id the id of the annonce to retrieve commentaires
+     * @param id the id of the annonce to retrieve cours
      * @return the ResponseEntity with status 200 (OK) and with body the disponibilite, or with status 404 (Not Found)
      */
-    @GetMapping("/cours/commentaires/{annonceId}")
+    @GetMapping("/cours/annonce/{annonceId}")
     @Timed
-    public List<String> getCommentairesByAnnonceId(@PathVariable(value = "annonceId") Long id) {
-        log.debug("REST request to get commenaitres by annonce Id : {}", id);
-        return coursService.findCommentairesByAnnonceId(id);
+    public List<Cours> getCoursByAnnonceId(@PathVariable(value = "annonceId") Long id) {
+        log.debug("REST request to get cours by annonce Id : {}", id);
+        return coursService.findCoursByAnnonceId(id);
     }
 }

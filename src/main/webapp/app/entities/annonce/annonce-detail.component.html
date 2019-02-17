@@ -51,12 +51,11 @@
                                                             max="5"></ngb-rating>
                                             </div>
                                         </dd>
-                                        <dt style="margin-top: -1.4em;"><span jhiTranslate="trouvetonprofApp.annonce.domaine">Domaine</span></dt>
-                                        <dd>
-                                            <div *ngIf="annonce.domaine">
-                                                <a [routerLink]="['/domaine', annonce.domaine?.id, 'view']">{{annonce.domaine?.id}}</a>
-                                            </div>
-                                        </dd>
+                                        <dt style="margin-top: -1.4em;" *ngIf="cours?.length > 0"><span
+                                                class="amazon-italic font-lite"
+                                                style="color: #0066c0;"
+                                                (click)="scrollToElement(commentaires)">
+                                            {{cours?.length}} commentaires</span></dt>
                                     </div>
                                 </div>
                             </div>
@@ -132,8 +131,31 @@
                         </dd>
                     </dl>
                 </div>
+            </div>
 
-
+            <div class="container" style="padding-left: 0;margin-top: 3em;" #commentaires>
+                <div class="col-12">
+                    <dl class="row-md jh-entity-details">
+                        <dt *ngIf="cours?.length" id="commentaires"><span> Commentaires </span></dt>
+                        <dd *ngIf="cours?.length">
+                            <div *ngFor="let cour of cours;">
+                                <div class="font-lite"> {{ cour.cours.user.firstName }}</div>
+                                <div class="font-lite"
+                                     style="color: #555;">  {{ cour.date | date: 'dd MMMM yyyy'}} </div>
+                                <div style="margin-top: -1.4em;margin-left: -3px;margin-bottom: -0.8em">
+                                    <ng-template #t let-fill="fill">
+                                                      <span class="star" [class.full]="fill === 100">
+                                                        <span class="half" [style.width.%]="fill">&#8902;</span>&#8902;
+                                                      </span>
+                                    </ng-template>
+                                    <ngb-rating [(rate)]="cour.note" [starTemplate]="t" [readonly]="true"
+                                                max="5"></ngb-rating>
+                                </div>
+                                <p> {{ cour.commentaire }} </p>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
             </div>
 
 

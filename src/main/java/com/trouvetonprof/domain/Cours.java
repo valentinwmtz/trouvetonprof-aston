@@ -55,7 +55,7 @@ public class Cours implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Profil> profils = new HashSet<>();
     @ManyToOne
-    @JsonIgnoreProperties("")
+    @JsonIgnoreProperties(value = "", allowSetters = true)
     private Profil cours;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

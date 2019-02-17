@@ -1,13 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
-import { ChangeDetectorRef } from '@angular/core';
 import { IAnnonce } from 'app/shared/model/annonce.model';
 import { DisponibiliteService } from 'app/entities/disponibilite';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { IDisponibilite } from 'app/shared/model/disponibilite.model';
-import * as moment from 'moment';
 import { CoursService } from 'app/entities/cours';
+import { ICours } from 'app/shared/model/cours.model';
 
 @Component({
     selector: 'jhi-annonce-detail',
@@ -27,7 +26,8 @@ export class AnnonceDetailComponent implements OnInit {
     side = 'right';
     isDisponibilitesloaded = false;
     moyenneNotes: number;
-    commentaires: String[];
+    cours: ICours[] = [];
+    coursIsLoaded = false;
 
     constructor(
         protected dataUtils: JhiDataUtils,
@@ -42,37 +42,39 @@ export class AnnonceDetailComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ annonce }) => {
             this.annonce = annonce;
             console.error(annonce);
-        });
-
-        this.disponibiliteService.findByAnnonceId(this.annonce.id).subscribe(
-            (res: HttpResponse<IDisponibilite[]>) => {
-                const dispoStructured = this.stuctureDispoForTimeLine(res.body);
-                dispoStructured.forEach(dispo => {
-                    this.disponibilites.push({
-                        header: this.capitalizeAllFirstCharOfWord(dispo.header),
-                        content: dispo.content
+            this.disponibiliteService.findByAnnonceId(this.annonce.id).subscribe(
+                (res: HttpResponse<IDisponibilite[]>) => {
+                    const dispoStructured = this.stuctureDispoForTimeLine(res.body);
+                    dispoStructured.forEach(dispo => {
+                        this.disponibilites.push({
+                            header: this.capitalizeAllFirstCharOfWord(dispo.header),
+                            content: dispo.content
+                        });
                     });
-                });
-                this.isDisponibilitesloaded = true;
-                this.changeDetectorRef.detectChanges();
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+                    this.isDisponibilitesloaded = true;
+                    this.changeDetectorRef.detectChanges();
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
 
-        this.coursService.findNotesMoyenneByAnnonceId(this.annonce.id).subscribe(
-            (res: HttpResponse<number>) => {
-                this.moyenneNotes = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+            this.coursService.findNotesMoyenneByAnnonceId(this.annonce.id).subscribe(
+                (res: HttpResponse<number>) => {
+                    this.moyenneNotes = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
 
-        this.coursService.findCommentairesByAnnonceId(this.annonce.id).subscribe(
-            (res: HttpResponse<String[]>) => {
-                this.commentaires = res.body;
-                console.error(this.commentaires);
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+            this.coursService.findCoursByAnnonceId(this.annonce.id).subscribe(
+                (res: HttpResponse<ICours[]>) => {
+                    this.cours = res.body;
+                    console.error(this.cours);
+
+                    this.coursIsLoaded = true;
+                    console.error(this.coursIsLoaded);
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        });
     }
 
     private stuctureDispoForTimeLine(disponibilites: IDisponibilite[]): Array<any> {
@@ -136,5 +138,10 @@ export class AnnonceDetailComponent implements OnInit {
 
     onExpandEntry(expanded, index) {
         console.log(`Expand status of entry #${index} changed to ${expanded}`);
+    }
+
+    scrollToElement($element): void {
+        console.log($element);
+        $element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
     }
 }
