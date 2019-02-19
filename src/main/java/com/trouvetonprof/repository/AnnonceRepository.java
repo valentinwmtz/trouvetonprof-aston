@@ -13,5 +13,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface AnnonceRepository extends JpaRepository<Annonce, Long> {
-        List<Annonce> findAllByProfilUserLogin(String login);
+	List<Annonce> findAllByProfilUserLogin(String login);
+	List<Annonce> findByDomaineAnnonceId(Long id);
 }

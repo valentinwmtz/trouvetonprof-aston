@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IAnnonce } from 'app/shared/model/annonce.model';
+import { IMatiere } from 'app/shared/model/matiere.model';
 
 type EntityResponseType = HttpResponse<IAnnonce>;
 type EntityArrayResponseType = HttpResponse<IAnnonce[]>;
@@ -27,6 +28,10 @@ export class AnnonceService {
         return this.http.get<IAnnonce>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
+    findAllByMatiereId(id: number, req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IMatiere[]>(`${this.resourceUrl}/matiere/${id}`, { params: options, observe: 'response' });
+    }
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http.get<IAnnonce[]>(this.resourceUrl, { params: options, observe: 'response' });

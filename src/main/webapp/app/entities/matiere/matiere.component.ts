@@ -40,6 +40,9 @@ export class MatiereComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.annonceService.findAllByMatiereId(1).subscribe(reponse => {
+            console.error(reponse.body);
+        });
         this.loadAll();
         this.accountService.identity().then(account => {
             this.currentAccount = account;
