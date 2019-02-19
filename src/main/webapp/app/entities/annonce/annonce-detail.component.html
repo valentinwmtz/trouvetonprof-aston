@@ -3,7 +3,7 @@
         <div *ngIf="annonce">
             <div class="container" style="padding-left: 0;">
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-md-3 col-lg-3">
                         <dd>
                             <div *ngIf="annonce.image">
                                 <a (click)="openFile(annonce.imageContentType, annonce.image)">
@@ -13,13 +13,13 @@
                             </div>
                         </dd>
                     </div>
-                    <div class="col-9">
+                    <div class="col-md-9 col-lg-9">
                         <h1 class="mat-h1" style="margin-bottom: 0;"> {{annonce.titre}}</h1>
                         <hr>
                         <dl class="row-md jh-entity-details">
                             <div class="container" style="padding-left: 0;">
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-md-6">
                                         <dt><span jhiTranslate="trouvetonprofApp.annonce.status">Status</span></dt>
                                         <dd>
                                 <span
@@ -32,7 +32,7 @@
                                             <span>{{annonce.prixHoraire}} €</span>
                                         </dd>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-md-6">
                                         <!--                                     <dt><span jhiTranslate="trouvetonprofApp.annonce.profil">Profil</span></dt>
                                                                              <dd>
                                                                                  <div *ngIf="annonce.profil">
