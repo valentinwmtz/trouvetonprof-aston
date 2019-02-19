@@ -38,6 +38,7 @@ CREATE TABLE `jhi_persistent_audit_evt_data` (
 
 LOCK TABLES `jhi_persistent_audit_evt_data` WRITE;
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` DISABLE KEYS */;
+INSERT INTO `jhi_persistent_audit_evt_data` VALUES (10,'message','Bad credentials'),(10,'type','org.springframework.security.authentication.BadCredentialsException'),(11,'message','Bad credentials'),(11,'type','org.springframework.security.authentication.BadCredentialsException'),(12,'message','Bad credentials'),(12,'type','org.springframework.security.authentication.BadCredentialsException'),(13,'message','Bad credentials'),(13,'type','org.springframework.security.authentication.BadCredentialsException'),(15,'message','Bad credentials'),(15,'type','org.springframework.security.authentication.BadCredentialsException'),(16,'message','Bad credentials'),(16,'type','org.springframework.security.authentication.BadCredentialsException');
 /*!40000 ALTER TABLE `jhi_persistent_audit_evt_data` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-17 22:30:04
+-- Dump completed on 2019-02-19 13:28:10

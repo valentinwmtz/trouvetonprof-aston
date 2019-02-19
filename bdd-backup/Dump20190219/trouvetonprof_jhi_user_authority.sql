@@ -38,7 +38,7 @@ CREATE TABLE `jhi_user_authority` (
 
 LOCK TABLES `jhi_user_authority` WRITE;
 /*!40000 ALTER TABLE `jhi_user_authority` DISABLE KEYS */;
-INSERT INTO `jhi_user_authority` VALUES (1,'ROLE_ADMIN'),(3,'ROLE_ADMIN'),(1,'ROLE_USER'),(3,'ROLE_USER'),(4,'ROLE_USER');
+INSERT INTO `jhi_user_authority` VALUES (1,'ROLE_ADMIN'),(3,'ROLE_ADMIN'),(1,'ROLE_USER'),(3,'ROLE_USER'),(4,'ROLE_USER'),(6,'ROLE_USER');
 /*!40000 ALTER TABLE `jhi_user_authority` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-17 22:30:05
+-- Dump completed on 2019-02-19 13:28:10

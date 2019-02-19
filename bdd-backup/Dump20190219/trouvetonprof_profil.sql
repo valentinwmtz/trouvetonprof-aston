@@ -16,26 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `jhi_authority`
+-- Table structure for table `profil`
 --
 
-DROP TABLE IF EXISTS `jhi_authority`;
+DROP TABLE IF EXISTS `profil`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `jhi_authority` (
-  `name` varchar(50) NOT NULL,
-  PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `profil` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `date_naissance` datetime NOT NULL,
+  `pays` varchar(255) DEFAULT NULL,
+  `adresse` varchar(200) DEFAULT NULL,
+  `telephone` varchar(20) DEFAULT NULL,
+  `sexe` varchar(255) NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `cours_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ux_profil_user_id` (`user_id`),
+  KEY `fk_profil_cours_id` (`cours_id`),
+  CONSTRAINT `fk_profil_cours_id` FOREIGN KEY (`cours_id`) REFERENCES `cours` (`id`),
+  CONSTRAINT `fk_profil_user_id` FOREIGN KEY (`user_id`) REFERENCES `jhi_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `jhi_authority`
+-- Dumping data for table `profil`
 --
 
-LOCK TABLES `jhi_authority` WRITE;
-/*!40000 ALTER TABLE `jhi_authority` DISABLE KEYS */;
-INSERT INTO `jhi_authority` VALUES ('ROLE_ADMIN'),('ROLE_USER');
-/*!40000 ALTER TABLE `jhi_authority` ENABLE KEYS */;
+LOCK TABLES `profil` WRITE;
+/*!40000 ALTER TABLE `profil` DISABLE KEYS */;
+INSERT INTO `profil` VALUES (1,'2019-02-16 21:22:00','France','1 allée des chevaux','0614298438','HOMME',1,NULL),(2,'2019-02-16 10:11:00','France','avenue du peuple','0320325647','HOMME',3,NULL),(3,'2019-02-17 10:21:00','Congo','rue des pierres','0230102030','FEMME',4,NULL);
+/*!40000 ALTER TABLE `profil` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -47,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-17 22:30:02
+-- Dump completed on 2019-02-19 13:28:09

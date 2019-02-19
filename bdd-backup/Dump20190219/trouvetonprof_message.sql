@@ -16,30 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `jhi_persistent_audit_event`
+-- Table structure for table `message`
 --
 
-DROP TABLE IF EXISTS `jhi_persistent_audit_event`;
+DROP TABLE IF EXISTS `message`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
-CREATE TABLE `jhi_persistent_audit_event` (
-  `event_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `principal` varchar(50) NOT NULL,
-  `event_date` timestamp NULL DEFAULT NULL,
-  `event_type` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`event_id`),
-  KEY `idx_persistent_audit_event` (`principal`,`event_date`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `message` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `utilisateur_1` varchar(100) DEFAULT NULL,
+  `utilisateur_2` varchar(100) DEFAULT NULL,
+  `texte` varchar(3000) NOT NULL,
+  `jhi_date` datetime NOT NULL,
+  `profil_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_message_profil_id` (`profil_id`),
+  CONSTRAINT `fk_message_profil_id` FOREIGN KEY (`profil_id`) REFERENCES `profil` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `jhi_persistent_audit_event`
+-- Dumping data for table `message`
 --
 
-LOCK TABLES `jhi_persistent_audit_event` WRITE;
-/*!40000 ALTER TABLE `jhi_persistent_audit_event` DISABLE KEYS */;
-INSERT INTO `jhi_persistent_audit_event` VALUES (1,'admin','2019-02-17 08:06:39','AUTHENTICATION_SUCCESS'),(2,'admin','2019-02-17 08:53:35','AUTHENTICATION_SUCCESS');
-/*!40000 ALTER TABLE `jhi_persistent_audit_event` ENABLE KEYS */;
+LOCK TABLES `message` WRITE;
+/*!40000 ALTER TABLE `message` DISABLE KEYS */;
+/*!40000 ALTER TABLE `message` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-02-17 22:30:04
+-- Dump completed on 2019-02-19 13:28:10
