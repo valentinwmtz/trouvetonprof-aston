@@ -44,7 +44,7 @@ export class AnnonceUpdateComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.domaineService.query({ filter: 'annonce-is-null' }).subscribe(
+        this.domaineService.query().subscribe(
             (res: HttpResponse<IDomaine[]>) => {
                 if (!this.annonce.domaine || !this.annonce.domaine.id) {
                     this.domaines = res.body;
