@@ -9,6 +9,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -44,6 +45,7 @@ public class ProfilResource {
      */
     @PostMapping("/profils")
     @Timed
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Profil> createProfil(@Valid @RequestBody Profil profil) throws URISyntaxException {
         log.debug("REST request to save Profil : {}", profil);
         if (profil.getId() != null) {
@@ -111,6 +113,7 @@ public class ProfilResource {
      */
     @DeleteMapping("/profils/{id}")
     @Timed
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteProfil(@PathVariable Long id) {
         log.debug("REST request to delete Profil : {}", id);
         profilService.delete(id);

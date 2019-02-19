@@ -41,19 +41,20 @@
                                                                              </dd>-->
                                         <dt><span>Note</span></dt>
                                         <dd style="margin-top: -1.7em;">
-                                            <div *ngIf="moyenneNotes">
+                                            <div *ngIf="moyenneNotes"
+                                                 (click)="scrollToElement(commentaires)">
                                                 <ng-template #t let-fill="fill">
                                                       <span class="star" [class.full]="fill === 100">
                                                         <span class="half" [style.width.%]="fill">&#8902;</span>&#8902;
                                                       </span>
                                                 </ng-template>
-                                                <ngb-rating [(rate)]="moyenneNotes" [starTemplate]="t" [readonly]="true"
+                                                <ngb-rating style="outline: none;" [(rate)]="moyenneNotes" [starTemplate]="t" [readonly]="true"
                                                             max="5"></ngb-rating>
                                             </div>
                                         </dd>
                                         <dt style="margin-top: -1.4em;" *ngIf="cours?.length > 0"><span
                                                 class="amazon-italic font-lite"
-                                                style="color: #0066c0;"
+                                                style="color: #0066c0;cursor: pointer"
                                                 (click)="scrollToElement(commentaires)">
                                             {{cours?.length}} commentaires</span></dt>
                                     </div>
@@ -136,7 +137,8 @@
             <div class="container" style="padding-left: 0;margin-top: 3em;" #commentaires>
                 <div class="col-12">
                     <dl class="row-md jh-entity-details">
-                        <dt *ngIf="cours?.length" id="commentaires"><span> Commentaires </span></dt>
+                        <dt *ngIf="cours?.length" id="commentaires" style="text-align: center">
+                            <span> Commentaires </span></dt>
                         <dd *ngIf="cours?.length">
                             <div *ngFor="let cour of cours;">
                                 <div class="font-lite"> {{ cour.cours.user.firstName }}</div>

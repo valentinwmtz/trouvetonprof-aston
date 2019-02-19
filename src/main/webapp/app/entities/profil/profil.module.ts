@@ -12,12 +12,22 @@ import {
     profilRoute,
     profilPopupRoute
 } from './';
+import { ProfilUserComponent } from './profil-user/profil-user.component';
+import { ProfilAdminComponent } from './profil-admin/profil-admin.component';
 
 const ENTITY_STATES = [...profilRoute, ...profilPopupRoute];
 
 @NgModule({
     imports: [TrouvetonprofSharedModule, TrouvetonprofAdminModule, RouterModule.forChild(ENTITY_STATES)],
-    declarations: [ProfilComponent, ProfilDetailComponent, ProfilUpdateComponent, ProfilDeleteDialogComponent, ProfilDeletePopupComponent],
+    declarations: [
+        ProfilComponent,
+        ProfilDetailComponent,
+        ProfilUpdateComponent,
+        ProfilDeleteDialogComponent,
+        ProfilDeletePopupComponent,
+        ProfilUserComponent,
+        ProfilAdminComponent
+    ],
     entryComponents: [ProfilComponent, ProfilUpdateComponent, ProfilDeleteDialogComponent, ProfilDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -7,6 +7,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { IDisponibilite } from 'app/shared/model/disponibilite.model';
 import { CoursService } from 'app/entities/cours';
 import { ICours } from 'app/shared/model/cours.model';
+import { AccountService } from 'app/core';
 
 @Component({
     selector: 'jhi-annonce-detail',
@@ -35,10 +36,15 @@ export class AnnonceDetailComponent implements OnInit {
         protected jhiAlertService: JhiAlertService,
         private disponibiliteService: DisponibiliteService,
         private changeDetectorRef: ChangeDetectorRef,
-        private coursService: CoursService
+        private coursService: CoursService,
+        private accountService: AccountService
     ) {}
 
     ngOnInit() {
+        this.accountService.identity().then(account => {
+            console.error(account.id);
+        });
+
         this.activatedRoute.data.subscribe(({ annonce }) => {
             this.annonce = annonce;
             console.error(annonce);
@@ -71,6 +77,7 @@ export class AnnonceDetailComponent implements OnInit {
 
                     this.coursIsLoaded = true;
                     console.error(this.coursIsLoaded);
+                    this.changeDetectorRef.detectChanges();
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );

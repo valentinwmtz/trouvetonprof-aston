@@ -2,6 +2,8 @@ package com.trouvetonprof.service;
 
 import com.trouvetonprof.domain.Profil;
 import com.trouvetonprof.repository.ProfilRepository;
+import com.trouvetonprof.security.AuthoritiesConstants;
+import com.trouvetonprof.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +47,11 @@ public class ProfilService {
     @Transactional(readOnly = true)
     public List<Profil> findAll() {
         log.debug("Request to get all Profils");
-        return profilRepository.findAll();
+        if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
+            return profilRepository.findAll();
+        } else {
+            return profilRepository.findAllByUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        }
     }
 
 

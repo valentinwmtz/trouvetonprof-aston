@@ -2,6 +2,8 @@ package com.trouvetonprof.service;
 
 import com.trouvetonprof.domain.Annonce;
 import com.trouvetonprof.repository.AnnonceRepository;
+import com.trouvetonprof.security.AuthoritiesConstants;
+import com.trouvetonprof.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +47,11 @@ public class AnnonceService {
     @Transactional(readOnly = true)
     public List<Annonce> findAll() {
         log.debug("Request to get all Annonces");
-        return annonceRepository.findAll();
+        if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
+            return annonceRepository.findAll();
+        } else {
+            return annonceRepository.findAllByProfilUserLogin(SecurityUtils.getCurrentUserLogin().get());
+        }
     }
 
 

@@ -1,0 +1,47 @@
+<div class="row justify-content-center" *ngFor="let profil of profils">
+  <div class="col-8">
+    <div *ngIf="profil">
+      <h2><span jhiTranslate="trouvetonprofApp.profil.detail.title">Profil</span> {{profil.id}}</h2>
+      <hr>
+      <jhi-alert-error></jhi-alert-error>
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="trouvetonprofApp.profil.dateNaissance">Date Naissance</span></dt>
+        <dd>
+          <span>{{profil.dateNaissance}}</span>
+        </dd>
+        <dt><span jhiTranslate="trouvetonprofApp.profil.pays">Pays</span></dt>
+        <dd>
+          <span>{{profil.pays}}</span>
+        </dd>
+        <dt><span jhiTranslate="trouvetonprofApp.profil.adresse">Adresse</span></dt>
+        <dd>
+          <span>{{profil.adresse}}</span>
+        </dd>
+        <dt><span jhiTranslate="trouvetonprofApp.profil.telephone">Telephone</span></dt>
+        <dd>
+          <span>{{profil.telephone}}</span>
+        </dd>
+        <dt><span jhiTranslate="trouvetonprofApp.profil.sexe">Sexe</span></dt>
+        <dd>
+          <span jhiTranslate="{{'trouvetonprofApp.Sexe.' + profil.sexe}}">{{profil.sexe}}</span>
+        </dd>
+        <dt><span jhiTranslate="trouvetonprofApp.profil.user">User</span></dt>
+        <dd>
+          {{profil.user?.id}}
+        </dd>
+        <dt><span jhiTranslate="trouvetonprofApp.profil.cours">Cours</span></dt>
+        <dd>
+          <div *ngIf="profil.cours">
+            <a [routerLink]="['/cours', profil.cours?.id, 'view']">{{profil.cours?.id}}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="button"
+              [routerLink]="['/profil', profil.id, 'edit']"
+              class="btn btn-primary">
+        <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
