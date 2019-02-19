@@ -22,8 +22,8 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://localhost:3306/trouvetonprof?useUnicode=true&characterEncoding=utf8&useSSL=false
-    username: valentinwmtz
-    password: valentinwmtz123!
+    username: jhipster
+    password: jhipster123!
     hikari:
       data-source-properties:
         cachePrepStmts: true
