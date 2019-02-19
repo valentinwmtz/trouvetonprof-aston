@@ -140,12 +140,14 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
+                                *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                 [routerLink]="['/matiere', matiere.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
+                                *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                 [routerLink]="['/', { outlets: { popup: 'matiere/'+ matiere.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

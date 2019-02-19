@@ -1,10 +1,11 @@
 package com.trouvetonprof.repository;
 
-import com.trouvetonprof.domain.Disponibilite;
-import org.springframework.data.jpa.repository.*;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.trouvetonprof.domain.Disponibilite;
 
 
 /**
@@ -13,5 +14,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface DisponibiliteRepository extends JpaRepository<Disponibilite, Long> {
-    List<Disponibilite> findByAnnonceId(long id);
+	List<Disponibilite> findByAnnonceId(long id);
+	List<Disponibilite> findAllByAnnonceProfilUserLogin(String login);
 }
