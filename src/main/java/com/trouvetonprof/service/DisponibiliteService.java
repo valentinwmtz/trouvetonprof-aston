@@ -48,8 +48,10 @@ public class DisponibiliteService {
 	public List<Disponibilite> findAll() {
 		log.debug("Request to get all Disponibilites");
 		if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
+			System.out.println("bonsoir");
 			return disponibiliteRepository.findAll();
 		} else {
+			System.out.println("bonjour");
 			return disponibiliteRepository.findAllByAnnonceProfilUserLogin(SecurityUtils.getCurrentUserLogin().get());
 		}
 	}
