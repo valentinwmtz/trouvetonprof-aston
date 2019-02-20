@@ -13,6 +13,7 @@ import {
 } from './';
 import { CalendrierComponent } from './calendrier/calendrier.component';
 import { CalendrierHeaderComponent } from './calendrier/calendrier-header/calendrier-header.component';
+import { ReservationComponent } from './reservation/reservation.component';
 
 const ENTITY_STATES = [...annonceRoute, ...annoncePopupRoute];
 
@@ -25,9 +26,16 @@ const ENTITY_STATES = [...annonceRoute, ...annoncePopupRoute];
         AnnonceDeleteDialogComponent,
         AnnonceDeletePopupComponent,
         CalendrierComponent,
-        CalendrierHeaderComponent
+        CalendrierHeaderComponent,
+        ReservationComponent
     ],
-    entryComponents: [AnnonceComponent, AnnonceUpdateComponent, AnnonceDeleteDialogComponent, AnnonceDeletePopupComponent],
+    entryComponents: [
+        AnnonceComponent,
+        AnnonceUpdateComponent,
+        AnnonceDeleteDialogComponent,
+        AnnonceDeletePopupComponent,
+        ReservationComponent
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class TrouvetonprofAnnonceModule {}

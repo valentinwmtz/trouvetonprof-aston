@@ -8,6 +8,8 @@ import { IDisponibilite } from 'app/shared/model/disponibilite.model';
 import { CoursService } from 'app/entities/cours';
 import { ICours } from 'app/shared/model/cours.model';
 import { AccountService } from 'app/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ReservationComponent } from 'app/entities/annonce/reservation/reservation.component';
 
 @Component({
     selector: 'jhi-annonce-detail',
@@ -37,7 +39,8 @@ export class AnnonceDetailComponent implements OnInit {
         private disponibiliteService: DisponibiliteService,
         private changeDetectorRef: ChangeDetectorRef,
         private coursService: CoursService,
-        private accountService: AccountService
+        private accountService: AccountService,
+        private modalService: NgbModal
     ) {}
 
     ngOnInit() {
@@ -150,5 +153,10 @@ export class AnnonceDetailComponent implements OnInit {
     scrollToElement($element): void {
         console.log($element);
         $element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
+    }
+
+    openReservationModal() {
+        const modalRef = this.modalService.open(ReservationComponent, { centered: true });
+        modalRef.componentInstance.name = 'World';
     }
 }
