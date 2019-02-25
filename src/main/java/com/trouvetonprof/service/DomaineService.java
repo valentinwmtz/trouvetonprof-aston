@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 /**
  * Service Implementation for managing Domaine.
@@ -50,20 +48,6 @@ public class DomaineService {
         return domaineRepository.findAll();
     }
 
-
-
-    /**
-     *  get all the domaines where Annonce is null.
-     *  @return the list of entities
-     */
-    @Transactional(readOnly = true) 
-    public List<Domaine> findAllWhereAnnonceIsNull() {
-        log.debug("Request to get all domaines where Annonce is null");
-        return StreamSupport
-            .stream(domaineRepository.findAll().spliterator(), false)
-            .filter(domaine -> domaine.getAnnonce() == null)
-            .collect(Collectors.toList());
-    }
 
     /**
      * Get one domaine by id.

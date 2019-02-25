@@ -51,6 +51,7 @@ export class MatiereComponent implements OnInit, OnDestroy {
         this.annonceService.query().subscribe(
             (res: HttpResponse<IAnnonce[]>) => {
                 this.annonces = res.body;
+                console.log(this.annonces);
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

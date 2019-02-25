@@ -46,16 +46,7 @@ export class AnnonceUpdateComponent implements OnInit {
         );
         this.domaineService.query().subscribe(
             (res: HttpResponse<IDomaine[]>) => {
-                if (!this.annonce.domaine || !this.annonce.domaine.id) {
-                    this.domaines = res.body;
-                } else {
-                    this.domaineService.find(this.annonce.domaine.id).subscribe(
-                        (subRes: HttpResponse<IDomaine>) => {
-                            this.domaines = [subRes.body].concat(res.body);
-                        },
-                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                    );
-                }
+                this.domaines = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

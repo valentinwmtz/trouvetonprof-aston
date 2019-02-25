@@ -2,6 +2,7 @@ package com.trouvetonprof.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.trouvetonprof.domain.Annonce;
+import com.trouvetonprof.repository.AnnonceRepository;
 import com.trouvetonprof.service.AnnonceService;
 import com.trouvetonprof.web.rest.errors.BadRequestAlertException;
 import com.trouvetonprof.web.rest.util.HeaderUtil;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -29,7 +31,10 @@ public class AnnonceResource {
 
 	private static final String ENTITY_NAME = "annonce";
 
+
 	private final AnnonceService annonceService;
+
+
 
 	public AnnonceResource(AnnonceService annonceService) {
 		this.annonceService = annonceService;
@@ -103,14 +108,13 @@ public class AnnonceResource {
 		return ResponseUtil.wrapOrNotFound(annonce);
 	}
 
-	@GetMapping("/annonces/matiere/{matiereId}")
+
+	@GetMapping("/annonces/matieres/{id}")
 	@Timed
-	public List<Annonce> GetAnnonceByMatiereId(@PathVariable(value = "matiereId") Long id) {
-		log.debug("REST request to get Annonce : {}", id);
+	public List<Annonce> findAnnonceByMatieresId(@PathVariable Long id) {
+		log.debug("REST request to get Annonces : {}" , id);
 		return annonceService.findAllByMatiereId(id);
-
 	}
-
 	/**
 	 * DELETE  /annonces/:id : delete the "id" annonce.
 	 *

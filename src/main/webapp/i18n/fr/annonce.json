@@ -22,9 +22,9 @@
             "adminValide": "Admin Valide",
             "prixHoraire": "Prix Horaire",
             "profil": "Profil",
-            "domaine": "Domaine",
             "annonceDisponibilite": "Annonce Disponibilite",
-            "annonceCours": "Annonce Cours"
+            "annonceCours": "Annonce Cours",
+            "domaine": "Domaine"
         }
     }
 }
