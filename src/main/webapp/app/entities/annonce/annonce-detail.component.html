@@ -48,7 +48,8 @@
                                                         <span class="half" [style.width.%]="fill">&#8902;</span>&#8902;
                                                       </span>
                                                 </ng-template>
-                                                <ngb-rating style="outline: none;" [(rate)]="moyenneNotes" [starTemplate]="t" [readonly]="true"
+                                                <ngb-rating style="outline: none;" [(rate)]="moyenneNotes"
+                                                            [starTemplate]="t" [readonly]="true"
                                                             max="5"></ngb-rating>
                                             </div>
                                         </dd>
@@ -95,7 +96,8 @@
                                                 </mat-list-item>
                                             </mat-nav-list>
                                             <div style="width: 100%;">
-                                                <button style="width: 100%;" mat-raised-button color="primary" (click)="openReservationModal()">
+                                                <button style="width: 100%;" mat-raised-button color="primary"
+                                                        (click)="openReservationModal(dispo)">
                                                     Reserver
                                                 </button>
                                             </div>

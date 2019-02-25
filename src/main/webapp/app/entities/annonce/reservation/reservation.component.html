@@ -1,12 +1,53 @@
 <div class="modal-header">
-  <h4 class="modal-title">Hi there!</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>
+    <h5 class="modal-title amazon-italic">Reservation {{disponibilite.header}}</h5>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 <div class="modal-body">
-  <p>Hello, Word !</p>
+    <div class="row">
+        <div class="col-5">
+            <h5 class="amazon-italic" style="margin-bottom: 1em"> Possibilite de reservation : </h5>
+            <div *ngFor="let content of disponibilite.content">
+                <div style="text-align: center;color: #3d7e40;margin: 0.5em;">{{content}}</div>
+            </div>
+        </div>
+        <div class="col-7">
+            <h5 class="amazon-italic" style="margin-bottom: 1em;text-align: center"> Je reserve : </h5>
+            <div class="row">
+                <div class="col-6">
+                    <div class="row" style="align-items: center">
+                        <div class="col-2">
+                            <span> De </span>
+                        </div>
+                        <div class="col-10">
+                            <ngb-timepicker [(ngModel)]="timePickerDebut" [seconds]="false"
+                                            style="justify-content: center"
+                                            [hourStep]="hourStep" [minuteStep]="minuteStep"></ngb-timepicker>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row" style="align-items: center">
+                        <div class="col-2">
+                            <span> à </span>
+                        </div>
+                        <div class="col-10">
+                            <ngb-timepicker [(ngModel)]="timePickerFin" [seconds]="false"
+                                            style="justify-content: center"
+                                            [hourStep]="hourStep" [minuteStep]="minuteStep"></ngb-timepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <hr>
+    <pre>Selected time: {{timePickerDebut | json}}</pre>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close('Close click')">Annuler</button>
+    <button type="submit" class="btn btn-success" (click)="activeModal.close('Close click')">Confirmer</button>
 </div>
