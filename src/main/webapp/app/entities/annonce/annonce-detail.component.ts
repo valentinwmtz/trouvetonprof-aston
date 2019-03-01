@@ -62,6 +62,8 @@ export class AnnonceDetailComponent implements OnInit {
                             header: this.capitalizeAllFirstCharOfWord(dispo.header),
                             content: dispo.content,
                             dateDispo: dispo.dateDispo,
+                            heureDispo: dispo.heureDispo,
+                            minuteDispo: dispo.minuteDispo,
                             dureeDispo: dispo.dureeDispo
                         });
                     });
@@ -96,31 +98,33 @@ export class AnnonceDetailComponent implements OnInit {
         const disponibilitesStructured = [];
         disponibilites.forEach(dispo => {
             if (!dispo.date.isBefore(Date.now())) {
+                const dateDispo = dispo.date;
+                const heureDispo = dispo.date.locale('fr').format('kk');
+                const minuteDispo = dispo.date.locale('fr').format('mm');
+                const dureeDispo = dispo.duree;
                 const dateHeader = dispo.date.locale('fr').format('dddd MM MMMM YYYY');
                 const dateContent = `De ${dispo.date.locale('fr').format('kk')}H${dispo.date.locale('fr').format('mm')}
                          à ${dispo.date
                              .add(dispo.duree, 'h')
                              .locale('fr')
                              .format('kk')}H${dispo.date.locale('fr').format('mm')}`;
-                const dateDispo = dispo.date;
-                const dureeDispo = dispo.duree;
+
                 if (disponibilitesStructured.length === 0 || !disponibilitesStructured.some(dispoSome => dispoSome.header === dateHeader)) {
                     disponibilitesStructured.push({
                         header: dateHeader,
                         content: [dateContent],
                         dateDispo: [dateDispo],
+                        heureDispo: [heureDispo],
+                        minuteDispo: [minuteDispo],
                         dureeDispo: [dureeDispo]
                     });
                 } else {
-                    disponibilitesStructured[
-                        disponibilitesStructured.findIndex(dispoIndex => dispoIndex.header === dateHeader)
-                    ].content.push(dateContent);
-                    disponibilitesStructured[
-                        disponibilitesStructured.findIndex(dispoIndex => dispoIndex.header === dateHeader)
-                    ].dateDispo.push(dateDispo);
-                    disponibilitesStructured[
-                        disponibilitesStructured.findIndex(dispoIndex => dispoIndex.header === dateHeader)
-                    ].dureeDispo.push(dureeDispo);
+                    const index = disponibilitesStructured.findIndex(dispoIndex => dispoIndex.header === dateHeader);
+                    disponibilitesStructured[index].content.push(dateContent);
+                    disponibilitesStructured[index].dateDispo.push(dateDispo);
+                    disponibilitesStructured[index].heureDispo.push(heureDispo);
+                    disponibilitesStructured[index].minuteDispo.push(minuteDispo);
+                    disponibilitesStructured[index].dureeDispo.push(dureeDispo);
                 }
             }
         });
