@@ -58,6 +58,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
+                                *jhiHasAnyAuthority="'ROLE_ADMIN'"
                                 [routerLink]="['/', { outlets: { popup: 'cours/'+ cours.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"

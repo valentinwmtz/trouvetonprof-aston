@@ -1,10 +1,11 @@
 package com.trouvetonprof.repository;
 
-import com.trouvetonprof.domain.Cours;
-import org.springframework.data.jpa.repository.*;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.trouvetonprof.domain.Cours;
 
 
 /**
@@ -13,7 +14,9 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface CoursRepository extends JpaRepository<Cours, Long> {
-    List<Cours> findByAnnonceId(long id);
-    
-    List<Cours> findCommentaireByAnnonceId(Long id);
+	List<Cours> findByAnnonceId(long id);
+
+	List<Cours> findCommentaireByAnnonceId(Long id);
+
+	List<Cours> findAllByAnnonceProfilUserLogin(String login);
 }
