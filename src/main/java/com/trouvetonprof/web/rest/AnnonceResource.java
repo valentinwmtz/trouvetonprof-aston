@@ -2,7 +2,6 @@ package com.trouvetonprof.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.trouvetonprof.domain.Annonce;
-import com.trouvetonprof.repository.AnnonceRepository;
 import com.trouvetonprof.service.AnnonceService;
 import com.trouvetonprof.web.rest.errors.BadRequestAlertException;
 import com.trouvetonprof.web.rest.util.HeaderUtil;
@@ -10,9 +9,9 @@ import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;

@@ -17,5 +17,7 @@ import com.trouvetonprof.domain.Annonce;
 public interface AnnonceRepository extends JpaRepository<Annonce, Long> {
 
 	List <Annonce> findByDomaineAnnonceId(Long id);
+	
+	List <Annonce> findAllByProfilUserLogin(String login);
 
 }

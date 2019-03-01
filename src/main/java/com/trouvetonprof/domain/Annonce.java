@@ -71,6 +71,7 @@ public class Annonce implements Serializable {
 	@OneToMany(mappedBy = "annonce")
 	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	private Set<Cours> annonceCours = new HashSet<>();
+	
 	@ManyToOne
 	@JsonIgnoreProperties("")
 	private Domaine domaine;
