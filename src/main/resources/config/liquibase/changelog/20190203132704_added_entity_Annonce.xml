@@ -52,9 +52,11 @@
             <column name="profil_id" type="bigint">
                 <constraints nullable="true" />
             </column>
+
             <column name="domaine_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_annonce_domaine_id" />
+                <constraints nullable="true" />
             </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         

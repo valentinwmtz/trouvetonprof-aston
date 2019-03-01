@@ -1,5 +1,20 @@
 {
-    "name": "Domaine",
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "matiere",
+            "otherEntityName": "matiere",
+            "otherEntityRelationshipName": "domaine"
+        },
+        {
+            "relationshipName": "annonce",
+            "otherEntityName": "annonce",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "domaine"
+        }
+    ],
     "fields": [
         {
             "fieldName": "titre",
@@ -24,28 +39,11 @@
             "fieldTypeBlobContent": "image"
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-many",
-            "relationshipName": "matiere",
-            "otherEntityName": "matiere",
-            "otherEntityRelationshipName": "domaine"
-        },
-        {
-            "relationshipType": "one-to-one",
-            "relationshipName": "annonce",
-            "otherEntityName": "annonce",
-            "ownerSide": false,
-            "otherEntityRelationshipName": "domaine"
-        }
-    ],
     "changelogDate": "20190203132706",
-    "entityTableName": "domaine",
     "dto": "no",
-    "pagination": "no",
+    "searchEngine": false,
     "service": "serviceClass",
+    "entityTableName": "domaine",
     "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "clientRootFolder": "",
-    "applications": "*"
+    "pagination": "no"
 }

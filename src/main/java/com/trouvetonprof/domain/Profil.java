@@ -56,9 +56,11 @@ public class Profil implements Serializable {
     @OneToMany(mappedBy = "profil")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Message> userMessages = new HashSet<>();
+    
     @OneToMany(mappedBy = "profil")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Annonce> userAnnonces = new HashSet<>();
+    
     @ManyToOne
     @JsonIgnoreProperties(value = "profils", allowSetters = true)
     private Cours cours;

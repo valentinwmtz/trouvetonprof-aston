@@ -12,7 +12,6 @@ type EntityArrayResponseType = HttpResponse<IAnnonce[]>;
 @Injectable({ providedIn: 'root' })
 export class AnnonceService {
     public resourceUrl = SERVER_API_URL + 'api/annonces';
-
     constructor(protected http: HttpClient) {}
 
     create(annonce: IAnnonce): Observable<EntityResponseType> {
@@ -26,7 +25,9 @@ export class AnnonceService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<IAnnonce>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
-
+    findAllByMatiereId(id: number): Observable<EntityResponseType> {
+        return this.http.get<IAnnonce>(`${this.resourceUrl}/matieres/${id}`, { observe: 'response' });
+    }
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http.get<IAnnonce[]>(this.resourceUrl, { params: options, observe: 'response' });

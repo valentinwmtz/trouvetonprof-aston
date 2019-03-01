@@ -8,7 +8,7 @@ export interface IDomaine {
     imageContentType?: string;
     image?: any;
     matieres?: IMatiere[];
-    annonce?: IAnnonce;
+    annonces?: IAnnonce[];
 }
 
 export class Domaine implements IDomaine {
@@ -19,6 +19,6 @@ export class Domaine implements IDomaine {
         public imageContentType?: string,
         public image?: any,
         public matieres?: IMatiere[],
-        public annonce?: IAnnonce
+        public annonces?: IAnnonce[]
     ) {}
 }
