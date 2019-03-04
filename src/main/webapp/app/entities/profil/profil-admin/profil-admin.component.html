@@ -11,6 +11,13 @@
   </h2>
   <jhi-alert></jhi-alert>
   <br/>
+  <div class="row justify-content-center" *ngFor="let profil of profils">
+    <div class="col-8">
+      <div *ngIf="profils">
+        <h2><span jhiTranslate="trouvetonprofApp.profil.detail.title">Profil</span> {{profil.id}}</h2>
+        <hr>
+        <jhi-alert-error></jhi-alert-error>
+        
   <div class="table-responsive" *ngIf="profils">
     <table class="table table-striped">
       <thead>
