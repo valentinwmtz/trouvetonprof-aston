@@ -2,6 +2,8 @@ package com.trouvetonprof.service;
 
 import com.trouvetonprof.domain.Cours;
 import com.trouvetonprof.repository.CoursRepository;
+import com.trouvetonprof.repository.ProfilRepository;
+import com.trouvetonprof.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing Cours.
@@ -22,9 +23,10 @@ public class CoursService {
     private final Logger log = LoggerFactory.getLogger(CoursService.class);
 
     private final CoursRepository coursRepository;
-
-    public CoursService(CoursRepository coursRepository) {
+    private final ProfilRepository profilRepository;
+    public CoursService(CoursRepository coursRepository, ProfilRepository profilRepository) {
         this.coursRepository = coursRepository;
+        this.profilRepository = profilRepository;
     }
 
     /**
@@ -35,6 +37,9 @@ public class CoursService {
      */
     public Cours save(Cours cours) {
         log.debug("Request to save Cours : {}", cours);
+        if (cours.getId() == null) {
+            cours.setCours(this.profilRepository.findFirstByUserLogin(SecurityUtils.getCurrentUserLogin().get()));
+        }
         return coursRepository.save(cours);
     }
 
@@ -81,7 +86,7 @@ public class CoursService {
     @Transactional(readOnly = true)
     public double findNoteMoyenneByAnnonceId(Long id) {
         log.debug("Request to get moyenne of notes by annonce id : {}", id);
-        return coursRepository.findByAnnonceId(id).stream()
+        return coursRepository.findByAnnonceId(id).stream().filter(cours -> cours.getNote() != null)
                 .mapToDouble(Cours::getNote)
                 .average()
                 .orElse(-1);

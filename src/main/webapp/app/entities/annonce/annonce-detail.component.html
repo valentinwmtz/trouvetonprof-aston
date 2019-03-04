@@ -106,7 +106,7 @@
                                                                 [size]="size"
                                                                 (click)="onDotClick($event)"></mgl-timeline-entry-dot>
                                     </mgl-timeline-entry>
-                                    <mgl-timeline-entry (expand)="onExpandEntry($event, i)">
+        <!--                            <mgl-timeline-entry (expand)="onExpandEntry($event, i)">
                                         <mgl-timeline-entry-header (click)="onHeaderClick($event)">
                                             Demander une disponibilité
                                         </mgl-timeline-entry-header>
@@ -115,7 +115,7 @@
                                         <mgl-timeline-entry-dot [class]="color ? 'primary' : 'accent'"
                                                                 [size]="size"
                                                                 (click)="onDotClick($event)"></mgl-timeline-entry-dot>
-                                    </mgl-timeline-entry>
+                                    </mgl-timeline-entry>-->
                                 </div>
                                 <div *ngIf="!isDisponibilitesloaded">
                                     <mgl-timeline-entry
@@ -143,19 +143,21 @@
                             <span> Commentaires </span></dt>
                         <dd *ngIf="cours?.length">
                             <div *ngFor="let cour of cours;">
-                                <div class="font-lite"> {{ cour.cours.user.firstName }}</div>
-                                <div class="font-lite"
-                                     style="color: #555;">  {{ cour.date | date: 'dd MMMM yyyy'}} </div>
-                                <div style="margin-top: -1.4em;margin-left: -3px;margin-bottom: -0.8em">
-                                    <ng-template #t let-fill="fill">
+                                <div *ngIf="cour?.commentaire">
+                                    <div class="font-lite"> {{ cour.cours.user.firstName }}</div>
+                                    <div class="font-lite"
+                                         style="color: #555;">  {{ cour.date | date: 'dd MMMM yyyy'}} </div>
+                                    <div style="margin-top: -1.4em;margin-left: -3px;margin-bottom: -0.8em">
+                                        <ng-template #t let-fill="fill">
                                                       <span class="star" [class.full]="fill === 100">
                                                         <span class="half" [style.width.%]="fill">&#8902;</span>&#8902;
                                                       </span>
-                                    </ng-template>
-                                    <ngb-rating [(rate)]="cour.note" [starTemplate]="t" [readonly]="true"
-                                                max="5"></ngb-rating>
+                                        </ng-template>
+                                        <ngb-rating [(rate)]="cour.note" [starTemplate]="t" [readonly]="true"
+                                                    max="5"></ngb-rating>
+                                    </div>
+                                    <p> {{ cour.commentaire }} </p>
                                 </div>
-                                <p> {{ cour.commentaire }} </p>
                             </div>
                         </dd>
                     </dl>

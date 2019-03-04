@@ -40,14 +40,10 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
-    <hr>
-    <pre>Selected time: {{timePickerDebut | json}}</pre>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary" (click)="activeModal.close('Close click')">Annuler</button>
-    <button type="submit" class="btn btn-success" (click)="activeModal.close('Close click')">Confirmer</button>
+    <button type="submit" class="btn btn-success" (click)="reserver()">Confirmer</button>
 </div>

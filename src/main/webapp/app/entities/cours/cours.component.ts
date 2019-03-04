@@ -27,6 +27,7 @@ export class CoursComponent implements OnInit, OnDestroy {
         this.coursService.query().subscribe(
             (res: HttpResponse<ICours[]>) => {
                 this.cours = res.body;
+                console.log(this.cours);
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
