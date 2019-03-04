@@ -1,17 +1,17 @@
 package com.trouvetonprof.service;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.trouvetonprof.domain.Profil;
 import com.trouvetonprof.repository.ProfilRepository;
 import com.trouvetonprof.security.AuthoritiesConstants;
 import com.trouvetonprof.security.SecurityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Service Implementation for managing Profil.
@@ -20,60 +20,60 @@ import java.util.Optional;
 @Transactional
 public class ProfilService {
 
-    private final Logger log = LoggerFactory.getLogger(ProfilService.class);
+	private final Logger log = LoggerFactory.getLogger(ProfilService.class);
 
-    private final ProfilRepository profilRepository;
+	private final ProfilRepository profilRepository;
 
-    public ProfilService(ProfilRepository profilRepository) {
-        this.profilRepository = profilRepository;
-    }
+	public ProfilService(ProfilRepository profilRepository) {
+		this.profilRepository = profilRepository;
+	}
 
-    /**
-     * Save a profil.
-     *
-     * @param profil the entity to save
-     * @return the persisted entity
-     */
-    public Profil save(Profil profil) {
-        log.debug("Request to save Profil : {}", profil);
-        return profilRepository.save(profil);
-    }
+	/**
+	 * Save a profil.
+	 *
+	 * @param profil the entity to save
+	 * @return the persisted entity
+	 */
+	public Profil save(Profil profil) {
+		log.debug("Request to save Profil : {}", profil);
+		return profilRepository.save(profil);
+	}
 
-    /**
-     * Get all the profils.
-     *
-     * @return the list of entities
-     */
-    @Transactional(readOnly = true)
-    public List<Profil> findAll() {
-        log.debug("Request to get all Profils");
-        if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
-            return profilRepository.findAll();
-        } else {
-            return profilRepository.findAllByUserLogin(SecurityUtils.getCurrentUserLogin().get());
-        }
-    }
+	/**
+	 * Get all the profils.
+	 *
+	 * @return the list of entities
+	 */
+	@Transactional(readOnly = true)
+	public List<Profil> findAll() {
+		log.debug("Request to get all Profils");
+		if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
+			return profilRepository.findAll();
+		} else {
+			return profilRepository.findAllByUserLogin(SecurityUtils.getCurrentUserLogin().get());
+		}
+	}
 
 
-    /**
-     * Get one profil by id.
-     *
-     * @param id the id of the entity
-     * @return the entity
-     */
-    @Transactional(readOnly = true)
-    public Optional<Profil> findOne(Long id) {
-        log.debug("Request to get Profil : {}", id);
-        return profilRepository.findById(id);
-    }
+	/**
+	 * Get one profil by id.
+	 *
+	 * @param id the id of the entity
+	 * @return the entity
+	 */
+	@Transactional(readOnly = true)
+	public Optional<Profil> findOne(Long id) {
+		log.debug("Request to get Profil : {}", id);
+		return profilRepository.findById(id);
+	}
 
-    /**
-     * Delete the profil by id.
-     *
-     * @param id the id of the entity
-     */
-    public void delete(Long id) {
-        log.debug("Request to delete Profil : {}", id);
-        profilRepository.deleteById(id);
-    }
+	/**
+	 * Delete the profil by id.
+	 *
+	 * @param id the id of the entity
+	 */
+	public void delete(Long id) {
+		log.debug("Request to delete Profil : {}", id);
+		profilRepository.deleteById(id);
+	}
 }
