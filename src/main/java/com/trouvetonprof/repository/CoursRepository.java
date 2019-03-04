@@ -19,4 +19,6 @@ public interface CoursRepository extends JpaRepository<Cours, Long> {
 	List<Cours> findCommentaireByAnnonceId(Long id);
 
 	List<Cours> findAllByAnnonceProfilUserLogin(String login);
+
+	List<Cours> findAllByCoursId(Long id);
 }

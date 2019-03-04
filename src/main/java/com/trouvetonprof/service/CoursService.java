@@ -1,16 +1,19 @@
 package com.trouvetonprof.service;
 
-import com.trouvetonprof.domain.Cours;
-import com.trouvetonprof.repository.CoursRepository;
-import com.trouvetonprof.repository.ProfilRepository;
-import com.trouvetonprof.security.SecurityUtils;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import com.trouvetonprof.domain.Cours;
+import com.trouvetonprof.repository.CoursRepository;
+import com.trouvetonprof.repository.ProfilRepository;
+import com.trouvetonprof.security.AuthoritiesConstants;
+import com.trouvetonprof.security.SecurityUtils;
 
 /**
  * Service Implementation for managing Cours.
@@ -21,26 +24,26 @@ public class CoursService {
 
 	private final Logger log = LoggerFactory.getLogger(CoursService.class);
 
-    private final CoursRepository coursRepository;
-    private final ProfilRepository profilRepository;
-    public CoursService(CoursRepository coursRepository, ProfilRepository profilRepository) {
-        this.coursRepository = coursRepository;
-        this.profilRepository = profilRepository;
-    }
+	private final CoursRepository coursRepository;
+	private final ProfilRepository profilRepository;
+	public CoursService(CoursRepository coursRepository, ProfilRepository profilRepository) {
+		this.coursRepository = coursRepository;
+		this.profilRepository = profilRepository;
+	}
 
-    /**
-     * Save a cours.
-     *
-     * @param cours the entity to save
-     * @return the persisted entity
-     */
-    public Cours save(Cours cours) {
-        log.debug("Request to save Cours : {}", cours);
-        if (cours.getId() == null) {
-            cours.setCours(this.profilRepository.findFirstByUserLogin(SecurityUtils.getCurrentUserLogin().get()));
-        }
-        return coursRepository.save(cours);
-    }
+	/**
+	 * Save a cours.
+	 *
+	 * @param cours the entity to save
+	 * @return the persisted entity
+	 */
+	public Cours save(Cours cours) {
+		log.debug("Request to save Cours : {}", cours);
+		if (cours.getId() == null) {
+			cours.setCours(this.profilRepository.findFirstByUserLogin(SecurityUtils.getCurrentUserLogin().get()));
+		}
+		return coursRepository.save(cours);
+	}
 
 	/**
 	 * Get all the cours.
@@ -54,7 +57,12 @@ public class CoursService {
 		if (SecurityUtils.isCurrentUserInRole(AuthoritiesConstants.ADMIN)) {
 			return coursRepository.findAll();
 		} else {
-			return coursRepository.findAllByAnnonceProfilUserLogin(SecurityUtils.getCurrentUserLogin().get());
+
+			List<Cours> list = new ArrayList<Cours>();
+			list.addAll(coursRepository.findAllByAnnonceProfilUserLogin(SecurityUtils.getCurrentUserLogin().get()))
+			;			list.addAll(coursRepository.findAllByCoursId(profilRepository.findFirstByUserLogin(SecurityUtils.getCurrentUserLogin().get()).getId()));
+
+			return list;
 		}
 	}
 
@@ -71,21 +79,6 @@ public class CoursService {
 		return coursRepository.findById(id);
 	}
 
-    /**
-     * Get moyenne of notes by annoce id.
-     *
-     * @param id the id of the entity
-     * @return moyenne of notes
-     */
-    @Transactional(readOnly = true)
-    public double findNoteMoyenneByAnnonceId(Long id) {
-        log.debug("Request to get moyenne of notes by annonce id : {}", id);
-        return coursRepository.findByAnnonceId(id).stream().filter(cours -> cours.getNote() != null)
-                .mapToDouble(Cours::getNote)
-                .average()
-                .orElse(-1);
-    }
-
 	/**
 	 * Get moyenne of notes by annoce id.
 	 *
@@ -94,6 +87,21 @@ public class CoursService {
 	 */
 	@Transactional(readOnly = true)
 	public double findNoteMoyenneByAnnonceId(Long id) {
+		log.debug("Request to get moyenne of notes by annonce id : {}", id);
+		return coursRepository.findByAnnonceId(id).stream().filter(cours -> cours.getNote() != null)
+				.mapToDouble(Cours::getNote)
+				.average()
+				.orElse(-1);
+	}
+
+	/**
+	 * Get moyenne of notes by annoce id.
+	 *
+	 * @param id the id of the entity
+	 * @return moyenne of notes
+	 */
+	@Transactional(readOnly = true)
+	public double findNoteMoyenneByAnnonceId1(Long id) {
 		log.debug("Request to get moyenne of notes by annonce id : {}", id);
 		return coursRepository.findByAnnonceId(id).stream()
 				.mapToDouble(Cours::getNote)
