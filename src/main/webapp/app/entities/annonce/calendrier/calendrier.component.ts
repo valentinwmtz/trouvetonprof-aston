@@ -1,20 +1,19 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {CalendarEvent, DAYS_OF_WEEK} from 'angular-calendar';
-import {IAnnonce} from 'app/shared/model/annonce.model';
-import {Observable, Subject} from 'rxjs';
-import {IDisponibilite} from 'app/shared/model/disponibilite.model';
-import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
-import {DisponibiliteService} from 'app/entities/disponibilite';
-import {JhiAlertService} from 'ng-jhipster';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { CalendarEvent, DAYS_OF_WEEK } from 'angular-calendar';
+import { IAnnonce } from 'app/shared/model/annonce.model';
+import { Observable, Subject } from 'rxjs';
+import { IDisponibilite } from 'app/shared/model/disponibilite.model';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { DisponibiliteService } from 'app/entities/disponibilite';
+import { JhiAlertService } from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-calendrier',
     templateUrl: './calendrier.component.html',
     styleUrls: ['./calendrier.component.css'],
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None
 })
 export class CalendrierComponent implements OnInit {
-
     @Input() annonce: IAnnonce;
     disponibilite: IDisponibilite[];
 
@@ -31,8 +30,7 @@ export class CalendrierComponent implements OnInit {
 
     refresh: Subject<any> = new Subject();
 
-    constructor(private disponibiliteService: DisponibiliteService, protected jhiAlertService: JhiAlertService) {
-    }
+    constructor(private disponibiliteService: DisponibiliteService, protected jhiAlertService: JhiAlertService) {}
 
     ngOnInit() {
         this.disponibiliteService.findByAnnonceId(this.annonce.id).subscribe(
@@ -75,5 +73,4 @@ export class CalendrierComponent implements OnInit {
     refreshView(): void {
         this.refresh.next();
     }
-
 }

@@ -14,4 +14,5 @@ import java.util.List;
 @Repository
 public interface ProfilRepository extends JpaRepository<Profil, Long> {
     List<Profil> findAllByUserLogin(String login);
+    Profil findFirstByUserLogin(String login);
 }
