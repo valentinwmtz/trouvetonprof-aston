@@ -1,17 +1,16 @@
 package com.trouvetonprof.service;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.trouvetonprof.domain.Cours;
+import com.trouvetonprof.repository.CoursRepository;
+import com.trouvetonprof.repository.ProfilRepository;
+import com.trouvetonprof.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.trouvetonprof.domain.Cours;
-import com.trouvetonprof.repository.CoursRepository;
-import com.trouvetonprof.security.AuthoritiesConstants;
-import com.trouvetonprof.security.SecurityUtils;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Implementation for managing Cours.
@@ -22,22 +21,26 @@ public class CoursService {
 
 	private final Logger log = LoggerFactory.getLogger(CoursService.class);
 
-	private final CoursRepository coursRepository;
+    private final CoursRepository coursRepository;
+    private final ProfilRepository profilRepository;
+    public CoursService(CoursRepository coursRepository, ProfilRepository profilRepository) {
+        this.coursRepository = coursRepository;
+        this.profilRepository = profilRepository;
+    }
 
-	public CoursService(CoursRepository coursRepository) {
-		this.coursRepository = coursRepository;
-	}
-
-	/**
-	 * Save a cours.
-	 *
-	 * @param cours the entity to save
-	 * @return the persisted entity
-	 */
-	public Cours save(Cours cours) {
-		log.debug("Request to save Cours : {}", cours);
-		return coursRepository.save(cours);
-	}
+    /**
+     * Save a cours.
+     *
+     * @param cours the entity to save
+     * @return the persisted entity
+     */
+    public Cours save(Cours cours) {
+        log.debug("Request to save Cours : {}", cours);
+        if (cours.getId() == null) {
+            cours.setCours(this.profilRepository.findFirstByUserLogin(SecurityUtils.getCurrentUserLogin().get()));
+        }
+        return coursRepository.save(cours);
+    }
 
 	/**
 	 * Get all the cours.
@@ -68,15 +71,20 @@ public class CoursService {
 		return coursRepository.findById(id);
 	}
 
-	/**
-	 * Delete the cours by id.
-	 *
-	 * @param id the id of the entity
-	 */
-	public void delete(Long id) {
-		log.debug("Request to delete Cours : {}", id);
-		coursRepository.deleteById(id);
-	}
+    /**
+     * Get moyenne of notes by annoce id.
+     *
+     * @param id the id of the entity
+     * @return moyenne of notes
+     */
+    @Transactional(readOnly = true)
+    public double findNoteMoyenneByAnnonceId(Long id) {
+        log.debug("Request to get moyenne of notes by annonce id : {}", id);
+        return coursRepository.findByAnnonceId(id).stream().filter(cours -> cours.getNote() != null)
+                .mapToDouble(Cours::getNote)
+                .average()
+                .orElse(-1);
+    }
 
 	/**
 	 * Get moyenne of notes by annoce id.

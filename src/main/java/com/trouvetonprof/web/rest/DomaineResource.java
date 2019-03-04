@@ -29,6 +29,13 @@ import com.trouvetonprof.web.rest.util.HeaderUtil;
 
 import io.github.jhipster.web.util.ResponseUtil;
 
+import javax.validation.Valid;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import java.util.List;
+import java.util.Optional;
+
 /**
  * REST controller for managing Domaine.
  */
@@ -90,22 +97,17 @@ public class DomaineResource {
 				.body(result);
 	}
 
-	/**
-	 * GET  /domaines : get all the domaines.
-	 *
-	 * @param filter the filter of the request
-	 * @return the ResponseEntity with status 200 (OK) and the list of domaines in body
-	 */
-	@GetMapping("/domaines")
-	@Timed
-	public List<Domaine> getAllDomaines(@RequestParam(required = false) String filter) {
-		if ("annonce-is-null".equals(filter)) {
-			log.debug("REST request to get all Domaines where annonce is null");
-			return domaineService.findAllWhereAnnonceIsNull();
-		}
-		log.debug("REST request to get all Domaines");
-		return domaineService.findAll();
-	}
+    /**
+     * GET  /domaines : get all the domaines.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of domaines in body
+     */
+    @GetMapping("/domaines")
+    @Timed
+    public List<Domaine> getAllDomaines() {
+        log.debug("REST request to get all Domaines");
+        return domaineService.findAll();
+    }
 
 	/**
 	 * GET  /domaines/:id : get the "id" domaine.

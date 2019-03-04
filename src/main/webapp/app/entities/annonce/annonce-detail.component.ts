@@ -18,6 +18,7 @@ import { ReservationComponent } from 'app/entities/annonce/reservation/reservati
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AnnonceDetailComponent implements OnInit {
+    basicDisponibilite: IDisponibilite[];
     annonce: IAnnonce;
     disponibilites = [];
     // timeline var
@@ -53,11 +54,17 @@ export class AnnonceDetailComponent implements OnInit {
             console.error(annonce);
             this.disponibiliteService.findByAnnonceId(this.annonce.id).subscribe(
                 (res: HttpResponse<IDisponibilite[]>) => {
+                    this.basicDisponibilite = res.body;
+                    console.error(this.basicDisponibilite);
                     const dispoStructured = this.stuctureDispoForTimeLine(res.body);
                     dispoStructured.forEach(dispo => {
                         this.disponibilites.push({
                             header: this.capitalizeAllFirstCharOfWord(dispo.header),
-                            content: dispo.content
+                            content: dispo.content,
+                            dateDispo: dispo.dateDispo,
+                            heureDispo: dispo.heureDispo,
+                            minuteDispo: dispo.minuteDispo,
+                            dureeDispo: dispo.dureeDispo
                         });
                     });
                     this.isDisponibilitesloaded = true;
@@ -91,21 +98,33 @@ export class AnnonceDetailComponent implements OnInit {
         const disponibilitesStructured = [];
         disponibilites.forEach(dispo => {
             if (!dispo.date.isBefore(Date.now())) {
+                const dateDispo = dispo.date;
+                const heureDispo = dispo.date.locale('fr').format('kk');
+                const minuteDispo = dispo.date.locale('fr').format('mm');
+                const dureeDispo = dispo.duree;
                 const dateHeader = dispo.date.locale('fr').format('dddd MM MMMM YYYY');
                 const dateContent = `De ${dispo.date.locale('fr').format('kk')}H${dispo.date.locale('fr').format('mm')}
                          à ${dispo.date
                              .add(dispo.duree, 'h')
                              .locale('fr')
                              .format('kk')}H${dispo.date.locale('fr').format('mm')}`;
+
                 if (disponibilitesStructured.length === 0 || !disponibilitesStructured.some(dispoSome => dispoSome.header === dateHeader)) {
                     disponibilitesStructured.push({
                         header: dateHeader,
-                        content: [dateContent]
+                        content: [dateContent],
+                        dateDispo: [dateDispo],
+                        heureDispo: [heureDispo],
+                        minuteDispo: [minuteDispo],
+                        dureeDispo: [dureeDispo]
                     });
                 } else {
-                    disponibilitesStructured[
-                        disponibilitesStructured.findIndex(dispoIndex => dispoIndex.header === dateHeader)
-                    ].content.push(dateContent);
+                    const index = disponibilitesStructured.findIndex(dispoIndex => dispoIndex.header === dateHeader);
+                    disponibilitesStructured[index].content.push(dateContent);
+                    disponibilitesStructured[index].dateDispo.push(dateDispo);
+                    disponibilitesStructured[index].heureDispo.push(heureDispo);
+                    disponibilitesStructured[index].minuteDispo.push(minuteDispo);
+                    disponibilitesStructured[index].dureeDispo.push(dureeDispo);
                 }
             }
         });
@@ -155,8 +174,10 @@ export class AnnonceDetailComponent implements OnInit {
         $element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' });
     }
 
-    openReservationModal() {
-        const modalRef = this.modalService.open(ReservationComponent, { centered: true });
-        modalRef.componentInstance.name = 'World';
+    openReservationModal(disponibilite) {
+        const modalRef = this.modalService.open(ReservationComponent, { centered: true, size: 'lg' });
+        modalRef.componentInstance.annonce = this.annonce;
+        modalRef.componentInstance.basicDisponibilite = this.basicDisponibilite;
+        modalRef.componentInstance.disponibilite = disponibilite;
     }
 }

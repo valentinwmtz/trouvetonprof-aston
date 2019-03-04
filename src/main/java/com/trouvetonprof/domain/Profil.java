@@ -61,15 +61,17 @@ public class Profil implements Serializable {
 	@OneToOne    @JoinColumn(unique = true)
 	private User user;
 
-	@OneToMany(mappedBy = "profil")
-	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-	private Set<Message> userMessages = new HashSet<>();
-	@OneToMany(mappedBy = "profil")
-	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-	private Set<Annonce> userAnnonces = new HashSet<>();
-	@ManyToOne
-	@JsonIgnoreProperties(value = "profils", allowSetters = true)
-	private Cours cours;
+    @OneToMany(mappedBy = "profil")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Message> userMessages = new HashSet<>();
+    
+    @OneToMany(mappedBy = "profil")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<Annonce> userAnnonces = new HashSet<>();
+    
+    @ManyToOne
+    @JsonIgnoreProperties(value = "profils", allowSetters = true)
+    private Cours cours;
 
 	// jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
 	public Long getId() {
