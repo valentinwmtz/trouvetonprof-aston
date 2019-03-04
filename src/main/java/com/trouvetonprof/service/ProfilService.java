@@ -66,6 +66,12 @@ public class ProfilService {
         log.debug("Request to get Profil : {}", id);
         return profilRepository.findById(id);
     }
+    
+    @Transactional(readOnly = true)
+    public Profil findProfil() {
+    	log.debug("Request to get Profil : {}");
+    	return profilRepository.findFirstByUserLogin(SecurityUtils.getCurrentUserLogin().get());
+    }
 
     /**
      * Delete the profil by id.

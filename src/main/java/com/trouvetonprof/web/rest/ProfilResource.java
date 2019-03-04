@@ -104,6 +104,14 @@ public class ProfilResource {
         Optional<Profil> profil = profilService.findOne(id);
         return ResponseUtil.wrapOrNotFound(profil);
     }
+    
+    @GetMapping("/profils/login")
+    @Timed
+    public Profil getProfilByUserLogin() {
+    	log.debug("REST request to get Profil : {}");
+    	Profil profil = profilService.findProfil();
+    	return profil;
+    }
 
     /**
      * DELETE  /profils/:id : delete the "id" profil.

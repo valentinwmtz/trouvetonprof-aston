@@ -49,6 +49,10 @@ export class ProfilService {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
+    findProfil(): Observable<EntityResponseType> {
+        return this.http.get(`${this.resourceUrl}/login`, { observe: 'response' });
+    }
+
     protected convertDateFromClient(profil: IProfil): IProfil {
         const copy: IProfil = Object.assign({}, profil, {
             dateNaissance: profil.dateNaissance != null && profil.dateNaissance.isValid() ? profil.dateNaissance.toJSON() : null

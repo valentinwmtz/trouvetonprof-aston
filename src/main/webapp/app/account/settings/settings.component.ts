@@ -49,7 +49,7 @@ export class SettingsComponent implements OnInit {
             this.languages = languages;
         });
         this.isSaving = false;
-        this.loadAll();
+        this.findOne();
         this.userService.query().subscribe(
             (res: HttpResponse<IUser[]>) => {
                 this.users = res.body;
@@ -64,15 +64,20 @@ export class SettingsComponent implements OnInit {
         );
     }
 
-    loadAll() {
-        this.profilService.query().subscribe(
-            (res: HttpResponse<IProfil[]>) => {
-                this.profil = res.body[0];
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+    // loadAll() {
+    //     this.profilService.query().subscribe(
+    //         (res: HttpResponse<IProfil[]>) => {
+    //             this.profil = res.body[0];
+    //         },
+    //         (res: HttpErrorResponse) => this.onError(res.message)
+    //     );
+    // }
+    findOne() {
+        this.profilService.findProfil().subscribe((res: HttpResponse<IProfil>) => {
+            this.profil = res.body;
+            console.log(this.profil);
+        });
     }
-
     save() {
         this.accountService.save(this.settingsAccount).subscribe(
             () => {
