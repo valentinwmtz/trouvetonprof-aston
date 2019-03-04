@@ -5,6 +5,8 @@ import { IDisponibilite } from 'app/shared/model/disponibilite.model';
 import moment = require('moment');
 import { FormBuilder, Validators } from '@angular/forms';
 import { Cours } from 'app/shared/model/cours.model';
+import { CoursService } from 'app/entities/cours';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
     selector: 'jhi-reservation',
@@ -27,7 +29,12 @@ export class ReservationComponent implements OnInit {
         minuteDeFin: ['', Validators.required]
     });
 
-    constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) {}
+    constructor(
+        public activeModal: NgbActiveModal,
+        private coursService: CoursService,
+        private fb: FormBuilder,
+        private snackBar: MatSnackBar
+    ) {}
 
     ngOnInit() {
         console.error(this.disponibilite.dateDispo[0].locale('fr').format('kk'));
@@ -64,6 +71,11 @@ export class ReservationComponent implements OnInit {
         console.log('date debut : ' + dateDebut);
         console.log('date de fin : ' + dateDeFin);
         console.log('duree : ' + dureeHeure);
-        const cours = new Cours(undefined, moment(Date.now()), 2, undefined, undefined, undefined, this.annonce, undefined, undefined);
+        const cours = new Cours(undefined, dateDebut, dureeHeure, undefined, undefined, undefined, this.annonce, undefined, undefined);
+        this.coursService.create(cours).subscribe(response => {
+            console.log(response);
+            this.activeModal.close();
+            this.snackBar.open('Réservation effectué avec succès')._dismissAfter(3000);
+        });
     }
 }
