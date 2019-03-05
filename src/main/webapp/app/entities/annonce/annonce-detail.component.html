@@ -8,7 +8,7 @@
                             <div *ngIf="annonce.image">
                                 <a (click)="openFile(annonce.imageContentType, annonce.image)">
                                     <img [src]="'data:' + annonce.imageContentType + ';base64,' + annonce.image"
-                                         style="width: 100px;" alt="annonce image"/>
+                                         style="width: 12em;" alt="annonce image"/>
                                 </a>
                             </div>
                         </dd>
@@ -41,7 +41,7 @@
                                                                              </dd>-->
                                         <dt><span>Note</span></dt>
                                         <dd style="margin-top: -1.7em;">
-                                            <div *ngIf="moyenneNotes"
+                                            <div *ngIf="asNote"
                                                  (click)="scrollToElement(commentaires)">
                                                 <ng-template #t let-fill="fill">
                                                       <span class="star" [class.full]="fill === 100">
@@ -52,8 +52,11 @@
                                                             [starTemplate]="t" [readonly]="true"
                                                             max="5"></ngb-rating>
                                             </div>
+                                            <div *ngIf="!asNote" style="margin-top: 2em;">
+                                                Aucune notes
+                                            </div>
                                         </dd>
-                                        <dt style="margin-top: -1.4em;" *ngIf="cours?.length > 0"><span
+                                        <dt style="margin-top: -1.4em;" *ngIf="commentsNumber > 0 && commentsNumber != undefined && commentsNumber != null"><span
                                                 class="amazon-italic font-lite"
                                                 style="color: #0066c0;cursor: pointer"
                                                 (click)="scrollToElement(commentaires)">
@@ -139,7 +142,7 @@
             <div class="container" style="padding-left: 0;margin-top: 3em;" #commentaires>
                 <div class="col-12">
                     <dl class="row-md jh-entity-details">
-                        <dt *ngIf="cours?.length" id="commentaires" style="text-align: center">
+                        <dt *ngIf="cours?.length && commentsNumber > 0" id="commentaires" style="text-align: center">
                             <span> Commentaires </span></dt>
                         <dd *ngIf="cours?.length">
                             <div *ngFor="let cour of cours;">
@@ -171,11 +174,11 @@
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
 
-            <button type="button"
+<!--            <button type="button"
                     [routerLink]="['/annonce', annonce.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
-            </button>
+            </button>-->
         </div>
     </div>
 </div>

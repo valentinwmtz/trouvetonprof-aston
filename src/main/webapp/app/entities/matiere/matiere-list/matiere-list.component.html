@@ -2,7 +2,7 @@
 <div style="display: flex;flex-wrap: wrap;justify-content: center">
     <div *ngFor="let matiere of matieres">
         <mat-card class="example-card">
-            <div style="text-align: center;font-size: 2em;font-weight: 300;height: 10%"
+            <div style="text-align: center;font-size: 1.2em;font-weight: 300;height: 10%"
                  class="amazon-italic">{{matiere?.titre}}</div>
             <img style="margin-top: 0.5em;height: 41%;" mat-card-image
                  [src]="'data:' + matiere.imageContentType + ';base64,' + matiere.image" alt="domaine image"/>

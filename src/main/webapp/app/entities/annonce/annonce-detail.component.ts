@@ -84,10 +84,10 @@ export class AnnonceDetailComponent implements OnInit {
                 (res: HttpResponse<ICours[]>) => {
                     this.cours = res.body;
                     console.error(this.cours);
-
                     this.coursIsLoaded = true;
                     console.error(this.coursIsLoaded);
                     this.changeDetectorRef.detectChanges();
+                    console.error(this.asNote);
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
@@ -179,5 +179,13 @@ export class AnnonceDetailComponent implements OnInit {
         modalRef.componentInstance.annonce = this.annonce;
         modalRef.componentInstance.basicDisponibilite = this.basicDisponibilite;
         modalRef.componentInstance.disponibilite = disponibilite;
+    }
+
+    get commentsNumber() {
+        return this.cours.filter(cour => cour.commentaire != null).length;
+    }
+
+    get asNote() {
+        return this.cours.filter(cour => cour.note != null).length > 0;
     }
 }

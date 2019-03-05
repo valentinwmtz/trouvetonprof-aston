@@ -18,5 +18,10 @@ export class AnnonceListComponent implements OnInit {
         this.annonceService.findAllByMatiereId(this.route.snapshot.params.id).subscribe((res: HttpResponse<IAnnonce[]>) => {
             this.annonces = res.body;
         });
+
+        /*        this.annonceService.query().subscribe((res: HttpResponse<IAnnonce[]>) => {
+            this.annonces = res.body;
+            console.log(res.body);
+        });*/
     }
 }

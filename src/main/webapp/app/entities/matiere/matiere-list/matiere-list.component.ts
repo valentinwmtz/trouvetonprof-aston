@@ -16,6 +16,7 @@ export class MatiereListComponent implements OnInit {
     ngOnInit() {
         this.matiereService.findAllByDomaineId(this.route.snapshot.params.id).subscribe(response => {
             this.matieres = response.body;
+            console.log(this.matieres);
         });
     }
 }

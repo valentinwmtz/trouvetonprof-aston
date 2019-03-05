@@ -1,7 +1,9 @@
 package com.trouvetonprof.service;
 
 import com.trouvetonprof.domain.Annonce;
+import com.trouvetonprof.domain.Matiere;
 import com.trouvetonprof.repository.AnnonceRepository;
+import com.trouvetonprof.repository.MatiereRepository;
 import com.trouvetonprof.security.AuthoritiesConstants;
 import com.trouvetonprof.security.SecurityUtils;
 
@@ -24,9 +26,11 @@ public class AnnonceService {
 	private final Logger log = LoggerFactory.getLogger(AnnonceService.class);
 
 	private final AnnonceRepository annonceRepository;
+	private final MatiereRepository matiereRepository;
 
-	public AnnonceService(AnnonceRepository annonceRepository) {
+	public AnnonceService(AnnonceRepository annonceRepository, MatiereRepository matiereRepository) {
 		this.annonceRepository = annonceRepository;
+		this.matiereRepository = matiereRepository;
 	}
 
 	/**
@@ -70,9 +74,8 @@ public class AnnonceService {
 	@Transactional(readOnly = true)
 	public List <Annonce> findAllByMatiereId(Long id) {
 		log.debug("Request to get all Annonce by matiere Id");
-		return annonceRepository.findByDomaineAnnonceId(id);
-
-
+		Optional<Matiere> matiereDomaineId = matiereRepository.findById(id);
+		return annonceRepository.findAllByDomaineId(matiereDomaineId.get().getDomaine().getId());
 	}
 
 	/**
