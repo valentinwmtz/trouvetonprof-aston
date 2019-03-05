@@ -11,7 +11,7 @@ export const enum Sexe {
 
 export interface IProfil {
     id?: number;
-    dateNaissance?: Moment;
+    dateNaissance?: any;
     pays?: string;
     adresse?: string;
     telephone?: string;
@@ -25,7 +25,7 @@ export interface IProfil {
 export class Profil implements IProfil {
     constructor(
         public id?: number,
-        public dateNaissance?: Moment,
+        public dateNaissance?: any,
         public pays?: string,
         public adresse?: string,
         public telephone?: string,

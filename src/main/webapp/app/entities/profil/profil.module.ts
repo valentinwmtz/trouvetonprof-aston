@@ -22,7 +22,6 @@ const ENTITY_STATES = [...profilRoute, ...profilPopupRoute];
     declarations: [
         ProfilComponent,
         ProfilDetailComponent,
-        ProfilUpdateComponent,
         ProfilDeleteDialogComponent,
         ProfilDeletePopupComponent,
         ProfilUserComponent,

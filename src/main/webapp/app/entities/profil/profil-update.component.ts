@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -17,7 +17,7 @@ import { CoursService } from 'app/entities/cours';
     templateUrl: './profil-update.component.html'
 })
 export class ProfilUpdateComponent implements OnInit {
-    profil: IProfil;
+    @Input() profil: IProfil;
     isSaving: boolean;
 
     users: IUser[];
@@ -35,10 +35,10 @@ export class ProfilUpdateComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        this.activatedRoute.data.subscribe(({ profil }) => {
-            this.profil = profil;
-            this.dateNaissance = this.profil.dateNaissance != null ? this.profil.dateNaissance.format(DATE_TIME_FORMAT) : null;
-        });
+        // this.activatedRoute.data.subscribe(({ profil }) => {
+        //     this.profil = profil;
+        //     this.dateNaissance = this.profil.dateNaissance != null ? this.profil.dateNaissance.format(DATE_TIME_FORMAT) : null;
+        // });
         this.userService.query().subscribe(
             (res: HttpResponse<IUser[]>) => {
                 this.users = res.body;
@@ -58,6 +58,7 @@ export class ProfilUpdateComponent implements OnInit {
     }
 
     save() {
+        console.log(this.profil.id);
         this.isSaving = true;
         this.profil.dateNaissance = this.dateNaissance != null ? moment(this.dateNaissance, DATE_TIME_FORMAT) : null;
         if (this.profil.id !== undefined) {

@@ -1,4 +1,4 @@
-<div class="row justify-content-center">
+<div *ngIf="profil" class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
             <h2 id="jhi-profil-heading" jhiTranslate="trouvetonprofApp.profil.home.createOrEditLabel">Create or edit a Profil</h2>
@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="trouvetonprofApp.profil.dateNaissance" for="field_dateNaissance">Date Naissance</label>
                     <div class="d-flex">
-                        <input id="field_dateNaissance" type="datetime-local" class="form-control" name="dateNaissance" [(ngModel)]="dateNaissance"
+                        <input id="field_dateNaissance" type="datetime-local" class="form-control" name="dateNaissance" [(value)]="dateNaissance"
                         required/>
                     </div>
                     <div [hidden]="!(editForm.controls.dateNaissance?.dirty && editForm.controls.dateNaissance?.invalid)">
