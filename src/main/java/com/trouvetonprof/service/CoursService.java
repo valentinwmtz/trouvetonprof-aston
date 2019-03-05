@@ -121,4 +121,14 @@ public class CoursService {
 		return coursRepository.findByAnnonceId(id);
 	}
 
+	/**
+	 * Delete the cours by id.
+	 *
+	 * @param id the id of the entity
+	 */
+	public void delete(Long id) {
+		log.debug("Request to delete Cours : {}", id);
+		coursRepository.deleteById(id);
+	}
+
 }
