@@ -21,7 +21,7 @@
             <th><span jhiTranslate="trouvetonprofApp.cours.prix">Prix</span></th>
             <th><span jhiTranslate="trouvetonprofApp.cours.commentaire">Commentaire</span></th>
             <th><span jhiTranslate="trouvetonprofApp.cours.annonce">Annonce</span></th>
-            <th><span jhiTranslate="trouvetonprofApp.cours.cours">Profil</span></th>
+            <th><span>Profil</span></th>
             <th></th>
             </tr>
             </thead>
@@ -40,7 +40,7 @@
                 </td>
                 <td>
                     <div *ngIf="cours.cours">
-                        <a [routerLink]="['../profil', cours.cours?.id, 'view' ]" >{{cours.cours?.user.lastName }}({{cours.cours?.id}})</a>
+                        <a [routerLink]="['../profil', cours.cours?.id, 'view' ]" >{{cours.cours?.user.lastName }} {{cours.cours?.user.firstName }}({{cours.cours?.id}})</a>
                     </div>
                 </td>
                 <td class="text-right">

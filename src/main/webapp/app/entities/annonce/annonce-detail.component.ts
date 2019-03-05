@@ -68,6 +68,7 @@ export class AnnonceDetailComponent implements OnInit {
                         });
                     });
                     this.isDisponibilitesloaded = true;
+                    console.error(this.disponibilites);
                     this.changeDetectorRef.detectChanges();
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
@@ -102,7 +103,8 @@ export class AnnonceDetailComponent implements OnInit {
                 const heureDispo = dispo.date.locale('fr').format('kk');
                 const minuteDispo = dispo.date.locale('fr').format('mm');
                 const dureeDispo = dispo.duree;
-                const dateHeader = dispo.date.locale('fr').format('dddd MM MMMM YYYY');
+                const dateHeader = dispo.date.locale('fr').format('dddd DD MMMM YYYY');
+                console.error(dateHeader);
                 const dateContent = `De ${dispo.date.locale('fr').format('kk')}H${dispo.date.locale('fr').format('mm')}
                          à ${dispo.date
                              .add(dispo.duree, 'h')

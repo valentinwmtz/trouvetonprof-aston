@@ -1,25 +1,25 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="cours">
-            <h2><span jhiTranslate="trouvetonprofApp.cours.detail.title">Cours</span> {{cours.id}}</h2>
+            <!--      <h2><span jhiTranslate="trouvetonprofApp.cours.detail.title">Cours</span> {{cours.id}}</h2>-->
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="trouvetonprofApp.cours.date">Date</span></dt>
                 <dd>
-                    <span>{{cours.date}}</span>
+                    <span>{{cours.date | date: 'dd/MM/yyyy'}}</span>
                 </dd>
                 <dt><span jhiTranslate="trouvetonprofApp.cours.duree">Duree</span></dt>
                 <dd>
-                    <span>{{cours.duree}}</span>
+                    <span>{{cours.duree}} H</span>
                 </dd>
                 <dt><span jhiTranslate="trouvetonprofApp.cours.note">Note</span></dt>
                 <dd>
-                    <span>{{cours.note}}</span>
+                    <span>{{cours.note}} / 5</span>
                 </dd>
                 <dt><span jhiTranslate="trouvetonprofApp.cours.prix">Prix</span></dt>
                 <dd>
-                    <span>{{cours.prix}}</span>
+                    <span>{{cours.prix}} €</span>
                 </dd>
                 <dt><span jhiTranslate="trouvetonprofApp.cours.commentaire">Commentaire</span></dt>
                 <dd>
@@ -28,13 +28,13 @@
                 <dt><span jhiTranslate="trouvetonprofApp.cours.annonce">Annonce</span></dt>
                 <dd>
                     <div *ngIf="cours.annonce">
-                        <a [routerLink]="['/annonce', cours.annonce?.id, 'view']">{{cours.annonce?.id}}</a>
+                        <a [routerLink]="['/annonce', cours.annonce?.id, 'view']">({{cours.annonce?.id}}) {{cours.annonce?.titre}}</a>
                     </div>
                 </dd>
-                <dt><span jhiTranslate="trouvetonprofApp.cours.cours">Cours</span></dt>
+                <dt><span>Intervenant</span></dt>
                 <dd>
                     <div *ngIf="cours.cours">
-                        <a [routerLink]="['/profil', cours.cours?.id, 'view']">{{cours.cours?.id}}</a>
+                        <a [routerLink]="['/profil', cours.cours?.id, 'view']">({{cours.cours?.id}}) </a>
                     </div>
                 </dd>
             </dl>

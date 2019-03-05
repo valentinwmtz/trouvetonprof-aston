@@ -15,6 +15,7 @@ export class CoursDetailComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ cours }) => {
             this.cours = cours;
+            console.error(this.cours);
         });
     }
 

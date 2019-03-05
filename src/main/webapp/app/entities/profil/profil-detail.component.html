@@ -1,13 +1,13 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="profil">
-            <h2><span jhiTranslate="trouvetonprofApp.profil.detail.title">Profil</span> {{profil.id}}</h2>
+            <h2><span jhiTranslate="trouvetonprofApp.profil.detail.title">Profil</span> {{profil.id}} {{ profil.user.firstName }} {{ profil.user.lastName }}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="trouvetonprofApp.profil.dateNaissance">Date Naissance</span></dt>
                 <dd>
-                    <span>{{profil.dateNaissance}}</span>
+                    <span>{{profil.dateNaissance | date: 'dd/MM/yyyy'}}</span>
                 </dd>
                 <dt><span jhiTranslate="trouvetonprofApp.profil.pays">Pays</span></dt>
                 <dd>
@@ -29,12 +29,12 @@
                 <dd>
                     {{profil.user?.id}}
                 </dd>
-                <dt><span jhiTranslate="trouvetonprofApp.profil.cours">Cours</span></dt>
+<!--                <dt><span jhiTranslate="trouvetonprofApp.profil.cours">Cours</span></dt>
                 <dd>
                     <div *ngIf="profil.cours">
                         <a [routerLink]="['/cours', profil.cours?.id, 'view']">{{profil.cours?.id}}</a>
                     </div>
-                </dd>
+                </dd>-->
             </dl>
 
             <button type="submit"
