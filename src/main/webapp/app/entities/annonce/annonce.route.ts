@@ -11,6 +11,9 @@ import { AnnonceDetailComponent } from './annonce-detail.component';
 import { AnnonceUpdateComponent } from './annonce-update.component';
 import { AnnonceDeletePopupComponent } from './annonce-delete-dialog.component';
 import { IAnnonce } from 'app/shared/model/annonce.model';
+import { MatiereListComponent } from 'app/entities/matiere/matiere-list/matiere-list.component';
+import { MatiereResolve } from 'app/entities/matiere';
+import { AnnonceListComponent } from 'app/entities/annonce/annonce-list/annonce-list.component';
 
 @Injectable({ providedIn: 'root' })
 export class AnnonceResolve implements Resolve<IAnnonce> {
@@ -47,6 +50,17 @@ export const annonceRoute: Routes = [
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'trouvetonprofApp.annonce.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'annonce/matiere/:id/view',
+        component: AnnonceListComponent,
+        resolve: {
+            matiere: MatiereResolve
+        },
+        data: {
+            pageTitle: 'trouvetonprofApp.matiere.home.title'
         },
         canActivate: [UserRouteAccessService]
     },

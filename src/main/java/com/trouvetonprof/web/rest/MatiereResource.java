@@ -102,6 +102,18 @@ public class MatiereResource {
 	}
 
 	/**
+	 * GET  /matieres/domaine/id : get all the matieres by domaine id.
+	 *
+	 * @return the ResponseEntity with status 200 (OK) and the list of matieres in body
+	 */
+	@GetMapping("/matieres/domaine/{id}")
+	@Timed
+	public List<Matiere> getAllMatieresByDomaineId(@PathVariable Long id) {
+		log.debug("REST request to get all Matieres By Domaine Id");
+		return matiereService.findAllByDomaineId(id);
+	}
+
+	/**
 	 * GET  /matieres/:id : get the "id" matiere.
 	 *
 	 * @param id the id of the matiere to retrieve

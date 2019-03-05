@@ -11,6 +11,7 @@ import {
     matiereRoute,
     matierePopupRoute
 } from './';
+import { MatiereListComponent } from './matiere-list/matiere-list.component';
 
 const ENTITY_STATES = [...matiereRoute, ...matierePopupRoute];
 
@@ -21,7 +22,8 @@ const ENTITY_STATES = [...matiereRoute, ...matierePopupRoute];
         MatiereDetailComponent,
         MatiereUpdateComponent,
         MatiereDeleteDialogComponent,
-        MatiereDeletePopupComponent
+        MatiereDeletePopupComponent,
+        MatiereListComponent
     ],
     entryComponents: [MatiereComponent, MatiereUpdateComponent, MatiereDeleteDialogComponent, MatiereDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

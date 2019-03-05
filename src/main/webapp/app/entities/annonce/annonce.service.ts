@@ -25,8 +25,8 @@ export class AnnonceService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<IAnnonce>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
-    findAllByMatiereId(id: number): Observable<EntityResponseType> {
-        return this.http.get<IAnnonce>(`${this.resourceUrl}/matieres/${id}`, { observe: 'response' });
+    findAllByMatiereId(id: number): Observable<EntityArrayResponseType> {
+        return this.http.get<IAnnonce[]>(`${this.resourceUrl}/matieres/${id}`, { observe: 'response' });
     }
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);

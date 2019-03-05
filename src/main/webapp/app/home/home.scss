@@ -23,7 +23,10 @@ Main page styles
 }
 
 .example-card {
-    max-width: 400px;
+    height: 512px;
+    width: 320px;
+    margin: 2em !important;
+    border: 1px solid #0000004f !important;
 }
 
 .example-header-image {

@@ -1,19 +1,19 @@
 <h2 style="text-align: center"> Que recherchez vous ?</h2>
 <div style="display: flex;flex-wrap: wrap;justify-content: center">
-    <div *ngFor="let domaine of domaines">
+    <div *ngFor="let matiere of matieres">
         <mat-card class="example-card">
             <div style="text-align: center;font-size: 2em;font-weight: 300;height: 10%"
-                 class="amazon-italic">{{domaine?.titre}}</div>
+                 class="amazon-italic">{{matiere?.titre}}</div>
             <img style="margin-top: 0.5em;height: 41%;" mat-card-image
-                 [src]="'data:' + domaine.imageContentType + ';base64,' + domaine.image" alt="domaine image"/>
-            <mat-card-content style="height: 32%">
+                 [src]="'data:' + matiere.imageContentType + ';base64,' + matiere.image" alt="domaine image"/>
+            <mat-card-content style="height: 32%;overflow: overlay;">
                 <p>
-                    {{domaine.description}}
+                    {{matiere.description}}
                 </p>
             </mat-card-content>
             <mat-card-actions>
                 <button mat-raised-button color="primary" style="width: 100%"
-                        [routerLink]="['matiere/domaine/', domaine.id, 'view' ]"> Voir les matières associés
+                        [routerLink]="['/annonce/matiere/', matiere.id, 'view' ]"> Voir les professeur associés
                 </button>
             </mat-card-actions>
         </mat-card>

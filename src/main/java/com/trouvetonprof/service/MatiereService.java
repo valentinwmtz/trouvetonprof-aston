@@ -48,6 +48,17 @@ public class MatiereService {
         return matiereRepository.findAll();
     }
 
+    /**
+     * Get all the matieres by domaine id.
+     *
+     * @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public List<Matiere> findAllByDomaineId(long id) {
+        log.debug("Request to get all Matieres");
+        return matiereRepository.findAllByDomaineId(id);
+    }
+
 
     /**
      * Get one matiere by id.

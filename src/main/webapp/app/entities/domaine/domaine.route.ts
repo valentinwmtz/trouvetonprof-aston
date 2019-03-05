@@ -33,7 +33,6 @@ export const domaineRoute: Routes = [
         path: 'domaine',
         component: DomaineComponent,
         data: {
-            authorities: ['ROLE_USER'],
             pageTitle: 'trouvetonprofApp.domaine.home.title'
         },
         canActivate: [UserRouteAccessService]
@@ -45,7 +44,6 @@ export const domaineRoute: Routes = [
             domaine: DomaineResolve
         },
         data: {
-            authorities: ['ROLE_USER'],
             pageTitle: 'trouvetonprofApp.domaine.home.title'
         },
         canActivate: [UserRouteAccessService]

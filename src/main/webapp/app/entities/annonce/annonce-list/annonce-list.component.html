@@ -1,0 +1,21 @@
+<h2 style="text-align: center"> Que recherchez vous ?</h2>
+<div style="display: flex;flex-wrap: wrap;justify-content: center">
+  <div *ngFor="let annonce of annonces">
+    <mat-card class="example-card">
+      <div style="text-align: center;font-size: 2em;font-weight: 300;height: 10%"
+           class="amazon-italic">{{annonce?.titre}}</div>
+      <img style="margin-top: 0.5em;height: 41%;" mat-card-image
+           [src]="'data:' + annonce.imageContentType + ';base64,' + annonce.image" alt="domaine image"/>
+      <mat-card-content style="height: 32%;overflow: overlay;">
+        <p>
+          {{annonce.description}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" style="width: 100%"
+                [routerLink]="['/annonce/matiere/', annonce.id, 'view' ]"> Voir les professeur associés
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

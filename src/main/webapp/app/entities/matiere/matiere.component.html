@@ -1,4 +1,4 @@
-<!--<div>
+<div>
     <h2 id="page-heading">
         <span jhiTranslate="trouvetonprofApp.matiere.home.title">Matieres</span>
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-matiere" [routerLink]="['/matiere/new']">
@@ -14,12 +14,12 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th><span jhiTranslate="global.field.id">ID</span></th>
-                <th><span jhiTranslate="trouvetonprofApp.matiere.titre">Titre</span></th>
-                <th><span jhiTranslate="trouvetonprofApp.matiere.description">Description</span></th>
-                <th><span jhiTranslate="trouvetonprofApp.matiere.image">Image</span></th>
-                <th><span jhiTranslate="trouvetonprofApp.matiere.domaine">Domaine</span></th>
-                <th></th>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="trouvetonprofApp.matiere.titre">Titre</span></th>
+            <th><span jhiTranslate="trouvetonprofApp.matiere.description">Description</span></th>
+            <th><span jhiTranslate="trouvetonprofApp.matiere.image">Image</span></th>
+            <th><span jhiTranslate="trouvetonprofApp.matiere.domaine">Domaine</span></th>
+            <th></th>
             </tr>
             </thead>
             <tbody>
@@ -66,100 +66,4 @@
             </tbody>
         </table>
     </div>
-</div>-->
-
-<h2 id="page-heading">
-    <span jhiTranslate="trouvetonprofApp.matiere.home.title">Matieres</span>
-    <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-matiere" [routerLink]="['/matiere/new']">
-        <fa-icon [icon]="'plus'"></fa-icon>
-        <span  jhiTranslate="trouvetonprofApp.matiere.home.createLabel">
-            Creer une nouvelle matière
-            </span>
-    </button>
-</h2>
-<jhi-alert></jhi-alert>
-<br/>
-<!--<div *ngFor="let annonce of annonces">
-    <h1>{{ annonce.titre }}</h1>
-    <p> {{  annonce.description }}</p>
-</div>-->
-<div class="container">
-
-    <div class="row">
-
-        <div id="card" *ngFor="let matiere of matieres">
-            <mat-card class="matiere">
-                <mat-card-header id="header">
-                    <div mat-card-avatar class="domaine"></div>
-                    <mat-card-title><h1> {{ matiere.titre }} </h1></mat-card-title>
-
-                </mat-card-header>
-                <mat-card-content id="contenu">
-                    <img id="illustration" mat-card-image [src]="'data:' + matiere.imageContentType + ';base64,' + matiere.image" alt="matiere-image"/>
-
-                    <p>{{ matiere.description }}</p>
-
-
-                    <div class="info-carousel" >
-                    <ngb-carousel *ngIf="images">
-                        <div *ngFor="let annonce of annonces">
-                        <ng-template ngbSlide>
-                            <img [src]="images[0]" alt="Random first slide">
-                            <div class="carousel-caption">
-                                <h3> {{ annonce.titre }} </h3>
-                                <p> {{ annonce.description }} </p>
-                            </div>
-                        </ng-template>
-                        <ng-template ngbSlide>
-                            <img [src]="images[1]" alt="Random second slide">
-                            <div class="carousel-caption">
-                                <h3>{{ annonce.titre }}</h3>
-                                <p>{{ annonce.description }}</p>
-                            </div>
-                        </ng-template>
-                        <ng-template ngbSlide>
-                            <img [src]="images[2]" alt="Random third slide">
-                            <div class="carousel-caption">
-                                <h3>{{ annonce.titre }}</h3>
-                                <p>{{ annonce.description }}</p>
-                            </div>
-
-                        </ng-template>
-                        </div>
-                    </ngb-carousel>
-
-                    </div>
-
-                </mat-card-content>
-                <mat-card-footer id="footer">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['/matiere', matiere.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                                [routerLink]="['/matiere', matiere.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                *jhiHasAnyAuthority="'ROLE_ADMIN'"
-                                [routerLink]="['/', { outlets: { popup: 'matiere/'+ matiere.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-
-                </mat-card-footer>
-            </mat-card>
-        </div>
-
-
-
+</div>

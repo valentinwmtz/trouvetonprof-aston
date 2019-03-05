@@ -27,6 +27,11 @@ export class MatiereService {
         return this.http.get<IMatiere>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
+    findAllByDomaineId(id: number, req?: any): Observable<EntityArrayResponseType> {
+        const options = createRequestOption(req);
+        return this.http.get<IMatiere[]>(`${this.resourceUrl}/domaine/${id}`, { params: options, observe: 'response' });
+    }
+
     query(req?: any): Observable<EntityArrayResponseType> {
         const options = createRequestOption(req);
         return this.http.get<IMatiere[]>(this.resourceUrl, { params: options, observe: 'response' });

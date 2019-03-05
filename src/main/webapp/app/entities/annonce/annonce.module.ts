@@ -14,6 +14,7 @@ import {
 import { CalendrierComponent } from './calendrier/calendrier.component';
 import { CalendrierHeaderComponent } from './calendrier/calendrier-header/calendrier-header.component';
 import { ReservationComponent } from './reservation/reservation.component';
+import { AnnonceListComponent } from './annonce-list/annonce-list.component';
 
 const ENTITY_STATES = [...annonceRoute, ...annoncePopupRoute];
 
@@ -27,7 +28,8 @@ const ENTITY_STATES = [...annonceRoute, ...annoncePopupRoute];
         AnnonceDeletePopupComponent,
         CalendrierComponent,
         CalendrierHeaderComponent,
-        ReservationComponent
+        ReservationComponent,
+        AnnonceListComponent
     ],
     entryComponents: [
         AnnonceComponent,
