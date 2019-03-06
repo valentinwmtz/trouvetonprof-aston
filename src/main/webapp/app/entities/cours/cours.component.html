@@ -35,7 +35,7 @@
                 <td>{{cours.commentaire}}</td>
                 <td>
                     <div *ngIf="cours.annonce">
-                        <a [routerLink]="['../annonce', cours.annonce?.id, 'view' ]" >{{cours.annonce?.id}}</a>
+                        <a [routerLink]="['../annonce', cours.annonce?.id, 'view' ]" >({{cours.annonce?.id}}) {{cours.annonce?.titre}}</a>
                     </div>
                 </td>
                 <td>

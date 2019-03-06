@@ -1,21 +1,34 @@
 <h2 style="text-align: center"> Que recherchez vous ?</h2>
+<section style="display: flex; justify-content: center;margin-top: 1em">
+    <section>
+        <mat-checkbox [(ngModel)]="eleveChecked"> Annonce eleve</mat-checkbox>
+        <mat-checkbox [(ngModel)]="professeurChecked"> Annonce professeur</mat-checkbox>
+    </section>
+</section>
+
+<div style="width: 100%;display: flex; justify-content: center;">
+    <mat-form-field style="width: 60%;text-align: center;">
+        <input matInput placeholder="Filtrer par localisation, EX : Lille" [(ngModel)]="localisationFilter">
+    </mat-form-field>
+</div>
+
 <div style="display: flex;flex-wrap: wrap;justify-content: center">
-  <div *ngFor="let annonce of annonces">
-    <mat-card class="example-card">
-      <div style="text-align: center;font-size: 1.2em;font-weight: 300;height: 10%"
-           class="amazon-italic">{{annonce?.titre}}</div>
-      <img style="margin-top: 0.5em;height: 41%;" mat-card-image
-           [src]="'data:' + annonce.imageContentType + ';base64,' + annonce.image" alt="domaine image"/>
-      <mat-card-content style="height: 32%;overflow: overlay;">
-        <p>
-          {{annonce.description}}
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" style="width: 100%"
-                [routerLink]="['/annonce/', annonce.id, 'view' ]"> Voir l'annonce
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+    <div *ngFor="let annonce of (annonces  | annonceFilter: statusFilter) | annonceLocFilter: localisationFilter">
+        <mat-card class="example-card">
+            <div style="text-align: center;font-size: 1.2em;font-weight: 300;height: 10%"
+                 class="amazon-italic">{{annonce?.titre}}</div>
+            <img style="margin-top: 0.5em;height: 41%;" mat-card-image
+                 [src]="'data:' + annonce.imageContentType + ';base64,' + annonce.image" alt="domaine image"/>
+            <mat-card-content style="height: 32%;overflow: overlay;">
+                <p>
+                    {{annonce.description}}
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" style="width: 100%"
+                        [routerLink]="['/annonce/', annonce.id, 'view' ]"> Voir l'annonce
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
 </div>

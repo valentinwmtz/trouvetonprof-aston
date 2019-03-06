@@ -4,7 +4,7 @@ import { IAnnonce } from 'app/shared/model/annonce.model';
 import { IDisponibilite } from 'app/shared/model/disponibilite.model';
 import moment = require('moment');
 import { FormBuilder, Validators } from '@angular/forms';
-import { Cours } from 'app/shared/model/cours.model';
+import { Cours, ICours } from 'app/shared/model/cours.model';
 import { CoursService } from 'app/entities/cours';
 import { MatSnackBar } from '@angular/material';
 
@@ -72,10 +72,28 @@ export class ReservationComponent implements OnInit {
         console.log('date de fin : ' + dateDeFin);
         console.log('duree : ' + dureeHeure);
         const cours = new Cours(undefined, dateDebut, dureeHeure, undefined, undefined, undefined, this.annonce, undefined, undefined);
-        this.coursService.create(cours).subscribe(response => {
-            console.log(response);
-            this.activeModal.close();
-            this.snackBar.open('Réservation effectué avec succès')._dismissAfter(3000);
+        this.openCheckout(this.annonce, dureeHeure, cours);
+    }
+
+    openCheckout(annonce: IAnnonce, dureeHeure, cours: ICours) {
+        const handler = (<any>window).StripeCheckout.configure({
+            key: 'pk_test_y4BMPjpeY0wiczztookLlSl9',
+            locale: 'auto',
+            token: function(token: any) {}
+        });
+        handler.open({
+            name: 'TrouveTonProf',
+            description: 'description',
+            amount: annonce.prixHoraire * dureeHeure * 100,
+            currency: 'EUR',
+            closed: () => {
+                console.log('closed');
+                this.coursService.create(cours).subscribe(response => {
+                    console.log(response);
+                    this.activeModal.close();
+                    this.snackBar.open('Réservation effectué avec succès')._dismissAfter(3000);
+                });
+            }
         });
     }
 }

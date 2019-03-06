@@ -28,7 +28,7 @@
                 <td>{{disponibilite.duree}}</td>
                 <td>
                     <div *ngIf="disponibilite.annonce">
-                        <a [routerLink]="['../annonce', disponibilite.annonce?.id, 'view' ]" >{{disponibilite.annonce?.id}}</a>
+                        <a [routerLink]="['../annonce', disponibilite.annonce?.id, 'view' ]" >({{disponibilite.annonce?.id}})  {{disponibilite.annonce?.titre}} </a>
                     </div>
                 </td>
                 <td class="text-right">

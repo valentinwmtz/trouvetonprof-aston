@@ -11,6 +11,9 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 })
 export class AnnonceListComponent implements OnInit {
     annonces: IAnnonce[];
+    eleveChecked = true;
+    professeurChecked = true;
+    localisationFilter = '';
 
     constructor(private annonceService: AnnonceService, private route: ActivatedRoute) {}
 
@@ -23,5 +26,17 @@ export class AnnonceListComponent implements OnInit {
             this.annonces = res.body;
             console.log(res.body);
         });*/
+    }
+
+    get statusFilter() {
+        if (this.eleveChecked && this.professeurChecked) {
+            return ['ELEVE', 'PROFESSEUR'];
+        } else if (this.professeurChecked) {
+            return ['PROFESSEUR'];
+        } else if (this.eleveChecked) {
+            return ['ELEVE'];
+        } else {
+            return ['Aucun'];
+        }
     }
 }

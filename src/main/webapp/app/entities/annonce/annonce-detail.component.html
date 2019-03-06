@@ -31,6 +31,7 @@
                                         <dd>
                                             <span>{{annonce.prixHoraire}} €</span>
                                         </dd>
+
                                     </div>
                                     <div class="col-md-6">
                                         <!--                                     <dt><span jhiTranslate="trouvetonprofApp.annonce.profil">Profil</span></dt>
@@ -61,6 +62,10 @@
                                                 style="color: #0066c0;cursor: pointer"
                                                 (click)="scrollToElement(commentaires)">
                                             {{commentsNumber}} commentaires</span></dt>
+                                        <dt><span> Localisation </span></dt>
+                                        <dd>
+                                            <span>{{annonce.profil.adresse}} </span>
+                                        </dd>
                                     </div>
                                 </div>
                             </div>

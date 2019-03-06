@@ -46,7 +46,7 @@
                     <label class="form-control-label" jhiTranslate="trouvetonprofApp.disponibilite.annonce" for="field_annonce">Annonce</label>
                     <select class="form-control" id="field_annonce" name="annonce" [(ngModel)]="disponibilite.annonce" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="annonceOption.id === disponibilite.annonce?.id ? disponibilite.annonce : annonceOption" *ngFor="let annonceOption of annonces; trackBy: trackAnnonceById">{{annonceOption.id}}</option>
+                        <option [ngValue]="annonceOption.id === disponibilite.annonce?.id ? disponibilite.annonce : annonceOption" *ngFor="let annonceOption of annonces; trackBy: trackAnnonceById">({{annonceOption.id}}) {{annonceOption.titre}}</option>
                     </select>
                 </div>
             </div>

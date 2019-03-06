@@ -34,7 +34,7 @@
                 <dt><span>Intervenant</span></dt>
                 <dd>
                     <div *ngIf="cours.cours">
-                        <a [routerLink]="['/profil', cours.cours?.id, 'view']">({{cours.cours?.id}}) </a>
+                        <a [routerLink]="['/profil', cours.cours?.id, 'view']">({{cours.cours?.id}}) {{ cours.cours.user.firstName}} {{ cours.cours.user.lastName}}</a>
                     </div>
                 </dd>
             </dl>

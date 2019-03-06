@@ -75,7 +75,7 @@
                         </small>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *jhiHasAnyAuthority="'ROLE_ADMIN'">
                     <label class="form-control-label" jhiTranslate="trouvetonprofApp.annonce.adminValide" for="field_adminValide">Admin Valide</label>
                     <input type="checkbox" class="form-control" name="adminValide" id="field_adminValide"
                         [(ngModel)]="annonce.adminValide" />
@@ -100,14 +100,14 @@
                     <label class="form-control-label" jhiTranslate="trouvetonprofApp.annonce.profil" for="field_profil">Profil</label>
                     <select class="form-control" id="field_profil" name="profil" [(ngModel)]="annonce.profil" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="profilOption.id === annonce.profil?.id ? annonce.profil : profilOption" *ngFor="let profilOption of profils; trackBy: trackProfilById">{{profilOption.id}}</option>
+                        <option [ngValue]="profilOption.id === annonce.profil?.id ? annonce.profil : profilOption" *ngFor="let profilOption of profils; trackBy: trackProfilById">({{profilOption.id}}) {{profilOption.user.firstName}} {{profilOption.user.lastName}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="trouvetonprofApp.annonce.domaine" for="field_domaine">Domaine</label>
                     <select class="form-control" id="field_domaine" name="domaine" [(ngModel)]="annonce.domaine" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="domaineOption.id === annonce.domaine?.id ? annonce.domaine : domaineOption" *ngFor="let domaineOption of domaines; trackBy: trackDomaineById">{{domaineOption.id}}</option>
+                        <option [ngValue]="domaineOption.id === annonce.domaine?.id ? annonce.domaine : domaineOption" *ngFor="let domaineOption of domaines; trackBy: trackDomaineById">({{domaineOption.id}}) {{domaineOption.titre}}</option>
                     </select>
                 </div>
             </div>

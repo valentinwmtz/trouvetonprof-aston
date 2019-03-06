@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="manifest" href="manifest.webapp" />
     <link rel="stylesheet" href="content/css/loading.css">
+
     <!-- jhipster-needle-add-resources-to-root - JHipster will add new resources here -->
 </head>
 <body>
@@ -72,6 +73,7 @@
     <noscript>
         <h1>You must enable javascript to view this page.</h1>
     </noscript>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
     <script type="text/javascript" language="javascript">
         // show an error message if the app loading takes more than 5 sec
         window.onload=function() {
@@ -84,6 +86,7 @@
             }
         }
     </script>
+
     <!-- uncomment this for adding service worker
         <script>
             if ('serviceWorker' in navigator) {

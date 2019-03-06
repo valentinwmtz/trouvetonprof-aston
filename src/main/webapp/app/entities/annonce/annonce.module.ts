@@ -15,6 +15,8 @@ import { CalendrierComponent } from './calendrier/calendrier.component';
 import { CalendrierHeaderComponent } from './calendrier/calendrier-header/calendrier-header.component';
 import { ReservationComponent } from './reservation/reservation.component';
 import { AnnonceListComponent } from './annonce-list/annonce-list.component';
+import { AnnonceFilterPipe } from './annonce-list/annonce-filter.pipe';
+import { AnnonceLocFilterPipe } from './annonce-list/annonce-loc-filter.pipe';
 
 const ENTITY_STATES = [...annonceRoute, ...annoncePopupRoute];
 
@@ -29,7 +31,9 @@ const ENTITY_STATES = [...annonceRoute, ...annoncePopupRoute];
         CalendrierComponent,
         CalendrierHeaderComponent,
         ReservationComponent,
-        AnnonceListComponent
+        AnnonceListComponent,
+        AnnonceFilterPipe,
+        AnnonceLocFilterPipe
     ],
     entryComponents: [
         AnnonceComponent,
