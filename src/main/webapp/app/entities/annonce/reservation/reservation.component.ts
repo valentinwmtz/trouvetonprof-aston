@@ -83,7 +83,7 @@ export class ReservationComponent implements OnInit {
         });
         handler.open({
             name: 'TrouveTonProf',
-            description: 'description',
+            description: 'Reservation ' + this.disponibilite.header,
             amount: annonce.prixHoraire * dureeHeure * 100,
             currency: 'EUR',
             closed: () => {

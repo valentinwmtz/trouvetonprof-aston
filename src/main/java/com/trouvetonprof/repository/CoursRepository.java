@@ -14,11 +14,11 @@ import com.trouvetonprof.domain.Cours;
 @SuppressWarnings("unused")
 @Repository
 public interface CoursRepository extends JpaRepository<Cours, Long> {
-	List<Cours> findByAnnonceId(long id);
+    List<Cours> findByAnnonceId(long id);
 
-	List<Cours> findCommentaireByAnnonceId(Long id);
+    List<Cours> findCommentaireByAnnonceId(Long id);
 
-	List<Cours> findAllByAnnonceProfilUserLogin(String login);
+    List<Cours> findAllByAnnonceProfilUserLogin(String login);
 
-	List<Cours> findAllByCoursId(Long id);
+    List<Cours> findAllByCoursId(Long id);
 }

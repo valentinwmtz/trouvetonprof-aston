@@ -1,9 +1,10 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="trouvetonprofApp.cours.home.title">Cours</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-cours" [routerLink]="['/cours/new']">
+        <button *jhiHasAnyAuthority="'ROLE_ADMIN'" id="jh-create-entity"
+                class="btn btn-primary float-right jh-create-entity create-cours" [routerLink]="['/cours/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
-            <span  jhiTranslate="trouvetonprofApp.cours.home.createLabel">
+            <span jhiTranslate="trouvetonprofApp.cours.home.createLabel">
             Create new Cours
             </span>
         </button>
@@ -14,15 +15,15 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="trouvetonprofApp.cours.date">Date</span></th>
-            <th><span jhiTranslate="trouvetonprofApp.cours.duree">Duree</span></th>
-            <th><span jhiTranslate="trouvetonprofApp.cours.note">Note</span></th>
-            <th><span jhiTranslate="trouvetonprofApp.cours.prix">Prix</span></th>
-            <th><span jhiTranslate="trouvetonprofApp.cours.commentaire">Commentaire</span></th>
-            <th><span jhiTranslate="trouvetonprofApp.cours.annonce">Annonce</span></th>
-            <th><span>Profil</span></th>
-            <th></th>
+                <th><span jhiTranslate="global.field.id">ID</span></th>
+                <th><span jhiTranslate="trouvetonprofApp.cours.date">Date</span></th>
+                <th><span jhiTranslate="trouvetonprofApp.cours.duree">Duree</span></th>
+                <th><span jhiTranslate="trouvetonprofApp.cours.note">Note</span></th>
+                <th><span jhiTranslate="trouvetonprofApp.cours.prix">Prix</span></th>
+                <th><span jhiTranslate="trouvetonprofApp.cours.commentaire">Commentaire</span></th>
+                <th><span jhiTranslate="trouvetonprofApp.cours.annonce">Annonce</span></th>
+                <th><span>Profil</span></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -35,12 +36,14 @@
                 <td>{{cours.commentaire}}</td>
                 <td>
                     <div *ngIf="cours.annonce">
-                        <a [routerLink]="['../annonce', cours.annonce?.id, 'view' ]" >({{cours.annonce?.id}}) {{cours.annonce?.titre}}</a>
+                        <a [routerLink]="['../annonce', cours.annonce?.id, 'view' ]">({{cours.annonce?.id}}
+                            ) {{cours.annonce?.titre}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="cours.cours">
-                        <a [routerLink]="['../profil', cours.cours?.id, 'view' ]" >{{cours.cours?.user.lastName }} {{cours.cours?.user.firstName }}({{cours.cours?.id}})</a>
+                        <a [routerLink]="['../profil', cours.cours?.id, 'view' ]">{{cours.cours?.user.lastName }} {{cours.cours?.user.firstName }}
+                            ({{cours.cours?.id}})</a>
                     </div>
                 </td>
                 <td class="text-right">
